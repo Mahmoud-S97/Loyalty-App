@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "My Bestie",
-    "slug": "my-bestie",
+    "name": "BESTIE",
+    "slug": "BESTIE",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/images/startup/icon.png",
-    "scheme": "mybestieapp",
+    "scheme": "bestieapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
