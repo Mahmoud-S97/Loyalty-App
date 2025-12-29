@@ -32,8 +32,9 @@
           "image": "./src/assets/images/startup/icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
+          "backgroundColor": "#D6C6FF",
           "dark": {
-            "backgroundColor": "#000000"
+            "backgroundColor": "#0f0d23"
           }
         }
       ]
