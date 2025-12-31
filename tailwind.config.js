@@ -9,23 +9,50 @@ module.exports = {
     "./src/hooks/**/*.{ts,tsx}",
   ],
   presets: [require("nativewind/preset")],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
-        primary: "#030014",
-        secondary: "#151312",
-        light: {
-          100: "#D6C6FF",
-          200: "#A8B5DB",
-          300: "#9CA4AB",
+        primary: "#4b12a3",
+        secondary: "#3c3c3c",
+        neutral: {
+          50: "#ffffff",
+          100: "#fafafa",
+          200: "#f5f5f5",
+          300: "#f0f0f0",
+          400: "#dedede",
+          500: "#c2c2c2",
+          600: "#979797",
+          700: "#818181",
+          800: "#606060"
         },
-        dark: {
-          100: "#221f3d",
-          200: "#0f0d23",
+        brand: {
+          50: "#f4e6f8",
+          100: "#e4bfed",
+          200: "#d395e2",
+          300: "#c269d6",
+          400: "#b447cd",
+          500: "#a623c3",
+          600: "#9720bd",
+          700: "#821cb6",
+          800: "#7019ae"
         },
-        accent: "#AB8BFF",
-        accentOverlay: "#ac8bff8e",
+        accent: {
+          DEFAULT: "#AB8BFF",
+          overlay: "rgba(171, 139, 255, 0.56)",
+        },
       },
+      fontFamily: {
+        sans: ["Inter_400Regular"]
+      },
+      fontSize: {
+        xs: [12, { lineHeight: "16px" }],
+        sm: [14, { lineHeight: "20px" }],
+        base: [16, { lineHeight: "24px" }],
+        lg: [18, { lineHeight: "26px" }],
+        xl: [22, { lineHeight: "30px" }],
+        "2xl": [26, { lineHeight: "34px" }],
+      }
     },
   },
   plugins: [],
