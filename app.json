@@ -14,7 +14,7 @@
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#ffffff",
-        "foregroundImage": "./src/assets/images/startup/icon-trans.png",
+        "foregroundImage": "./src/assets/images/startup/icon-trans.png"
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
@@ -37,7 +37,8 @@
             "backgroundColor": "#0f0d23"
           }
         }
-      ]
+      ],
+      "expo-localization"
     ],
     "experiments": {
       "typedRoutes": true,
