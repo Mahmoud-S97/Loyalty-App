@@ -1,9 +1,9 @@
+import { useAppFonts } from '@/Hooks/typography/useAppFonts';
+import { initAppLanguage } from '@/lib/localization';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import React, { JSX, useEffect, useState } from 'react';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { useAppFonts } from '../Hooks/typography/useAppFonts';
-import { initAppLanguage } from '../lib/localization';
 import AnimatedSplashScreen from './AnimatedSplashScreen';
 import './global.css';
 
