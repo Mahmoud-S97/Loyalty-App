@@ -1,3 +1,32 @@
 {
-    "welcome": "مرحبًا بك في تطبيق BESTIE للولاء"
+    "welcome": "مرحبًا بك في تطبيق BESTIE للولاء",
+    "auth": {
+        "login": "تسجيل الدخول",
+        "signUp": "إنشاء حساب",
+        "email": "البريد الإلكتروني",
+        "username": "اسم المستخدم",
+        "password": "كلمة المرور",
+        "confirmPassword": "تأكيد كلمة المرور",
+        "ask_forgotPassword": "هل نسيت كلمة المرور؟",
+        "forgotPassword": "نسيت كلمة المرور",
+        "resetPassword": "إعادة تعيين كلمة المرور",
+        "have_an_account": "هل لديك حساب بالفعل؟",
+        "have_not_an_account": "ليس لديك حساب؟",
+        "continue_with_google": "تسجيل الدخول باستخدام حساب جوجل",
+        "login_entries_with_welcoming_msg": "أدخل بريدك الإلكتروني وكلمة مرورك للوصول إلى حسابك بأمان والحصول على مزايا برنامج الولاء الخاص بك.",
+        "signUp_entries_with_welcoming_msg": "أنشئ حسابًا جديدًا للبدء واستمتع بالوصول السلس إلى ميزات برنامج الولاء الخاص بنا.",
+        "forgotPassword_entries_with_welcoming_msg": "أدخل عنوان بريدك الإلكتروني لتلقي رابط إعادة التعيين واستعادة الوصول إلى حسابك.",
+        "resetPassword_entries_with_welcoming_msg": "قم بتعيين كلمة مرور جديدة قوية لتعزيز الأمان وحماية حسابك.",
+        "submit": "إرسال",
+        "reset": "إعادة تعيين"
+    },
+    "prepositions": {
+        "in": "في",
+        "on": "على",
+        "at": "عند",
+        "of": "من",
+        "or": "أو",
+        "with": "مع",
+        "to": "إلى"
+    }
 }

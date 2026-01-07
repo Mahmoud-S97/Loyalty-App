@@ -5,8 +5,8 @@ import ar from './ar.json';
 import en from './en.json';
 
 type Resources = {
-    en: { translation: Record<string, string> };
-    ar: { translation: Record<string, string> };
+    en: { translation: Record<string, string | object> };
+    ar: { translation: Record<string, string | object> };
 };
 
 const resources: Resources = {
@@ -16,7 +16,7 @@ const resources: Resources = {
 
 i18n.use(initReactI18next).init({
     resources,
-    lng: Localization.getLocales().find(locale => locale.languageCode === 'ar') ? 'ar' : 'en',
+    lng: !Localization.getLocales().find(locale => locale.languageCode === 'ar') ? 'ar' : 'en', // Can be more than 2 languages later on!
     fallbackLng: 'en',
     interpolation: {
         escapeValue: false

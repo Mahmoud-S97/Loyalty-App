@@ -24,7 +24,8 @@ module.exports = {
           500: "#c2c2c2",
           600: "#979797",
           700: "#818181",
-          800: "#606060"
+          800: "#606060",
+          900: "#111111"
         },
         brand: {
           50: "#f4e6f8",
@@ -35,7 +36,8 @@ module.exports = {
           500: "#a623c3",
           600: "#9720bd",
           700: "#821cb6",
-          800: "#7019ae"
+          800: "#7019ae",
+          900: "#570a8fff",
         },
         accent: {
           DEFAULT: "#AB8BFF",
@@ -46,12 +48,13 @@ module.exports = {
         sans: ["Inter_400Regular"]
       },
       fontSize: {
-        xs: [12, { lineHeight: "16px" }],
-        sm: [14, { lineHeight: "20px" }],
-        base: [16, { lineHeight: "24px" }],
-        lg: [18, { lineHeight: "26px" }],
-        xl: [22, { lineHeight: "30px" }],
-        "2xl": [26, { lineHeight: "34px" }],
+        xs: [12, { lineHeight: "14px" }],
+        sm: [14, { lineHeight: "18px" }],
+        base: [16, { lineHeight: "20px" }],
+        lg: [18, { lineHeight: "24px" }],
+        xl: [22, { lineHeight: "28px" }],
+        "2xl": [26, { lineHeight: "32px" }],
+        "3xl": [30, { lineHeight: "36px" }],
       }
     },
   },

@@ -1,8 +1,8 @@
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll": false,
-    "source.organizeImports": false,
-    "source.sortMembers": false,
+    "source.fixAll": "never",
+    "source.organizeImports": "never",
+    "source.sortMembers": "never"
   },
   "typescript.preferences.removeUnusedImports": false,
   "javascript.preferences.removeUnusedImports": false
