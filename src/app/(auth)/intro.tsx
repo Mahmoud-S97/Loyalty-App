@@ -14,7 +14,7 @@ const IntroScreen = () => {
     return (
         <ScrollingView>
             <ContainerView>
-                <View className='flex w-full justify-center items-center mt-20 mb-10'>
+                <View className='flex w-full justify-center items-center my-20'>
                     <Image source={LOCAL_IMAGES.LOGO_TRANS} className='w-[120px] h-[120px] border-[1px] border-neutral-500 dark:border-neutral-800 rounded-lg' />
                     <AppText className='text-2xl text-center font-trans  font-[600] mt-5'>welcome</AppText>
                 </View>

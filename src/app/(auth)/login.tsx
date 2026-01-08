@@ -7,14 +7,16 @@ import ScrollingView from '@/components/layout/screens/ScrollingView';
 import { LOCAL_ICONS } from '@/constants/icons';
 import MainButton from '@/components/ui/globals/buttons/MainButton';
 import MainInputField from '@/components/ui/globals/inputFields/MainInputField';
+import GoBackButton from '@/components/ui/globals/buttons/GoBackButton';
 
 const LoginScreen = () => {
 
   return (
     <KeyboardAvoidingView className='flex-1' behavior='padding'>
       <ScrollingView>
+        <GoBackButton />
         <ContainerView>
-          <View className='flex-column w-full p-2 justify-center items-center my-10'>
+          <View className='flex-column w-full p-2 justify-center items-center my-7'>
             <AppText className='text-3xl text-center font-trans font-bold'>auth.login</AppText>
             <AppText className='text-sm text-center font-bold text-neutral-800 dark:text-neutral-500 mt-4'>auth.login_entries_with_welcoming_msg</AppText>
           </View>

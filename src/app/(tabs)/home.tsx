@@ -6,7 +6,10 @@ const HomeScreen = () => {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text>Home {'(Scan Screen)'}</Text>
-      <Button onPress={() => router.replace('/login')} title='Go Back Login'/>
+      <Button onPress={() => {
+        router.dismissAll();
+        router.replace('/login');
+      }} title='Go Back Login'/>
     </View>
   )
 }
