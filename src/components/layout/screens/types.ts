@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react';
+import React, { ReactNode } from 'react';
 
 export type ViewProps = {
     children: ReactNode,
@@ -8,6 +8,7 @@ export type ViewProps = {
 export type ScrollingViewProps = {
     children: ReactNode,
     className?: string,
+    horizontal?: boolean,
     showsVerticalScrollIndicator?: boolean,
     showsHorizontalScrollIndicator?: boolean
 }
