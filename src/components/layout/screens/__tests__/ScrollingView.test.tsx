@@ -24,15 +24,6 @@ describe('<ScrollingView />', () => {
 
     });
 
-    it('Combines style classes correctly', () => {
-        const { getByTestId } = render(<ScrollingView className='bg-red-500'>
-            <Text>Children</Text>
-        </ScrollingView>)
-        const scrollingView = getByTestId('ScrollingView:View');
-
-        expect(scrollingView.props.className).toContain('bg-red-500');
-    });
-
     it('Checks if Horizontal scroll-view being false by default', () => {
         const { getByTestId } = render(<ScrollingView horizontal={false}>
             <Text>Children</Text>

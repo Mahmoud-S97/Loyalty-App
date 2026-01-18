@@ -22,7 +22,7 @@ const GoBackButton = ({ className, iconSize, iconColor, onPress }: GoBackButtonP
     if(!router.canGoBack()) return null;
 
     return (
-        <TouchableOpacity activeOpacity={0.6} style={shadowStyle(scheme)} className={cn('w-[45px] h-[45px] m-5 flex justify-center items-center rounded-full bg-neutral-50 dark:bg-neutral-800', className)} onPress={onPress || goBackHandler}>
+        <TouchableOpacity testID='GoBackButton:Button' activeOpacity={0.6} style={shadowStyle(scheme)} className={cn('w-[45px] h-[45px] m-5 flex justify-center items-center rounded-full bg-neutral-50 dark:bg-neutral-800', className)} onPress={onPress || goBackHandler}>
             <FontAwesome5
                 name='chevron-left'
                 size={iconSize || 20}

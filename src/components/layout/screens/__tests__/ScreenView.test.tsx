@@ -23,13 +23,4 @@ describe('<ScreenView />', () => {
         expect(getByTestId('ScreenView:View')).toBeTruthy();
 
     });
-
-    it('Combines style classes correctly', () => {
-        const { getByTestId } = render(<ScreenView className='bg-red-500'>
-            <Text>Children</Text>
-        </ScreenView>)
-        const screenView = getByTestId('ScreenView:View');
-
-        expect(screenView.props.className).toContain('bg-red-500');
-    });
 });

@@ -29,9 +29,10 @@ const MainInputField = ({ icon, iconSize, iconColor, showPassword, className, te
     const scheme = useColorScheme();
 
     return (
-        <View style={shadowStyle(scheme)} className={cn('w-full h-[50px] bg-neutral-50 rounded-full flex-row items-center py-2 px-4', className)}>
+        <View testID='MainInputField:WrapperView' style={shadowStyle(scheme)} className={cn('w-full h-[50px] bg-neutral-50 rounded-full flex-row items-center py-2 px-4', className)}>
             <MaterialIcons name={icon} size={iconSize || 24} color={iconColor || APP_COLORS.neutral[800]} />
             <TextInput
+                testID='MainInputField:TextInput'
                 className={cn('flex items-center w-[90%] h-[100%] ms-3 font-trans font-medium text-base text-neutral-900 dark:text-neutral-500 dark:bg-neutral-300 rounded-full', textInputClassName)}
                 placeholderTextColor={placeholderTextColor || APP_COLORS.neutral[800]}
                 placeholder={getTranslated(placeholder || '')}
@@ -44,7 +45,7 @@ const MainInputField = ({ icon, iconSize, iconColor, showPassword, className, te
                 scrollEnabled={scrollEnabled || true}
             />
             {secureTextEntry && (
-                <TouchableOpacity activeOpacity={0.7} className='flex justify-center items-center absolute start-[95%] z-10'>
+                <TouchableOpacity testID='MainInputField:ToggleEyeButton' activeOpacity={0.7} className='flex justify-center items-center absolute start-[95%] z-10'>
                     <FontAwesome5 name={showPassword ? 'eye' : 'eye-slash'} size={iconSize || 20} color={iconColor || APP_COLORS.neutral[800]} />
                 </TouchableOpacity>
             )}

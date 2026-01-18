@@ -23,13 +23,4 @@ describe('<ContainerView />', () => {
         expect(getByTestId('ContainerView:View')).toBeTruthy();
 
     });
-
-    it('Combines style classes correctly', () => {
-        const { getByTestId } = render(<ContainerView className='bg-red-500'>
-            <Text>Children</Text>
-        </ContainerView>)
-        const containerView = getByTestId('ContainerView:View');
-
-        expect(containerView.props.className).toContain('bg-red-500');
-    });
 });

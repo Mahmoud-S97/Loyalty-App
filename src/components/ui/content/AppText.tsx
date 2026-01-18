@@ -11,7 +11,7 @@ type AppTextProps = {
 const AppText = ({ children, className }: AppTextProps): JSX.Element => {
 
     return (
-        <Text className={cn('text-neutral-900 dark:text-neutral-500 font-normal text-base font-sans', className)}>{getTranslated(children)}</Text>
+        <Text testID='AppText:Text' className={cn('text-neutral-900 dark:text-neutral-500 font-normal text-base font-sans', className)}>{getTranslated(children)}</Text>
     )
 }
 
