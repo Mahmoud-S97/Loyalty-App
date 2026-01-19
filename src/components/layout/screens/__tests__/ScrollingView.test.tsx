@@ -3,7 +3,7 @@ import { render } from "@testing-library/react-native";
 import ScrollingView from '../ScrollingView';
 
 describe('<ScrollingView />', () => {
-    it('Renders its children', () => {
+    it('renders its children', () => {
         const { getByText } = render(
             <ScrollingView>
                 <Text>Hello ScrollingView</Text>
@@ -13,7 +13,7 @@ describe('<ScrollingView />', () => {
         expect(getByText('Hello ScrollingView')).toBeTruthy();
     });
 
-    it('Renders the root View', () => {
+    it('renders the root View', () => {
         const { getByTestId } = render(
             <ScrollingView>
                 <Text>Child</Text>

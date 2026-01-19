@@ -3,7 +3,7 @@ import { render } from "@testing-library/react-native";
 import ScreenView from '../ScreenView';
 
 describe('<ScreenView />', () => {
-    it('Renders its children', () => {
+    it('renders its children', () => {
         const { getByText } = render(
             <ScreenView>
                 <Text>Hello ScreenView</Text>
@@ -13,7 +13,7 @@ describe('<ScreenView />', () => {
         expect(getByText('Hello ScreenView')).toBeTruthy();
     });
 
-    it('Renders the root View', () => {
+    it('renders the root View', () => {
         const { getByTestId } = render(
             <ScreenView>
                 <Text>Child</Text>

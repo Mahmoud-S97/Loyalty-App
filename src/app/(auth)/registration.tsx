@@ -21,9 +21,9 @@ const RegistrationScreen = () => {
             <AppText className='text-sm text-center font-bold text-neutral-800 dark:text-neutral-500 mt-4'>auth.signUp_entries_with_welcoming_msg</AppText>
           </View>
           <View className='flex w-full p-2' >
-            <MainInputField placeholder='example@gmail.com' value='' icon='email' />
-            <MainInputField placeholder='auth.password' value='' icon='lock' className='my-7' secureTextEntry={true} />
-            <MainInputField placeholder='auth.confirmPassword' value='' icon='lock' className='mb-7' secureTextEntry={true} />
+            <MainInputField placeholder='example@gmail.com' icon='email' />
+            <MainInputField placeholder='auth.password' icon='lock' className='my-7' secureTextEntry={true} />
+            <MainInputField placeholder='auth.confirmPassword' icon='lock' className='mb-7' secureTextEntry={true} />
             <MainButton className='bg-primary' title='auth.signUp' onPress={() => router.navigate('/home')} />
             <View className='flex-row justify-between items-center my-5'>
               <View className='w-[44%] h-[1px] bg-neutral-500' />

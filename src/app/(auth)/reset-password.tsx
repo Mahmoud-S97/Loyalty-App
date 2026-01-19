@@ -20,8 +20,8 @@ const ResetPasswordScreen = () => {
             <AppText className='text-sm text-center font-bold text-neutral-800 dark:text-neutral-500 mt-4'>auth.resetPassword_entries_with_welcoming_msg</AppText>
           </View>
           <View className='flex w-full p-2'>
-            <MainInputField placeholder='auth.password' value='' icon='lock' className='my-7' secureTextEntry={true} />
-            <MainInputField placeholder='auth.confirmPassword' value='' icon='lock' className='mb-7' secureTextEntry={true} />
+            <MainInputField placeholder='auth.password' icon='lock' className='my-7' secureTextEntry={true} />
+            <MainInputField placeholder='auth.confirmPassword' icon='lock' className='mb-7' secureTextEntry={true} />
             <MainButton className='bg-primary' title='auth.reset' onPress={() => {
               router.dismissAll();
               router.replace('/login');

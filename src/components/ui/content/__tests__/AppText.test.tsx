@@ -12,7 +12,7 @@ import { getTranslated } from '@/lib/localization';
 
 describe('<AppText />', () => {
 
-    it('Renders translated text', () => {
+    it('renders translated text', () => {
 
         (getTranslated as jest.Mock).mockReturnValue('Welcome to BESTIE Loyalty App');
 

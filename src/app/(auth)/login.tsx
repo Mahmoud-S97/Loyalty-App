@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { KeyboardAvoidingView, TouchableOpacity, View } from 'react-native';
 import { router } from 'expo-router';
 import ContainerView from '@/components/layout/screens/ContainerView';
@@ -11,8 +11,15 @@ import GoBackButton from '@/components/ui/globals/buttons/GoBackButton';
 
 const LoginScreen = () => {
 
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
+  // Temporarly, validation will be handled later on
+  const setEmailHandler = (value: string): void => setEmail(value);
+  const setPasswordHandler = (value: string): void => setPassword(value)
+
   return (
-    <KeyboardAvoidingView className='flex-1' behavior='padding'>
+    <KeyboardAvoidingView testID='LoginScreen:KeyboardAvoidingView' className='flex-1' behavior='padding'>
       <ScrollingView>
         <GoBackButton />
         <ContainerView>
@@ -21,19 +28,19 @@ const LoginScreen = () => {
             <AppText className='text-sm text-center font-bold text-neutral-800 dark:text-neutral-500 mt-4'>auth.login_entries_with_welcoming_msg</AppText>
           </View>
           <View className='flex w-full p-2'>
-            <MainInputField placeholder='example@gmail.com' value='' icon='email' />
-            <MainInputField placeholder='auth.password' value='' icon='lock' className='mt-7' secureTextEntry={true} />
-            <TouchableOpacity activeOpacity={0.7} className='ms-auto mt-3 mb-5' onPress={() => router.navigate('/forgot-password')}>
+            <MainInputField testID='LoginScreen:EmailField' placeholder='example@gmail.com' icon='email' value={email}  onChangeText={setEmailHandler} />
+            <MainInputField testID='LoginScreen:PasswordField' placeholder='auth.password' icon='lock' className='mt-7' secureTextEntry={true} value={password} onChangeText={setPasswordHandler} />
+            <TouchableOpacity testID='LoginScreen:ForgotPasswordBtn' activeOpacity={0.7} className='ms-auto mt-3 mb-5' onPress={() => router.navigate('/forgot-password')}>
               <AppText className='text-neutral-800 dark:text-neutral-500'>auth.ask_forgotPassword</AppText>
             </TouchableOpacity>
-            <MainButton className='bg-primary' title='auth.login' onPress={() => router.navigate('/home')} />
+            <MainButton testID='LoginScreen:LoginBtn' className='bg-primary' title='auth.login' onPress={() => router.navigate('/home')} />
             <View className='flex-row justify-between items-center my-5'>
               <View className='w-[44%] h-[1px] bg-neutral-500' />
               <AppText className='w-[12%] text-center uppercase'>prepositions.or</AppText>
               <View className='w-[44%] h-[1px] bg-neutral-500' />
             </View>
-            <MainButton className='bg-neutral-100' textClassName='text-neutral-900 dark:text-neutral-500 font-[400]' title='auth.continue_with_google' image={LOCAL_ICONS.GOOGLE} />
-            <TouchableOpacity activeOpacity={0.7} className='flex-row items-center justify-center mt-8' onPress={() => router.navigate('/registration')}>
+            <MainButton className='bg-neutral-100' textClassName='text-neutral-900 dark:text-neutral-500 font-[400]' title='auth.continue_with_google' image={LOCAL_ICONS.GOOGLE} onPress={() => {}} />
+            <TouchableOpacity testID='LoginScreen:SignUpBtn' activeOpacity={0.7} className='flex-row items-center justify-center mt-8' onPress={() => router.navigate('/registration')}>
               <AppText className='me-2 text-neutral-800 dark:text-neutral-500'>auth.have_not_an_account</AppText>
               <AppText className='text-primary font-trans font-[600]'>auth.signUp</AppText>
             </TouchableOpacity>

@@ -20,7 +20,7 @@ const ForgotPasswordScreen = () => {
             <AppText className='text-sm text-center font-bold text-neutral-800 dark:text-neutral-500 mt-4'>auth.forgotPassword_entries_with_welcoming_msg</AppText>
           </View>
           <View className='flex w-full p-2'>
-            <MainInputField placeholder='example@gmail.com' value='' icon='email' />
+            <MainInputField placeholder='example@gmail.com' icon='email' />
             <MainButton className='bg-primary mt-8' title='auth.submit' onPress={() => router.navigate('/reset-password')} />
           </View>
         </ContainerView>

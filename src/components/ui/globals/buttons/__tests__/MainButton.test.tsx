@@ -31,7 +31,7 @@ describe('<MainButton />', () => {
         jest.clearAllMocks();
     });
 
-    it('Renders MainButton with translated text correctly (default-behavior)', () => {
+    it('renders MainButton with translated text correctly (default-behavior)', () => {
 
         (getTranslated as jest.Mock).mockReturnValue('Welcome to BESTIE Loyalty App');
 
@@ -41,7 +41,7 @@ describe('<MainButton />', () => {
         expect(getByText('Welcome to BESTIE Loyalty App')).toBeTruthy();
     });
 
-    it('Renders MainButton with icon correctly', () => {
+    it('renders MainButton with icon correctly', () => {
 
         const { getByTestId } = render(<MainButton icon='home' iconSize={25} iconColor={'#f00'} />);
 
@@ -54,7 +54,7 @@ describe('<MainButton />', () => {
         });
     });
 
-    it('Renders MainButton with image correctly', () => {
+    it('renders MainButton with image correctly', () => {
 
         const logo = require('@/assets/images/app/logo-trans.png');
 
@@ -65,7 +65,7 @@ describe('<MainButton />', () => {
         expect(renderedImage.props.source).toBe(logo);
     });
 
-    it('Renders children when provided to MainButton', () => {
+    it('renders children when provided to MainButton', () => {
 
         const { getByText } = render(<MainButton><Text>I am a child!</Text></MainButton>);
 

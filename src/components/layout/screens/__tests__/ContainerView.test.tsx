@@ -3,7 +3,7 @@ import { render } from "@testing-library/react-native";
 import ContainerView from '../ContainerView';
 
 describe('<ContainerView />', () => {
-    it('Renders its children', () => {
+    it('renders its children', () => {
         const { getByText } = render(
             <ContainerView>
                 <Text>Hello ContainerView</Text>
@@ -13,7 +13,7 @@ describe('<ContainerView />', () => {
         expect(getByText('Hello ContainerView')).toBeTruthy();
     });
 
-    it('Renders the root View', () => {
+    it('renders the root View', () => {
         const { getByTestId } = render(
             <ContainerView>
                 <Text>Child</Text>
