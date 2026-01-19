@@ -11,7 +11,7 @@ import GoBackButton from '@/components/ui/globals/buttons/GoBackButton';
 const ResetPasswordScreen = () => {
 
   return (
-    <KeyboardAvoidingView className='flex-1' behavior='padding'>
+    <KeyboardAvoidingView testID='ResetPasswordScreen:KeyboardAvoidingView' className='flex-1' behavior='padding'>
       <ScreenView>
         <GoBackButton />
         <ContainerView className='justify-start'>
@@ -22,7 +22,7 @@ const ResetPasswordScreen = () => {
           <View className='flex w-full p-2'>
             <MainInputField placeholder='auth.password' icon='lock' className='my-7' secureTextEntry={true} />
             <MainInputField placeholder='auth.confirmPassword' icon='lock' className='mb-7' secureTextEntry={true} />
-            <MainButton className='bg-primary' title='auth.reset' onPress={() => {
+            <MainButton testID='ResetPasswordScreen:ResetPasswordBtn' className='bg-primary' title='auth.reset' onPress={() => {
               router.dismissAll();
               router.replace('/login');
             }} />
