@@ -20,7 +20,7 @@ const IntroScreen = () => {
                 </View>
                 <View className='group flex-column w-full items-center justify-center p-2' >
                     <MainButton className='bg-primary' title='auth.login' onPress={() => router.replace('/login')} />
-                    <MainButton className='bg-neutral-700 mt-8' title='auth.signUp' onPress={() => router.replace('/registration')} />
+                    <MainButton className='bg-neutral-700 mt-8' title='auth.signUp' onPress={() => router.replace('/sign-up')} />
                     <View className='flex-row justify-between items-center my-5'>
                         <View className='w-[44%] h-[1px] bg-neutral-500' />
                         <AppText className='w-[12%] text-center uppercase'>prepositions.or</AppText>

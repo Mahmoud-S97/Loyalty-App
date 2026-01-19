@@ -28,8 +28,8 @@ const LoginScreen = () => {
             <AppText className='text-sm text-center font-bold text-neutral-800 dark:text-neutral-500 mt-4'>auth.login_entries_with_welcoming_msg</AppText>
           </View>
           <View className='flex w-full p-2'>
-            <MainInputField testID='LoginScreen:EmailField' placeholder='example@gmail.com' icon='email' value={email}  onChangeText={setEmailHandler} />
-            <MainInputField testID='LoginScreen:PasswordField' placeholder='auth.password' icon='lock' className='mt-7' secureTextEntry={true} value={password} onChangeText={setPasswordHandler} />
+            <MainInputField placeholder='example@gmail.com' icon='email' value={email}  onChangeText={setEmailHandler} />
+            <MainInputField placeholder='auth.password' icon='lock' className='mt-7' secureTextEntry={true} value={password} onChangeText={setPasswordHandler} />
             <TouchableOpacity testID='LoginScreen:ForgotPasswordBtn' activeOpacity={0.7} className='ms-auto mt-3 mb-5' onPress={() => router.navigate('/forgot-password')}>
               <AppText className='text-neutral-800 dark:text-neutral-500'>auth.ask_forgotPassword</AppText>
             </TouchableOpacity>
@@ -40,7 +40,7 @@ const LoginScreen = () => {
               <View className='w-[44%] h-[1px] bg-neutral-500' />
             </View>
             <MainButton className='bg-neutral-100' textClassName='text-neutral-900 dark:text-neutral-500 font-[400]' title='auth.continue_with_google' image={LOCAL_ICONS.GOOGLE} onPress={() => {}} />
-            <TouchableOpacity testID='LoginScreen:SignUpBtn' activeOpacity={0.7} className='flex-row items-center justify-center mt-8' onPress={() => router.navigate('/registration')}>
+            <TouchableOpacity testID='LoginScreen:SignUpBtn' activeOpacity={0.7} className='flex-row items-center justify-center mt-8' onPress={() => router.navigate('/sign-up')}>
               <AppText className='me-2 text-neutral-800 dark:text-neutral-500'>auth.have_not_an_account</AppText>
               <AppText className='text-primary font-trans font-[600]'>auth.signUp</AppText>
             </TouchableOpacity>

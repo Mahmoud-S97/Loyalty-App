@@ -50,7 +50,7 @@ describe('<LoginScreen />', () => {
         expect(router.navigate).toHaveBeenCalledTimes(1);
     });
 
-    it('navigates to Registration screen', async () => {
+    it('navigates to SignUp screen', async () => {
 
         const { getByTestId } = render(<LoginScreen />);
 
@@ -58,7 +58,7 @@ describe('<LoginScreen />', () => {
 
         fireEvent.press(signUpButton);
 
-        expect(router.navigate).toHaveBeenCalledWith('/registration');
+        expect(router.navigate).toHaveBeenCalledWith('/sign-up');
         expect(router.navigate).toHaveBeenCalledTimes(1);
     });
 })
