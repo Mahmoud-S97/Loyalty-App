@@ -20,6 +20,11 @@
         "submit": "Submit",
         "reset": "Reset"
     },
+    "app": {
+        "wallet": "Wallet",
+        "account": "Account",
+        "home": "Home"
+    },
     "prepositions": {
         "in": "In",
         "on": "On",
