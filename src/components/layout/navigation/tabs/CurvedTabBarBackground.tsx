@@ -5,7 +5,7 @@ import Svg, { Path } from "react-native-svg";
 
 export const CurvedTabBarBackground = (): JSX.Element => {
   const screen_width = getScreenWidth();
-  const barHeight = 60;
+  const barHeight = 64;
   const radius = 36;
   const cornerRadius = 25;
   const buttonRadius = 36;
