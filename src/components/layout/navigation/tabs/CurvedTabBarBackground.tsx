@@ -1,9 +1,13 @@
 import { APP_COLORS } from "@/constants/theme";
 import { getScreenWidth } from "@/utils";
 import { JSX } from "react";
+import { useColorScheme } from "react-native";
 import Svg, { Path } from "react-native-svg";
 
 export const CurvedTabBarBackground = (): JSX.Element => {
+
+  const scheme = useColorScheme();
+
   const screen_width = getScreenWidth();
   const barHeight = 64;
   const radius = 36;
@@ -40,7 +44,7 @@ export const CurvedTabBarBackground = (): JSX.Element => {
 
           Z
         `}
-        fill={APP_COLORS.neutral[400]}
+        fill={scheme === 'dark' ? '#232323' : APP_COLORS.neutral[400]}
       />
     </Svg>
   );

@@ -8,6 +8,7 @@ import { APP_COLORS, shadowStyle } from "@/constants/theme";
 import { LOCAL_IMAGES } from "@/constants/images";
 import AppText from "@/components/ui/content/AppText";
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
+import { cn } from '@/lib/nativeWindCSS/cn';
 
 const CustomTabBar = ({ state, navigation, descriptors }: BottomTabBarProps): JSX.Element => {
   const scheme = useColorScheme();
@@ -75,9 +76,9 @@ const CustomTabBar = ({ state, navigation, descriptors }: BottomTabBarProps): JS
               <Ionicons
                 name={isFocused ? icon : `${icon}-outline`}
                 size={28}
-                color={isFocused ? APP_COLORS.primary : APP_COLORS.neutral[800]}
+                color={isFocused ? APP_COLORS.primary : APP_COLORS.neutral[700]}
               />
-              <AppText className={`text-xs text-neutral-800 ${isFocused && 'text-primary'}`}>{`app.${route.name}`}</AppText>
+              <AppText className={cn('text-xs text-neutral-700 dark:text-neutral-700', { 'text-primary dark:text-primary': isFocused })}>{`app.${route.name}`}</AppText>
             </TouchableOpacity>
           );
         })}
