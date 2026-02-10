@@ -22,7 +22,7 @@ const ResetPasswordScreen = () => {
           <View className='flex w-full p-2'>
             <MainInputField placeholder='auth.password' icon='lock' className='my-7' secureTextEntry={true} />
             <MainInputField placeholder='auth.confirmPassword' icon='lock' className='mb-7' secureTextEntry={true} />
-            <MainButton testID='ResetPasswordScreen:ResetPasswordBtn' className='bg-primary' title='auth.reset' onPress={() => {
+            <MainButton testID='ResetPasswordScreen:ResetPasswordBtn' className='bg-primary dark:bg-brand-800' title='auth.reset' onPress={() => {
               router.dismissAll();
               router.replace('/login');
             }} />

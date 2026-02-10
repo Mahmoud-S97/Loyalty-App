@@ -40,10 +40,10 @@ const HomeScreen = (): JSX.Element => {
             }}
           />
         </View>
-        <AppText className='text-center font-medium font-inter text-lg my-2'>app.scan_NFC_or_QR</AppText>
+        <AppText className='text-center font-trans font-medium text-lg my-2'>app.scan_NFC_or_QR</AppText>
         <View className='flex-column gap-4 w-[70%] self-center mt-10'>
-          <MainButton className='w-full bg-primary' title='app.tap_NFC_tag' icon='nfc' iconColor={APP_COLORS.neutral[400]} />
-          <MainButton className='w-full bg-primary' title='app.scan_QR' icon='qr-code' iconColor={APP_COLORS.neutral[400]} />
+          <MainButton className='w-full bg-primary dark:bg-brand-800' title='app.tap_NFC_tag' icon='nfc' iconColor={APP_COLORS.neutral[400]} />
+          <MainButton className='w-full bg-primary dark:bg-brand-800' title='app.scan_QR' icon='qr-code' iconColor={APP_COLORS.neutral[400]} />
         </View>
       </ContainerView>
     </ScreenView>

@@ -19,14 +19,14 @@ const IntroScreen = () => {
                     <AppText className='text-2xl text-center font-trans  font-[600] mt-5'>welcome</AppText>
                 </View>
                 <View testID='IntroScreen:NavigationSection' className='flex-column w-full items-center justify-center p-2' >
-                    <MainButton testID='IntroScreen:LoginBtn' className='bg-primary' title='auth.login' onPress={() => router.replace('/login')} />
+                    <MainButton testID='IntroScreen:LoginBtn' className='bg-primary dark:bg-brand-800' title='auth.login' onPress={() => router.replace('/login')} />
                     <MainButton testID='IntroScreen:SignUpBtn' className='bg-neutral-700 mt-8' title='auth.signUp' onPress={() => router.replace('/sign-up')} />
                     <View className='flex-row justify-between items-center my-5'>
                         <View className='w-[44%] h-[1px] bg-neutral-500' />
                         <AppText className='w-[12%] text-center uppercase'>prepositions.or</AppText>
                         <View className='w-[44%] h-[1px] bg-neutral-500' />
                     </View>
-                    <MainButton className='bg-neutral-100' textClassName='text-neutral-900 dark:text-neutral-500 font-[500]' title='auth.continue_with_google' image={LOCAL_ICONS.GOOGLE} />
+                    <MainButton className='bg-neutral-100 dark:bg-neutral-300' textClassName='text-neutral-900 dark:text-neutral-800 font-medium' title='auth.continue_with_google' image={LOCAL_ICONS.GOOGLE} />
                 </View>
             </ContainerView>
         </ScrollingView>

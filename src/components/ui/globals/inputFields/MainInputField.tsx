@@ -30,12 +30,12 @@ const MainInputField = ({ testID, icon, iconSize, iconColor, showPassword, class
     const scheme = useColorScheme();
 
     return (
-        <View testID='MainInputField:WrapperView' style={shadowStyle(scheme)} className={cn('w-full h-[50px] bg-neutral-50 rounded-full flex-row items-center py-2 px-4', className)}>
-            <MaterialIcons name={icon} size={iconSize ?? 24} color={iconColor ?? APP_COLORS.neutral[800]} />
+        <View testID='MainInputField:WrapperView' style={shadowStyle(scheme)} className={cn('w-full h-[50px] bg-neutral-50 dark:bg-neutral-800 rounded-full flex-row items-center py-2 px-4', className)}>
+            <MaterialIcons name={icon} size={iconSize ?? 24} color={iconColor ?? (scheme === 'dark' ? APP_COLORS.neutral[400] : APP_COLORS.neutral[800])} />
             <TextInput
                 testID={testID ?? 'MainInputField:TextInput'}
-                className={cn('flex items-center w-[90%] h-[100%] ms-3 font-trans font-medium text-base text-neutral-900 dark:text-neutral-500 dark:bg-neutral-300 rounded-full', textInputClassName)}
-                placeholderTextColor={placeholderTextColor ?? APP_COLORS.neutral[800]}
+                className={cn('flex items-center w-[90%] h-[100%] ms-3 font-trans font-medium text-base text-neutral-900 dark:text-neutral-400 bg-neutral-50 dark:bg-neutral-800 rounded-full', textInputClassName)}
+                placeholderTextColor={placeholderTextColor ?? (scheme === 'dark' ? APP_COLORS.neutral[400] : APP_COLORS.neutral[800])}
                 placeholder={getTranslated(placeholder ?? '')}
                 secureTextEntry={secureTextEntry}
                 editable={editable}
@@ -47,7 +47,7 @@ const MainInputField = ({ testID, icon, iconSize, iconColor, showPassword, class
             />
             {secureTextEntry && (
                 <TouchableOpacity testID='MainInputField:ToggleEyeButton' activeOpacity={0.7} className='flex justify-center items-center absolute start-[95%] z-10'>
-                    <FontAwesome5 name={showPassword ? 'eye' : 'eye-slash'} size={iconSize ?? 20} color={iconColor ?? APP_COLORS.neutral[800]} />
+                    <FontAwesome5 name={showPassword ? 'eye' : 'eye-slash'} size={iconSize ?? 20} color={iconColor ?? (scheme === 'dark' ? APP_COLORS.neutral[400] : APP_COLORS.neutral[800])} />
                 </TouchableOpacity>
             )}
         </View>

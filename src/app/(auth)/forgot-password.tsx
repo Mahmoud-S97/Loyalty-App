@@ -21,7 +21,7 @@ const ForgotPasswordScreen = () => {
           </View>
           <View className='flex w-full p-2'>
             <MainInputField placeholder='example@gmail.com' icon='email' />
-            <MainButton testID='ForogtPasswordScreen:SubmitBtn' className='bg-primary mt-8' title='auth.submit' onPress={() => router.navigate('/reset-password')} />
+            <MainButton testID='ForogtPasswordScreen:SubmitBtn' className='bg-primary dark:bg-brand-800 mt-8' title='auth.submit' onPress={() => router.navigate('/reset-password')} />
           </View>
         </ContainerView>
       </ScreenView>

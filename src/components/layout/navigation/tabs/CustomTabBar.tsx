@@ -53,7 +53,7 @@ const CustomTabBar = ({ state, navigation, descriptors }: BottomTabBarProps): JS
       <View style={StyleSheet.absoluteFill}>
         <CurvedTabBarBackground />
       </View>
-      <View testID='CustomTabBar:ContainerView' className="w-full h-[64px] flex-row justify-between items-center">
+      <View testID='CustomTabBar:ContainerView' className="w-full h-[68px] flex-row justify-between items-center pb-2">
         {state.routes.map((route: any, index: number) => {
           if (route.name === "home") return <View key={route.key} className="flex-0 w-0" />;
 
@@ -87,7 +87,7 @@ const CustomTabBar = ({ state, navigation, descriptors }: BottomTabBarProps): JS
         testID='CustomTabBar:CircleButton'
         activeOpacity={0.9}
         style={shadowStyle(scheme)}
-        className={`w-[64px] h-[64px] absolute -top-[32px] self-center items-center justify-center rounded-full bg-neutral-500 ${state.index === 0 && 'bg-primary'}`}
+        className={cn('w-[64px] h-[64px] absolute -top-[32px] self-center items-center justify-center rounded-full bg-neutral-500 dark:bg-secondary', { 'bg-primary dark:bg-primary': state.index === 0 })}
         onPress={() => {
           animateBrandOnce();
           Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
