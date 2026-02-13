@@ -19,12 +19,12 @@ export const CurvedTabBarBackground = (): JSX.Element => {
   const strokeWidth = 1.5;
   const halfStroke = strokeWidth / 2;
 
-  const fillColor = scheme === 'dark' ? APP_COLORS.secondary : APP_COLORS.neutral[400];
+  const fillColor = scheme === 'dark' ? APP_COLORS.secondary : APP_COLORS.neutral[200];
   const borderColor =
     scheme === "dark"
       ? "rgba(255,255,255,0.08)"
       : "rgba(0,0,0,0.12)";
-      
+
 
   return (
     <Svg testID="CurvedTabBarBackground:Svg" width={screen_width} height={barHeight} >
@@ -56,9 +56,8 @@ export const CurvedTabBarBackground = (): JSX.Element => {
         `}
         fill={fillColor}
       />
-      {/* Upper border */}
       <Path
-  d={`
+        d={`
     M0 ${cornerRadius}
 
     A${cornerRadius} ${cornerRadius} 0 0 1 ${cornerRadius} 0
@@ -77,13 +76,13 @@ export const CurvedTabBarBackground = (): JSX.Element => {
 
     A${cornerRadius} ${cornerRadius} 0 0 1 ${screen_width} ${cornerRadius}
   `}
-  fill="none"
-  stroke={borderColor}
-  strokeWidth={strokeWidth}
-  strokeLinecap="round"
-  strokeLinejoin="round"
-  vectorEffect="non-scaling-stroke"
-/>
+        fill="none"
+        stroke={borderColor}
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        vectorEffect="non-scaling-stroke"
+      />
 
     </Svg>
   );
