@@ -26,7 +26,9 @@
         "home": "Home",
         "tap_NFC_tag": "Tap NFC Tag",
         "scan_QR": "Scan QR",
-        "scan_NFC_or_QR": "Hold your phone near the NFC tag, or scan the QR code if NFC is not supported."
+        "scan_NFC_or_QR": "Hold your phone near the NFC tag, or scan the QR code if NFC is not supported.",
+        "your_wallet": "Your Wallet",
+        "earn_one_free_haircut": "Earn 1 free haircut"
     },
     "prepositions": {
         "in": "In",

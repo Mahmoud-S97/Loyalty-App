@@ -46,3 +46,15 @@ export const shadowStyle = (scheme: ColorSchemeName): ViewStyle => Platform.sele
         elevation: scheme === 'dark' ? 12 : 8,
     },
 }) ?? {};
+
+export const cardShadowStyle = (scheme: ColorSchemeName): ViewStyle => Platform.select({
+    ios: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: scheme === 'dark' ? 0.16 : 0.10,
+        shadowRadius: scheme === 'dark' ? 22 : 8,
+    },
+    android: {
+        elevation: scheme === 'dark' ? 10 : 6,
+    },
+}) ?? {};
