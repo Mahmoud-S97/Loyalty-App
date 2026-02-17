@@ -28,7 +28,13 @@
         "scan_QR": "مسح QR",
         "scan_NFC_or_QR": "قرّب هاتفك من علامة NFC، أو امسح رمز الاستجابة السريعة (QR) إذا لم تكن تقنية NFC مدعومة.",
         "your_wallet": "محفظتك",
-        "earn_one_free_haircut": "احصل على قصة شعر مجانية واحدة"
+        "earn_one_free_haircut": "احصل على قصة شعر مجانية واحدة",
+        "all_about_you": "كل شيء عنك",
+        "profile": "الملف الشخصي",
+        "activity": "الأنشطة",
+        "settings": "الإعدادات",
+        "logout": "تسجيل الخروج",
+        "app_stuff": "أشياء التطبيق"
     },
     "prepositions": {
         "in": "في",

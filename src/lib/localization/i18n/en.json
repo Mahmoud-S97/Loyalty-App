@@ -28,7 +28,13 @@
         "scan_QR": "Scan QR",
         "scan_NFC_or_QR": "Hold your phone near the NFC tag, or scan the QR code if NFC is not supported.",
         "your_wallet": "Your Wallet",
-        "earn_one_free_haircut": "Earn 1 free haircut"
+        "earn_one_free_haircut": "Earn 1 free haircut",
+        "all_about_you": "All about you",
+        "profile": "Profile",
+        "activity": "Activity",
+        "settings": "Settings",
+        "logout": "Logout",
+        "app_stuff": "App stuff"
     },
     "prepositions": {
         "in": "In",
