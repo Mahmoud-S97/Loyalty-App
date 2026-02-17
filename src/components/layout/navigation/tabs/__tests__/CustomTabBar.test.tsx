@@ -36,6 +36,10 @@ const mockTabBarProps = {
 
 describe('<CustomTabBar />', () => {
 
+    beforeEach(() => {
+        jest.clearAllMocks();
+    })
+
     it('renders CutomTabBar correctly', () => {
 
         const { getByTestId } = render(<CustomTabBar {...mockTabBarProps as any} />);
@@ -51,15 +55,27 @@ describe('<CustomTabBar />', () => {
         expect(getByTestId('CustomTabBar:ContainerView').props.children.length).toBe(mockTabBarProps.state.routes.length);
     });
 
-    it('navigates to a specific screen when tab is pressed', () => {
+    it('navigates to a account screen when tab is pressed', () => {
 
         const { getByTestId } = render(<CustomTabBar {...mockTabBarProps as any} />);
 
-        const tabButton = getByTestId('CustomTabBar:Tab-account');
+        const accountTab = getByTestId('CustomTabBar:Tab-account');
 
-        fireEvent.press(tabButton);
+        fireEvent.press(accountTab);
 
         expect(mockTabBarProps['navigation'].navigate).toHaveBeenCalledWith('account');
+        expect(mockTabBarProps['navigation'].navigate).toHaveBeenCalledTimes(1);
+    });
+
+    it('navigates to a wallet screen when tab is pressed', () => {
+
+        const { getByTestId } = render(<CustomTabBar {...mockTabBarProps as any} />);
+
+        const walletTab = getByTestId('CustomTabBar:Tab-wallet');
+
+        fireEvent.press(walletTab);
+
+        expect(mockTabBarProps['navigation'].navigate).toHaveBeenCalledWith('wallet');
         expect(mockTabBarProps['navigation'].navigate).toHaveBeenCalledTimes(1);
     });
 
