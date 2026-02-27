@@ -23,10 +23,14 @@ describe('<WalletCard />', () => {
   // Will be handled later, for now just asserting the existancy
   it('navigates to Loyalty-Screen correctly', () => {
 
-    const { getByTestId } = render(<WalletCard item={walletItem} index={0} />);
+    const onPress = jest.fn();
+    const { getByTestId } = render(<WalletCard item={walletItem} index={0} onPress={onPress} />);
 
     const cardNavigatorButton = getByTestId('WalletCard:TouchableOpacity');
 
     expect(cardNavigatorButton).toBeTruthy();
+
+    fireEvent.press(cardNavigatorButton);
+    expect(onPress).toHaveBeenCalledTimes(1);
   })
 })
