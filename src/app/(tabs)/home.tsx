@@ -19,7 +19,7 @@ const HomeScreen = (): JSX.Element => {
 
   return (
     <ScreenView>
-      <TouchableOpacity testID='HomeScreen:NotificationButton' activeOpacity={0.8} style={shadowStyle(scheme)} className='w-[50px] h-[50px] m-5 flex absolute z-10 justify-center items-center self-end rounded-full bg-neutral-50 dark:bg-neutral-800' onPress={() => { }}>
+      <TouchableOpacity testID='HomeScreen:NotificationButton' activeOpacity={0.8} style={shadowStyle(scheme)} className='w-[50px] h-[50px] m-5 flex absolute z-10 justify-center items-center self-end rounded-full bg-neutral-50 dark:bg-neutral-800' onPress={() => router.push('/home-screens/notification')}>
         <FontAwesome testID='HomeScreen:NotificationIcon' name='bell-o' size={22} color={scheme === 'dark' ? APP_COLORS.neutral[200] : APP_COLORS.neutral[900]} />
         <View className='w-[25px] h-[25px] bg-red-500 rounded-full flex items-center justify-center absolute -top-2 -end-2'>
           <Text className='text-neutral-50 font-bold text-xs'>1</Text>

@@ -24,6 +24,7 @@
         "wallet": "Wallet",
         "account": "Account",
         "home": "Home",
+        "notifications": "Notifications",
         "tap_NFC_tag": "Tap NFC Tag",
         "scan_QR": "Scan QR",
         "scan_NFC_or_QR": "Hold your phone near the NFC tag, or scan the QR code if NFC is not supported.",
