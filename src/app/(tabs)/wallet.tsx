@@ -14,7 +14,7 @@ const WalletScreen = (): JSX.Element => {
 
   return (
     <ScreenView>
-      <View className='flex w-full h-[70px] justify-center items-start bg-brand-500'>
+      <View testID='WalletScreen:HeaderView' className='flex w-full h-[70px] justify-center items-start bg-brand-500'>
         <AppText className='ms-4 font-trans font-[600px] text-xl text-accent'>app.your_wallet</AppText>
       </View>
       <WalletList walletData={walletData} />
