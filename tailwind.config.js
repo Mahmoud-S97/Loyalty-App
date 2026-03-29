@@ -47,7 +47,17 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ["Inter_400Regular"]
+        // Multilingual Fonts:
+        'inter-reg': ["InterRegular"],
+        'inter-md': ["InterMedium"],
+        'inter-semi-b': ["InterSemiBold"],
+        'inter-b': ["InterBold"],
+
+        // Arabic Fonts:
+        'cairo-reg': ["CairoRegular"],
+        'cairo-md': ["CairoMedium"],
+        'cairo-semi-b': ["CairoSemiBold"],
+        'cairo-b': ["CairoBold"],
       },
       fontSize: {
         xs: [12, { lineHeight: "14px" }],
