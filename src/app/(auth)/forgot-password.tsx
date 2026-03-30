@@ -16,7 +16,7 @@ const ForgotPasswordScreen = () => {
         <GoBackButton />
         <ContainerView className='justify-start'>
           <View className='flex-column w-full p-2 justify-center items-center my-5'>
-            <AppText className='text-3xl text-center font-trans font-bold'>auth.forgotPassword</AppText>
+            <AppText className='text-3xl text-center font-bold'>auth.forgotPassword</AppText>
             <AppText className='text-sm text-center font-bold text-neutral-800 dark:text-neutral-500 mt-4'>auth.forgotPassword_entries_with_welcoming_msg</AppText>
           </View>
           <View className='flex w-full p-2'>

@@ -16,7 +16,7 @@ const IntroScreen = () => {
             <ContainerView>
                 <View testID='IntroScreen:HeroSection' className='flex w-full justify-center items-center my-20'>
                     <Image testID='IntroScreen:LogoImage' source={LOCAL_IMAGES.LOGO_TRANS} className='w-[120px] h-[120px] border-[1px] border-neutral-500 dark:border-neutral-800 rounded-lg' />
-                    <AppText className='text-2xl text-center font-trans  font-[600] mt-5'>welcome</AppText>
+                    <AppText className='text-2xl text-center font-[600] mt-5'>welcome</AppText>
                 </View>
                 <View testID='IntroScreen:NavigationSection' className='flex-column w-full items-center justify-center p-2' >
                     <MainButton testID='IntroScreen:LoginBtn' className='bg-primary dark:bg-brand-800' title='auth.login' onPress={() => router.replace('/login')} />

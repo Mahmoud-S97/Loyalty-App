@@ -78,7 +78,7 @@ const CustomTabBar = ({ state, navigation, descriptors }: BottomTabBarProps): JS
                 size={28}
                 color={isFocused ? (scheme === 'dark' ? APP_COLORS.brand[500] : APP_COLORS.primary) : APP_COLORS.neutral[700]}
               />
-              <AppText className={cn('text-xs text-neutral-700 dark:text-neutral-700 font-trans font-semibold', { 'text-primary dark:text-brand-500': isFocused })}>{`app.${route.name}`}</AppText>
+              <AppText className={cn('text-xs text-neutral-700 dark:text-neutral-700 font-semibold', { 'text-primary dark:text-brand-500': isFocused })}>{`app.${route.name}`}</AppText>
             </TouchableOpacity>
           );
         })}

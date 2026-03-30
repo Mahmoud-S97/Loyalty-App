@@ -34,7 +34,7 @@ const MainInputField = ({ testID, icon, iconSize, iconColor, showPassword, class
             <MaterialIcons name={icon} size={iconSize ?? 24} color={iconColor ?? (scheme === 'dark' ? APP_COLORS.neutral[400] : APP_COLORS.neutral[800])} />
             <TextInput
                 testID={testID ?? 'MainInputField:TextInput'}
-                className={cn('flex items-center w-[90%] h-[100%] ms-3 font-trans font-medium text-base text-neutral-900 dark:text-neutral-400 bg-neutral-50 dark:bg-neutral-800 rounded-full', textInputClassName)}
+                className={cn('flex items-center w-[90%] h-[100%] ms-3 font-medium text-base text-neutral-900 dark:text-neutral-400 bg-neutral-50 dark:bg-neutral-800 rounded-full', textInputClassName)}
                 placeholderTextColor={placeholderTextColor ?? (scheme === 'dark' ? APP_COLORS.neutral[400] : APP_COLORS.neutral[800])}
                 placeholder={getTranslated(placeholder ?? '')}
                 secureTextEntry={secureTextEntry}

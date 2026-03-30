@@ -56,21 +56,21 @@ const WalletCard = ({ item: { id, title, name, image, address, points = 0, thres
         <ContainerView className='justify-start items-start p-4'>
           <View className='flex-row justify-between items-center'>
             <View className='flex-column w-[85%]'>
-              <AppText numberOfLines={1} withTranslation={false} className='w-full font-trans font-bold text-neutral-800 dark:text-neutral-800'>{name}</AppText>
+              <AppText numberOfLines={1} withTranslation={false} className='w-full font-bold text-neutral-800 dark:text-neutral-800'>{name}</AppText>
               <AppText numberOfLines={1} withTranslation={false} className='w-full my-1 text-neutral-800 dark:text-neutral-800'>{title}</AppText>
               <AppText numberOfLines={1} withTranslation={false} className='w-full text-neutral-600 dark:text-neutral-700'>{address}</AppText>
             </View>
             <View className='w-14 h-14 flex-column justify-center items-center self-start bg-brand-400 rounded-full'>
               <Ionicons name='ticket-sharp' size={20} color={APP_COLORS.brand[900]} />
-              <AppText className='text-sm font-trans font-bold text-brand-900 dark:text-brand-900'>x1</AppText>
+              <AppText className='text-sm font-bold text-brand-900 dark:text-brand-900'>x1</AppText>
             </View>
           </View>
           <View className='w-full h-3 border-brand-500 my-4 rounded-full overflow-hidden' style={{ borderWidth: 1 }}>
             <View style={{ width: percentage, height: '100%', backgroundColor: APP_COLORS.brand[500], borderRadius: 999 }} />
           </View>
           <View className='flex-row justify-between items-center'>
-            <AppText numberOfLines={1} withTranslation={false} className='w-[20%] text-neutral-800 dark:text-neutral-800 font-trans font-bold'>{`${points}/${threshold}`}</AppText>
-            <AppText numberOfLines={1} className='w-[75%] text-neutral-800 dark:text-neutral-800 font-trans font-semiBold'>app.earn_one_free_haircut</AppText>
+            <AppText numberOfLines={1} withTranslation={false} className='w-[20%] text-neutral-800 dark:text-neutral-800 font-bold'>{`${points}/${threshold}`}</AppText>
+            <AppText numberOfLines={1} className='w-[75%] text-neutral-800 dark:text-neutral-800 font-semibold'>app.earn_one_free_haircut</AppText>
           </View>
         </ContainerView>
       </TouchableOpacity>

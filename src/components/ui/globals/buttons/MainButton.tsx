@@ -32,7 +32,7 @@ const MainButton = ({ testID, children, title, icon, image, className, textClass
             {icon && <MaterialIcons name={icon} size={iconSize || 24} color={iconColor || APP_COLORS.neutral[900]} />}
             {image && <Image testID='MainButton:Image' source={image} className={cn('w-7 h-7 object-contain', imageClassName)} />}
             {children && children}
-            <Text className={cn('text-lg text-center font-trans font-bold text-neutral-200 dark:text-neutral-400 ms-2', combinedTextClasses)}>{getTranslated(title || '')}</Text>
+            <Text className={cn('text-lg text-center font-bold text-neutral-200 dark:text-neutral-400 ms-2', combinedTextClasses)}>{getTranslated(title || '')}</Text>
         </TouchableOpacity>
     )
 }

@@ -15,7 +15,7 @@ const AppText = ({ children, numberOfLines, className, withTranslation = true }:
     const renderChildren = withTranslation ? getTranslated(children) : children;
 
     return (
-        <Text testID='AppText:Text' numberOfLines={numberOfLines} className={cn('text-neutral-900 dark:text-neutral-500 font-normal text-base font-sans', className)}>{renderChildren}</Text>
+        <Text testID='AppText:Text' numberOfLines={numberOfLines} className={cn('text-neutral-900 dark:text-neutral-500 font-normal text-base', className)}>{renderChildren}</Text>
     )
 }
 
