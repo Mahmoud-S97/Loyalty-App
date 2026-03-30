@@ -1,17 +1,20 @@
 import React, { JSX, useRef } from 'react';
-import { View, TouchableOpacity, Image, StyleSheet, useColorScheme, Animated, Easing } from "react-native";
+import { View, TouchableOpacity, Image, StyleSheet, Animated, Easing } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
 import { CurvedTabBarBackground } from "./CurvedTabBarBackground";
-import { getScreenHeight, getScreenWidth } from "@/utils";
-import { APP_COLORS, shadowStyle } from "@/constants/theme";
+import { APP_COLORS } from "@/constants/theme";
 import { LOCAL_IMAGES } from "@/constants/images";
 import AppText from "@/components/ui/content/AppText";
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { cn } from '@/lib/nativeWindCSS/cn';
+import { useAppTheme } from '@/Hooks/theme/useAppTheme';
+import { useThemeStyles } from '@/Hooks/theme/useThemeStyles';
 
 const CustomTabBar = ({ state, navigation, descriptors }: BottomTabBarProps): JSX.Element => {
-  const scheme = useColorScheme();
+
+  const { is_dark } = useAppTheme();
+  const { shadow } = useThemeStyles();
 
   const rotateAnimation = useRef(new Animated.Value(0)).current;
   const scaleAnimation = useRef(new Animated.Value(1)).current;
@@ -76,7 +79,7 @@ const CustomTabBar = ({ state, navigation, descriptors }: BottomTabBarProps): JS
               <Ionicons
                 name={isFocused ? icon : `${icon}-outline`}
                 size={28}
-                color={isFocused ? (scheme === 'dark' ? APP_COLORS.brand[500] : APP_COLORS.primary) : APP_COLORS.neutral[700]}
+                color={isFocused ? (is_dark ? APP_COLORS.brand[500] : APP_COLORS.primary) : APP_COLORS.neutral[700]}
               />
               <AppText className={cn('text-xs text-neutral-700 dark:text-neutral-700 font-semibold', { 'text-primary dark:text-brand-500': isFocused })}>{`app.${route.name}`}</AppText>
             </TouchableOpacity>
@@ -86,7 +89,7 @@ const CustomTabBar = ({ state, navigation, descriptors }: BottomTabBarProps): JS
       <TouchableOpacity
         testID='CustomTabBar:CircleButton'
         activeOpacity={0.9}
-        style={shadowStyle(scheme)}
+        style={shadow}
         className={cn('w-[64px] h-[64px] absolute -top-[32px] self-center items-center justify-center rounded-full bg-neutral-300 dark:bg-secondary', { 'bg-primary dark:bg-primary': state.index === 0 })}
         onPress={() => {
           animateBrandOnce();

@@ -8,12 +8,29 @@ import { initAppLanguage } from '@/lib/localization';
 import AnimatedSplashScreen from './AnimatedSplashScreen';
 import { useColorScheme } from 'react-native';
 import { APP_COLORS } from '@/constants/theme';
+import { AppThemeProvider } from '@/store/context/theme';
+import { useAppTheme } from '@/Hooks/theme/useAppTheme';
 
 SplashScreen.preventAutoHideAsync();
 
+const RenderApp = (): JSX.Element => {
+
+  const { is_dark } = useAppTheme();
+
+  return (
+    <SafeAreaProvider>
+      <SafeAreaView className='flex-1 bg-neutral-100 dark:bg-neutral-900' edges={['top']}>
+        <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: is_dark ? APP_COLORS.neutral[900] : APP_COLORS.neutral[100] } }}>
+          <Stack.Screen name="(auth)" />
+          <Stack.Screen name="(tabs)" />
+        </Stack>
+      </SafeAreaView>
+    </SafeAreaProvider>
+  )
+}
+
 export default function RootLayout(): JSX.Element {
 
-  const scheme = useColorScheme();
   const [fontsLoaded] = useAppFonts();
   const [showSplash, setShowSplash] = useState<boolean>(true);
 
@@ -27,13 +44,8 @@ export default function RootLayout(): JSX.Element {
   }
 
   return (
-    <SafeAreaProvider>
-      <SafeAreaView className='flex-1 bg-neutral-100 dark:bg-neutral-900' edges={['top']}>
-        <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: scheme === 'dark' ? APP_COLORS.neutral[900] : APP_COLORS.neutral[100] } }}>
-          <Stack.Screen name="(auth)" />
-          <Stack.Screen name="(tabs)" />
-        </Stack>
-      </SafeAreaView>
-    </SafeAreaProvider>
+    <AppThemeProvider>
+      <RenderApp />
+    </AppThemeProvider>
   );
 }

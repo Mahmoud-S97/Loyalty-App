@@ -2,10 +2,11 @@ import React, { memo, useEffect, useRef } from 'react';
 import { Animated, DimensionValue, Image, TouchableOpacity, useColorScheme, View } from 'react-native';
 import ContainerView from '@/components/layout/screens/ContainerView';
 import AppText from '@/components/ui/content/AppText';
-import { APP_COLORS, cardShadowStyle } from '@/constants/theme';
+import { APP_COLORS } from '@/constants/theme';
 import { cn } from '@/lib/nativeWindCSS/cn';
 import { Ionicons } from '@expo/vector-icons';
 import { WalletItem } from '@/types';
+import { useThemeStyles } from '@/Hooks/theme/useThemeStyles';
 
 type WalletCardProps = {
   item: WalletItem,
@@ -18,7 +19,7 @@ const animatedIds = new Set<number>();
 
 const WalletCard = ({ item: { id, title, name, image, address, points = 0, threshold = 10 }, index, className, onPress }: WalletCardProps) => {
 
-  const scheme = useColorScheme();
+  const { cardShadow } = useThemeStyles();
 
   const fadingAnimation = useRef(new Animated.Value(animatedIds.has(id) ? 1 : 0)).current;
   const translateYAnimation = useRef(new Animated.Value(animatedIds.has(id) ? 0 : 12)).current;
@@ -50,7 +51,7 @@ const WalletCard = ({ item: { id, title, name, image, address, points = 0, thres
 
 
   return (
-    <Animated.View testID='WalletCard:AnimatedView' style={[cardShadowStyle(scheme), { opacity: fadingAnimation, transform: [{ translateY: translateYAnimation }] }]} className={cn('w-full rounded-2xl bg-brand-100 dark:bg-brand-200 mb-10', className)}>
+    <Animated.View testID='WalletCard:AnimatedView' style={[cardShadow, { opacity: fadingAnimation, transform: [{ translateY: translateYAnimation }] }]} className={cn('w-full rounded-2xl bg-brand-100 dark:bg-brand-200 mb-10', className)}>
       <TouchableOpacity testID='WalletCard:TouchableOpacity' activeOpacity={0.8} onPress={onPress}>
         <Image className='w-full h-[150px] rounded-2xl' resizeMode='cover' source={image} alt={title} />
         <ContainerView className='justify-start items-start p-4'>

@@ -1,17 +1,11 @@
-import { Dimensions, Platform } from "react-native";
-
+import { I18nManager, Platform } from "react-native";
 
 // Platform checks
 export const is_IOS = (): boolean => {
-    return Platform.OS === 'ios';
+  return Platform.OS === 'ios';
 }
 
-// Get mobile screen's width
-export const getScreenWidth = (): number => {
-    return Dimensions.get('window').width;
-}
-
-// Get mobile screen's height
-export const getScreenHeight = (): number => {
-    return Dimensions.get('window').height;
+// Check if the App is Arabic (Right-to-Left)
+export const is_RTL = (): boolean => {
+  return I18nManager.isRTL;
 }

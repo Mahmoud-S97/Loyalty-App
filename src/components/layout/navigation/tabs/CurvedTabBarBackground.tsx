@@ -1,33 +1,33 @@
 import { APP_COLORS } from "@/constants/theme";
-import { getScreenWidth } from "@/utils";
+import { useScreenDimensions } from "@/Hooks/layout/useScreenDimensions";
+import { useAppTheme } from "@/Hooks/theme/useAppTheme";
 import { JSX } from "react";
-import { useColorScheme } from "react-native";
 import Svg, { Path } from "react-native-svg";
 
 export const CurvedTabBarBackground = (): JSX.Element => {
 
-  const scheme = useColorScheme();
+  const { SCREEN_WIDTH } = useScreenDimensions();
+  const { is_dark } = useAppTheme();
 
-  const screen_width = getScreenWidth();
   const barHeight = 68;
   const radius = 36;
   const cornerRadius = 25;
   const buttonRadius = 36;
-  const centerX = screen_width / 2;
+  const centerX = SCREEN_WIDTH / 2;
   const notchDepth = radius;
 
   const strokeWidth = 1.5;
   const halfStroke = strokeWidth / 2;
 
-  const fillColor = scheme === 'dark' ? APP_COLORS.secondary : APP_COLORS.neutral[200];
+  const fillColor = is_dark ? APP_COLORS.secondary : APP_COLORS.neutral[200];
   const borderColor =
-    scheme === "dark"
+    is_dark
       ? "rgba(255,255,255,0.08)"
       : "rgba(0,0,0,0.12)";
 
 
   return (
-    <Svg testID="CurvedTabBarBackground:Svg" width={screen_width} height={barHeight} >
+    <Svg testID="CurvedTabBarBackground:Svg" width={SCREEN_WIDTH} height={barHeight} >
       <Path
         d={`
           M${cornerRadius} 0
@@ -42,9 +42,9 @@ export const CurvedTabBarBackground = (): JSX.Element => {
            ${centerX + radius} 0
            ${centerX + radius} 0
 
-          H${screen_width - cornerRadius}
+          H${SCREEN_WIDTH - cornerRadius}
 
-          A${cornerRadius} ${cornerRadius} 0 0 1 ${screen_width} ${cornerRadius}
+          A${cornerRadius} ${cornerRadius} 0 0 1 ${SCREEN_WIDTH} ${cornerRadius}
 
           V${barHeight}
           H0
@@ -72,9 +72,9 @@ export const CurvedTabBarBackground = (): JSX.Element => {
      ${centerX + radius} 0
      ${centerX + radius} 0
 
-    H${screen_width - cornerRadius}
+    H${SCREEN_WIDTH - cornerRadius}
 
-    A${cornerRadius} ${cornerRadius} 0 0 1 ${screen_width} ${cornerRadius}
+    A${cornerRadius} ${cornerRadius} 0 0 1 ${SCREEN_WIDTH} ${cornerRadius}
   `}
         fill="none"
         stroke={borderColor}
