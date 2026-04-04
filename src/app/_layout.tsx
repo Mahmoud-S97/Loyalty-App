@@ -6,7 +6,6 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useAppFonts } from '@/Hooks/typography/useAppFonts';
 import { initAppLanguage } from '@/lib/localization';
 import AnimatedSplashScreen from './AnimatedSplashScreen';
-import { useColorScheme } from 'react-native';
 import { APP_COLORS } from '@/constants/theme';
 import { AppThemeProvider } from '@/store/context/theme';
 import { useAppTheme } from '@/Hooks/theme/useAppTheme';
@@ -35,7 +34,9 @@ export default function RootLayout(): JSX.Element {
   const [showSplash, setShowSplash] = useState<boolean>(true);
 
   useEffect(() => {
-    initAppLanguage();
+    (async () => {
+      await initAppLanguage();
+    })();
     SplashScreen.hideAsync();
   }, []);
 

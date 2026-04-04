@@ -2,10 +2,10 @@ import React, { JSX } from 'react';
 import { Text } from 'react-native';
 import { cn } from '@/lib/nativeWindCSS/cn';
 import { getTranslated } from '@/lib/localization';
-import { getFontWeight, is_RTL } from '@/utils';
+import { getFontWeight } from '@/utils';
 
 type AppTextProps = {
-  children: any,
+  children: string,
   numberOfLines?: number,
   className?: string,
   withTranslation?: boolean,

@@ -30,12 +30,10 @@
         "expo-font",
         {
           "fonts": [
-            // English and multilingual support version
             "./src/assets/fonts/Inter-Regular.ttf",
             "./src/assets/fonts/Inter-Medium.ttf",
             "./src/assets/fonts/Inter-SemiBold.ttf",
             "./src/assets/fonts/Inter-Bold.ttf",
-            // Arabic support version
             "./src/assets//fonts/Cairo-Regular.ttf",
             "./src/assets/fonts/Cairo-Medium.ttf",
             "./src/assets/fonts/Cairo-SemiBold.ttf",

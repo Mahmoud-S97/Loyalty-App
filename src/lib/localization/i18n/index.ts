@@ -5,22 +5,24 @@ import ar from './ar.json';
 import en from './en.json';
 
 type Resources = {
-    en: { translation: Record<string, string | object> };
-    ar: { translation: Record<string, string | object> };
+  en: { translation: Record<string, string | object> };
+  ar: { translation: Record<string, string | object> };
 };
 
 const resources: Resources = {
-    en: { translation: en },
-    ar: { translation: ar }
+  en: { translation: en },
+  ar: { translation: ar }
 };
 
+const deviceLanguage = Localization.getLocales()[0]?.languageCode === 'ar' ? 'ar' : 'en';
+
 i18n.use(initReactI18next).init({
-    resources,
-    lng: !Localization.getLocales().find(locale => locale.languageCode === 'ar') ? 'ar' : 'en', // Can be more than 2 languages later on!
-    fallbackLng: 'en',
-    interpolation: {
-        escapeValue: false
-    }
+  resources,
+  lng: deviceLanguage,
+  fallbackLng: 'en',
+  interpolation: {
+    escapeValue: false
+  }
 });
 
 export default i18n;
