@@ -11,21 +11,12 @@ export const is_RTL = (): boolean => {
 }
 
 // Getting the font-weight based on the App language
-export const getFontWeight = (weight: string): string => {
-  switch (weight) {
-    case 'regular':
-      return is_RTL() ? 'font-cairo-reg' : 'font-inter-reg';
-      break;
-    case 'medium':
-      return is_RTL() ? 'font-cairo-md' : 'font-inter-md';
-      break;
-    case 'semiBold':
-      return is_RTL() ? 'font-cairo-semi-b' : 'font-inter-semi-b';
-      break;
-    case 'bold':
-      return is_RTL() ? 'font-cairo-b' : 'font-inter-b';
-      break;
-    default:
-      return is_RTL() ? 'font-cairo-reg' : 'font-inter-reg';
+export const getFontWeight = (weight: 'regular' | 'medium' | 'semiBold' | 'bold'): string => {
+  const fonts = {
+    regular: is_RTL() ? 'font-cairo-reg' : 'font-inter-reg',
+    medium: is_RTL() ? 'font-cairo-md' : 'font-inter-md',
+    semiBold: is_RTL() ? 'font-cairo-semi-b' : 'font-inter-semi-b',
+    bold: is_RTL() ? 'font-cairo-b' : 'font-inter-b'
   }
+  return fonts[weight];
 }

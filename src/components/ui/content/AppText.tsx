@@ -9,7 +9,7 @@ type AppTextProps = {
   numberOfLines?: number,
   className?: string,
   withTranslation?: boolean,
-  weight?: string
+  weight?: 'regular' | 'medium' | 'semiBold' | 'bold'
 }
 
 const AppText = ({ children, numberOfLines, className, withTranslation = true, weight = 'regular' }: AppTextProps): JSX.Element => {

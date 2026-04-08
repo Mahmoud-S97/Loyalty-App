@@ -7,12 +7,12 @@ export const useLocalStorage = () => {
     await AsyncStorage.setItem(key, storedValue);
   }
 
-  const getStorageItem = async (key: string) => {
+  const getStorageItem = async (key: string): Promise<any> => {
     const value = await AsyncStorage.getItem(key);
     return value ? JSON.parse(value) : null
   }
 
-  const removeStorageItem = async (key: string) => {
+  const removeStorageItem = async (key: string): Promise<void> => {
     await AsyncStorage.removeItem(key);
   }
 

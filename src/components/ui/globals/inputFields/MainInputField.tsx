@@ -12,10 +12,10 @@ type InputFieldProps = {
   icon?: ComponentProps<typeof MaterialIcons>['name'],
   iconSize?: number,
   iconColor?: string,
-  showPassword?: boolean,
   className?: string,
   textInputClassName?: string,
   secureTextEntry?: boolean,
+  isPasswordField?: boolean,
   placeholderTextColor?: string,
   placeholder?: string,
   editable?: boolean,
@@ -24,16 +24,17 @@ type InputFieldProps = {
   scrollEnabled?: boolean,
   value?: string,
   onChangeText?: (value: any) => void,
+  toggleShowPassword?: () => void;
   testID?: string
 }
 
-const MainInputField = ({ testID, icon, iconSize, iconColor, showPassword, className, textInputClassName, secureTextEntry, placeholder, placeholderTextColor, editable, maxLength, multiline, scrollEnabled, value, onChangeText }: InputFieldProps) => {
+const MainInputField = ({ testID, icon, iconSize, iconColor, className, textInputClassName, secureTextEntry, isPasswordField, placeholder, placeholderTextColor, editable, maxLength, multiline, scrollEnabled, value, onChangeText, toggleShowPassword }: InputFieldProps) => {
 
   const { is_dark } = useAppTheme();
   const { shadow } = useThemeStyles();
 
   return (
-    <View testID='MainInputField:WrapperView' style={shadow} className={cn('w-full h-[50px] bg-neutral-50 dark:bg-neutral-800 rounded-full flex-row items-center py-2 px-4', className)}>
+    <View testID='MainInputField:WrapperView' style={shadow} className={cn('w-full h-[55px] bg-neutral-50 dark:bg-neutral-800 rounded-full flex-row items-center py-2 px-4', className)}>
       <MaterialIcons name={icon} size={iconSize ?? 24} color={iconColor ?? (is_dark ? APP_COLORS.neutral[400] : APP_COLORS.neutral[800])} />
       <TextInput
         testID={testID ?? 'MainInputField:TextInput'}
@@ -48,9 +49,9 @@ const MainInputField = ({ testID, icon, iconSize, iconColor, showPassword, class
         multiline={multiline ?? false}
         scrollEnabled={scrollEnabled ?? true}
       />
-      {secureTextEntry && (
-        <TouchableOpacity testID='MainInputField:ToggleEyeButton' activeOpacity={0.7} className='flex justify-center items-center absolute start-[95%] z-10'>
-          <FontAwesome5 name={showPassword ? 'eye' : 'eye-slash'} size={iconSize ?? 20} color={iconColor ?? (is_dark ? APP_COLORS.neutral[400] : APP_COLORS.neutral[800])} />
+      {isPasswordField && (
+        <TouchableOpacity testID='MainInputField:ToggleEyeButton' activeOpacity={0.7} className='flex justify-center items-center absolute start-[95%] z-10' onPress={toggleShowPassword}>
+          <FontAwesome5 name={!secureTextEntry ? 'eye' : 'eye-slash'} size={iconSize ?? 20} color={iconColor ?? (is_dark ? APP_COLORS.neutral[400] : APP_COLORS.neutral[800])} />
         </TouchableOpacity>
       )}
     </View>
