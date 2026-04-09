@@ -35,7 +35,8 @@
         "activity": "الأنشطة",
         "settings": "الإعدادات",
         "logout": "تسجيل الخروج",
-        "app_stuff": "أشياء التطبيق"
+        "app_stuff": "أشياء التطبيق",
+        "clear_all": "حذف الكل"
     },
     "prepositions": {
         "in": "في",

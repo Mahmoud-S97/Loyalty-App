@@ -35,7 +35,8 @@
         "activity": "Activity",
         "settings": "Settings",
         "logout": "Logout",
-        "app_stuff": "App stuff"
+        "app_stuff": "App stuff",
+        "clear_all": "Clear All"
     },
     "prepositions": {
         "in": "In",

@@ -1,3 +1,4 @@
+import { LOCAL_IMAGES } from "@/constants";
 
 const barbershoMockImage = require('@/assets/images/app/mock/snipz-barbershop.jpeg');
 
@@ -29,4 +30,28 @@ export const walletData = [ // Dummy list
     points: 9,
     threshold: 10
   },
-]
+];
+
+export const notificationData = [
+  {
+    id: 1,
+    icon: LOCAL_IMAGES.LOGO_TRANS,
+    title: 'BESTIE Team',
+    body: "Thank you to joining us!. Try it out and enjoy your free-haircut!",
+    createdAt: '2026-04-07, 7:33pm'
+  },
+  {
+    id: 2,
+    icon: LOCAL_IMAGES.LOGO_TRANS,
+    title: 'BESTIE Team',
+    body: "Don't miss out to try scan NFC or QR code in order to get your free-haircut!",
+    createdAt: '2026-04-07, 7:33pm'
+  },
+  {
+    id: 3,
+    icon: LOCAL_IMAGES.LOGO_TRANS,
+    title: 'BESTIE Team',
+    body: 'Thank you to joining us!. Try it out and enjoy your free-haircut!',
+    createdAt: '2026-04-07, 7:33pm'
+  }
+];

@@ -16,6 +16,7 @@ import { useThemeStyles } from '@/Hooks/theme/useThemeStyles';
 import i18n from '@/lib/localization/i18n';
 import { useLocalStorage } from '@/Hooks/storage/useLocalStorage';
 import { LOCAL_STORAGE_KEYS } from '@/constants';
+import { walletData } from '@/dummy-data';
 
 
 const HomeScreen = (): JSX.Element => {
@@ -62,7 +63,7 @@ const HomeScreen = (): JSX.Element => {
       <TouchableOpacity testID='HomeScreen:NotificationButton' activeOpacity={0.8} style={shadow} className='w-[50px] h-[50px] m-5 flex absolute z-10 justify-center items-center self-end rounded-full bg-neutral-50 dark:bg-neutral-800' onPress={() => router.push('/home-screens/notification')}>
         <FontAwesome testID='HomeScreen:NotificationIcon' name='bell-o' size={22} color={currentThemeColor} />
         <View className='w-[25px] h-[25px] bg-red-500 rounded-full flex items-center justify-center absolute -top-2 -end-2'>
-          <Text className='text-neutral-50 font-bold text-xs'>1</Text>
+          <Text className='text-neutral-50 font-bold text-xs'>{walletData.length}</Text>
         </View>
       </TouchableOpacity>
       <ContainerView>
