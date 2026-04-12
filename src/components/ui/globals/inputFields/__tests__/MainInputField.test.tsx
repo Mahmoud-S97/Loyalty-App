@@ -61,7 +61,7 @@ describe('<MainInputField />', () => {
 
     it('renders eye-button to show or hide the input password', () => {
 
-        const { getByTestId } = render(<MainInputField value='' secureTextEntry={true} iconSize={26} iconColor='blue' />);
+        const { getByTestId } = render(<MainInputField value='' secureTextEntry={true} isPasswordField={true} iconSize={26} iconColor='blue' />);
 
         const eyeButton = getByTestId('MainInputField:ToggleEyeButton');
         const eyeIcon = getByTestId('GoBackButton:FontAwesome5');

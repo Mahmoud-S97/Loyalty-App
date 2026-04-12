@@ -1,3 +1,4 @@
+import { APP_COLORS } from '@/constants/theme';
 import { jest } from '@jest/globals';
 import mockAsyncStorage from '@react-native-async-storage/async-storage/jest/async-storage-mock';
 
@@ -27,10 +28,10 @@ jest.mock('@/Hooks/theme/useAppTheme', () => ({
   useAppTheme: () => ({
     theme: 'light',
     is_dark: false,
-    currentThemeColor: 'light',
+    currentThemeColor: '#1a1a1a',
     toggleTheme: jest.fn(),
     changeCurrentThemeColor: jest.fn()
-  }),
+  })
 }));
 
 afterEach(() => {

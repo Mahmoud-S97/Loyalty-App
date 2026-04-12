@@ -3,7 +3,6 @@ import LoginScreen from "../login";
 import { router } from 'expo-router';
 
 // Mock the rendered components which have their own unit-tests
-jest.mock('@/components/ui/globals/buttons/GoBackButton');
 jest.mock('@/components/ui/globals/buttons/MainButton');
 jest.mock('@/components/ui/globals/inputFields/MainInputField');
 jest.mock('@/components/ui/content/AppText');
@@ -58,7 +57,7 @@ describe('<LoginScreen />', () => {
 
         fireEvent.press(signUpButton);
 
-        expect(router.navigate).toHaveBeenCalledWith('/sign-up');
-        expect(router.navigate).toHaveBeenCalledTimes(1);
+        expect(router.replace).toHaveBeenCalledWith('/sign-up');
+        expect(router.replace).toHaveBeenCalledTimes(1);
     });
 })

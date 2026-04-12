@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, useColorScheme } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { cn } from '@/lib/nativeWindCSS/cn';

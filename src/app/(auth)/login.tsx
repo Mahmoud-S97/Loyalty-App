@@ -27,7 +27,6 @@ const LoginScreen = () => {
   return (
     <KeyboardAvoidingView testID='LoginScreen:KeyboardAvoidingView' className='flex-1' behavior='padding'>
       <ScrollingView>
-        <GoBackButton />
         <ContainerView>
           <View className='flex-column w-full p-2 justify-center items-center my-7'>
             <AppText className='text-3xl text-center font-bold'>auth.login</AppText>
@@ -46,7 +45,7 @@ const LoginScreen = () => {
               <View className='w-[44%] h-[1px] bg-neutral-500' />
             </View>
             <MainButton className='bg-neutral-100 dark:bg-neutral-300' textClassName='text-neutral-900 dark:text-neutral-800 font-medium' title='auth.continue_with_google' image={LOCAL_ICONS.GOOGLE} onPress={() => { }} />
-            <TouchableOpacity testID='LoginScreen:SignUpBtn' activeOpacity={0.7} className='flex-row items-center justify-center mt-8' onPress={() => router.dismissTo('/sign-up')}>
+            <TouchableOpacity testID='LoginScreen:SignUpBtn' activeOpacity={0.7} className='flex-row items-center justify-center mt-8' onPress={() => router.replace('/sign-up')}>
               <AppText className='me-2 text-neutral-800 dark:text-neutral-500'>auth.have_not_an_account</AppText>
               <AppText className='text-primary font-[600]'>auth.signUp</AppText>
             </TouchableOpacity>
