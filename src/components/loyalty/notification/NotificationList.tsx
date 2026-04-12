@@ -60,7 +60,7 @@ const NotificationList = ({ notificationData }: NotificationListTypes) => {
       windowSize={5}
       initialNumToRender={10}
       removeClippedSubviews
-      ListEmptyComponent={() => <Text>No wallet items found</Text>}
+      ListEmptyComponent={() => <Text>No notification items found</Text>}
     />
   )
 }

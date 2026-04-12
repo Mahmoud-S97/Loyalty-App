@@ -44,12 +44,12 @@ const NotificationCard = ({ item: { id, title, icon, body, createdAt }, index, c
   }, []);
 
   return (
-    <Animated.View style={[{ opacity: fadingAnimation, transform: [{ translateY: translateYAnimation }] }]} className={cn('w-full min-h-100 px-4 py-6 border-b border-neutral-500 dark:border-neutral-800 bg-neutral-50 dark:bg-secondary', className)}>
-      <TouchableOpacity activeOpacity={0.9} onPress={onPress}>
+    <Animated.View testID='NotificationCard:AnimatedView' style={[{ opacity: fadingAnimation, transform: [{ translateY: translateYAnimation }] }]} className={cn('w-full min-h-100 px-4 py-6 border-b border-neutral-500 dark:border-neutral-800 bg-neutral-50 dark:bg-secondary', className)}>
+      <TouchableOpacity testID='NotificationCard:TouchableOpacity' activeOpacity={0.9} onPress={onPress}>
         <View className="w-full flex flex-row gap-6 items-start justify-start">
           <View className="flex-1/2 items-center justify-center">
             <View className="w-[70px] h-[70px]">
-              <Image source={icon} resizeMode="contain" className="w-full h-full" />
+              <Image testID="NotificationCard:Image" source={icon} resizeMode="contain" className="w-full h-full" />
             </View>
           </View>
           <View className="flex-1 flex-col items-start justify-start gap-2">
