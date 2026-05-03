@@ -1,46 +1,90 @@
-import React, { ComponentProps } from 'react';
-import { TextInput, TouchableOpacity, View } from 'react-native';
-import { APP_COLORS } from '@/constants/theme';
-import { cn } from '@/lib/nativeWindCSS/cn';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-import { getTranslated } from '@/lib/localization';
-import { useAppTheme } from '@/Hooks/theme/useAppTheme';
-import { useThemeStyles } from '@/Hooks/theme/useThemeStyles';
+import React, { ComponentProps } from "react";
+import { TextInput, TouchableOpacity, View } from "react-native";
+import { APP_COLORS } from "@/constants/theme";
+import { cn } from "@/lib/nativeWindCSS/cn";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import { getTranslated } from "@/lib/localization";
+import { useAppTheme } from "@/Hooks/theme/useAppTheme";
+import { useThemeStyles } from "@/Hooks/theme/useThemeStyles";
 
 type InputFieldProps = {
-  icon?: ComponentProps<typeof MaterialIcons>['name'],
-  iconSize?: number,
-  iconColor?: string,
-  className?: string,
-  textInputClassName?: string,
-  secureTextEntry?: boolean,
-  isPasswordField?: boolean,
-  placeholderTextColor?: string,
-  placeholder?: string,
-  editable?: boolean,
-  maxLength?: number,
-  multiline?: boolean,
-  scrollEnabled?: boolean,
-  value?: string,
-  onChangeText?: (value: any) => void,
+  icon?: ComponentProps<typeof MaterialIcons>["name"];
+  iconSize?: number;
+  iconColor?: string;
+  className?: string;
+  withShadow?: boolean;
+  withIcon?: boolean;
+  textInputClassName?: string;
+  secureTextEntry?: boolean;
+  isPasswordField?: boolean;
+  placeholderTextColor?: string;
+  placeholder?: string;
+  editable?: boolean;
+  maxLength?: number;
+  multiline?: boolean;
+  scrollEnabled?: boolean;
+  value?: string;
+  onChangeText?: (value: any) => void;
   toggleShowPassword?: () => void;
-  testID?: string
-}
+  testID?: string;
+};
 
-const MainInputField = ({ testID, icon, iconSize, iconColor, className, textInputClassName, secureTextEntry, isPasswordField, placeholder, placeholderTextColor, editable, maxLength, multiline, scrollEnabled, value, onChangeText, toggleShowPassword }: InputFieldProps) => {
-
+const MainInputField = ({
+  testID,
+  icon,
+  iconSize,
+  iconColor,
+  className,
+  withShadow = true,
+  withIcon = true,
+  textInputClassName,
+  secureTextEntry,
+  isPasswordField,
+  placeholder,
+  placeholderTextColor,
+  editable,
+  maxLength,
+  multiline,
+  scrollEnabled,
+  value,
+  onChangeText,
+  toggleShowPassword,
+}: InputFieldProps) => {
   const { is_dark } = useAppTheme();
   const { shadow } = useThemeStyles();
+  const applyShadow = withShadow ? shadow : {};
 
   return (
-    <View testID='MainInputField:WrapperView' style={shadow} className={cn('w-full h-[55px] bg-neutral-50 dark:bg-neutral-800 rounded-full flex-row items-center py-2 px-4', className)}>
-      <MaterialIcons name={icon} size={iconSize ?? 24} color={iconColor ?? (is_dark ? APP_COLORS.neutral[400] : APP_COLORS.neutral[800])} />
+    <View
+      testID="MainInputField:WrapperView"
+      style={applyShadow}
+      className={cn(
+        "w-full h-[55px] bg-neutral-50 dark:bg-neutral-800 rounded-full flex-row items-center py-2 px-4",
+        className,
+      )}
+    >
+      {withIcon && (
+        <MaterialIcons
+          name={icon}
+          size={iconSize ?? 24}
+          color={
+            iconColor ??
+            (is_dark ? APP_COLORS.neutral[400] : APP_COLORS.neutral[800])
+          }
+        />
+      )}
       <TextInput
-        testID={testID ?? 'MainInputField:TextInput'}
-        className={cn('flex items-center w-[90%] h-[100%] ms-3 font-medium text-base text-neutral-900 dark:text-neutral-400 bg-neutral-50 dark:bg-neutral-800 rounded-full', textInputClassName)}
-        placeholderTextColor={placeholderTextColor ?? (is_dark ? APP_COLORS.neutral[400] : APP_COLORS.neutral[800])}
-        placeholder={getTranslated(placeholder ?? '')}
+        testID={testID ?? "MainInputField:TextInput"}
+        className={cn(
+          "flex items-center w-[90%] h-[100%] ms-3 font-medium text-base text-neutral-900 dark:text-neutral-400 bg-neutral-50 dark:bg-neutral-800 rounded-full",
+          textInputClassName,
+        )}
+        placeholderTextColor={
+          placeholderTextColor ??
+          (is_dark ? APP_COLORS.neutral[400] : APP_COLORS.neutral[800])
+        }
+        placeholder={getTranslated(placeholder ?? "")}
         secureTextEntry={secureTextEntry}
         editable={editable}
         value={value}
@@ -50,12 +94,24 @@ const MainInputField = ({ testID, icon, iconSize, iconColor, className, textInpu
         scrollEnabled={scrollEnabled ?? true}
       />
       {isPasswordField && (
-        <TouchableOpacity testID='MainInputField:ToggleEyeButton' activeOpacity={0.7} className='flex justify-center items-center absolute start-[95%] z-10' onPress={toggleShowPassword}>
-          <FontAwesome5 name={!secureTextEntry ? 'eye' : 'eye-slash'} size={iconSize ?? 20} color={iconColor ?? (is_dark ? APP_COLORS.neutral[400] : APP_COLORS.neutral[800])} />
+        <TouchableOpacity
+          testID="MainInputField:ToggleEyeButton"
+          activeOpacity={0.7}
+          className="flex justify-center items-center absolute start-[95%] z-10"
+          onPress={toggleShowPassword}
+        >
+          <FontAwesome5
+            name={!secureTextEntry ? "eye" : "eye-slash"}
+            size={iconSize ?? 20}
+            color={
+              iconColor ??
+              (is_dark ? APP_COLORS.neutral[400] : APP_COLORS.neutral[800])
+            }
+          />
         </TouchableOpacity>
       )}
     </View>
-  )
-}
+  );
+};
 
 export default MainInputField;
