@@ -9,7 +9,7 @@ import AppText from '@/components/ui/content/AppText';
 
 const NotificationScreen = (): JSX.Element => {
 
-  const RenderHeaderRightComponent = (): ReactNode => {
+  const RenderHeaderEndComponent = (): ReactNode => {
     return (
       <TouchableOpacity activeOpacity={0.7} className='px-4 py-2 rounded-md'>
         <AppText className='text-red-500 dark:text-red-700 font-semibold' weight='semiBold'>app.clear_all</AppText>
@@ -19,7 +19,7 @@ const NotificationScreen = (): JSX.Element => {
 
   return (
     <ScreenView className='p-0 bg-neutral-50'>
-      <MainHeader withGoBackButton={true} textClassName='text-start ps-6' title='app.notifications' rightComponent={RenderHeaderRightComponent()} />
+      <MainHeader withGoBackButton={true} textClassName='text-start ps-6' title='app.notifications' endComponent={RenderHeaderEndComponent()} />
       <NotificationList notificationData={notificationData} />
     </ScreenView>
   )
