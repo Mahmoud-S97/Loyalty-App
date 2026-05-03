@@ -40,6 +40,10 @@
     "clear_all": "حذف الكل",
     "date_of_birth": "تاريخ الميلاد",
     "update": "تحديث",
+    "account_settings": {
+      "language": "اللغة",
+      "dark_mode_on": "تشغيل الوضع الليلي"
+    },
     "gender": {
       "gender_identity": "تحديد الجتس",
       "male": "ذكر",
