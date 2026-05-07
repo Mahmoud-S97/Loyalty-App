@@ -1,5 +1,6 @@
 import React, { JSX } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { Switch, TouchableOpacity, View } from 'react-native';
+import { useColorScheme } from 'nativewind';
 import ScrollingView from '@/components/layout/screens/ScrollingView';
 import MainHeader from '@/components/layout/header/MainHeader';
 import AppText from '@/components/ui/content/AppText';
@@ -9,7 +10,7 @@ import { useAppTheme } from '@/Hooks/theme/useAppTheme';
 import AppIcon from '@/components/ui/globals/icons/AppIcon';
 
 const SettingsScreen = (): JSX.Element => {
-  const { currentThemeColor } = useAppTheme();
+  const { currentThemeColor, is_dark, toggleTheme } = useAppTheme();
 
   return (
     <ScrollingView className='bg-neutral-50'>
@@ -24,7 +25,7 @@ const SettingsScreen = (): JSX.Element => {
             return (
               <TouchableOpacity
                 key={index}
-                activeOpacity={0.7}
+                activeOpacity={row.cta === 'appearance' ? 1 : 0.7}
                 className='flex-row w-full h-14 py-1 px-4 items-center justify-between'
                 onPress={() => {}}
               >
@@ -37,12 +38,16 @@ const SettingsScreen = (): JSX.Element => {
                   />
                   <AppText className='text-lg'>{row.label}</AppText>
                 </View>
-                <AppIcon
-                  type='Ionicons'
-                  name={row.arrowIcon}
-                  size={24}
-                  color={currentThemeColor}
-                />
+                {row.cta === 'appearance' ? (
+                  <Switch value={is_dark} onChange={toggleTheme} />
+                ) : (
+                  <AppIcon
+                    type='Ionicons'
+                    name={row.arrowIcon}
+                    size={24}
+                    color={currentThemeColor}
+                  />
+                )}
               </TouchableOpacity>
             );
           })}

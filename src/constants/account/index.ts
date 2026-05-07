@@ -56,7 +56,7 @@ export const ACCOUNT_SETTINGS = [
     cta: 'language'
   },
   {
-    label: 'app.account_settings.dark_mode_on',
+    label: 'app.account_settings.dark_mode',
     iconName: 'dark-mode',
     iconType: 'MaterialIcons',
     arrowIcon: 'chevron-forward',

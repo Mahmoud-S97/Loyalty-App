@@ -42,7 +42,7 @@
     "update": "تحديث",
     "account_settings": {
       "language": "اللغة",
-      "dark_mode_on": "تشغيل الوضع الليلي"
+      "dark_mode": "تشغيل الوضع الليلي"
     },
     "gender": {
       "gender_identity": "تحديد الجتس",

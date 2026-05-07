@@ -42,7 +42,7 @@
     "update": "Update",
     "account_settings": {
       "language": "Language",
-      "dark_mode_on": "Dark Mode On"
+      "dark_mode": "Dark Mode"
     },
     "gender": {
       "gender_identity": "Gender Identity",
