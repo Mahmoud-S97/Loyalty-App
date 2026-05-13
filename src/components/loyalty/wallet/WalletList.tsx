@@ -1,4 +1,5 @@
 import { Alert, FlatList, Text } from "react-native";
+import { router } from "expo-router";
 import WalletCard from "./WalletCard";
 import { WalletItem } from "@/types";
 
@@ -13,14 +14,14 @@ type WalletListTypes = {
 
 const WalletList = ({ walletData }: WalletListTypes) => {
 
-  const navigationHandler = () => {
+  const navigationHandler = (shopId: number) => {
     // Will be handled later
-    Alert.alert('', 'Navigate to Loyalty-Screen!');
+    router.navigate(`/shops/${shopId}`);
   }
 
   const renderWalletItem = ({ item, index }: WalletItemTypes) => {
     return (
-      <WalletCard index={index} item={item} onPress={navigationHandler} />
+      <WalletCard index={index} item={item} onPress={() => navigationHandler(item.id)} />
     )
   }
 

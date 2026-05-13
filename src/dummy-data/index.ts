@@ -1,8 +1,10 @@
-import { LOCAL_IMAGES } from "@/constants";
+import { LOCAL_IMAGES } from '@/constants';
+import { WalletItem } from '@/types';
 
 const barbershoMockImage = require('@/assets/images/app/mock/snipz-barbershop.jpeg');
 
-export const walletData = [ // Dummy list
+export const walletData: WalletItem[] = [
+  // Dummy list
   {
     id: 1,
     name: 'Snipz Barbershop',
@@ -29,7 +31,7 @@ export const walletData = [ // Dummy list
     address: 'Carrickmacross, Monaghan',
     points: 9,
     threshold: 10
-  },
+  }
 ];
 
 export const notificationData = [
@@ -37,7 +39,7 @@ export const notificationData = [
     id: 1,
     icon: LOCAL_IMAGES.LOGO_TRANS,
     title: 'BESTIE Team',
-    body: "Thank you to joining us!. Try it out and enjoy your free-haircut!",
+    body: 'Thank you to joining us!. Try it out and enjoy your free-haircut!',
     createdAt: '2026-04-07, 7:33pm'
   },
   {
@@ -55,3 +57,24 @@ export const notificationData = [
     createdAt: '2026-04-07, 7:33pm'
   }
 ];
+
+export const vouchersList = [
+  {
+    id: 1,
+    image: LOCAL_IMAGES.REDEEMING_VOUCHER,
+    title: 'Reward 1 Free Haircut',
+    description: 'Redeem Now'
+  },
+  {
+    id: 2,
+    image: LOCAL_IMAGES.REDEEMING_VOUCHER,
+    title: 'Reward 1 Free Haircut',
+    description: 'Redeem Now'
+  },
+  {
+    id: 3,
+    image: LOCAL_IMAGES.REDEEMING_VOUCHER,
+    title: 'Reward 1 Free Haircut',
+    description: 'Redeem Now'
+  }
+] as const;
