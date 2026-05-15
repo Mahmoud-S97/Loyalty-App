@@ -1,4 +1,4 @@
-import { JSX, useCallback } from 'react';
+import { JSX } from 'react';
 import { FlatList, View } from 'react-native';
 import AppText from '@/components/ui/content/AppText';
 import { vouchersList } from '@/dummy-data';
@@ -19,10 +19,10 @@ const VouchersList = (): JSX.Element => {
   return (
     <View className='flex-1'>
       <AppText
-        className='text-start text-lg mt-6 mb-4 font-semibold text-brand-500 dark:text-neutral-600'
+        className='text-start text-lg mt-2 mb-4 font-semibold text-brand-500 dark:text-neutral-600'
         weight='semiBold'
       >
-        Your Vouchers
+        app.your_vouchers
       </AppText>
       <FlatList
         data={vouchersList}

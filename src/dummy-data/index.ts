@@ -62,19 +62,19 @@ export const vouchersList = [
   {
     id: 1,
     image: LOCAL_IMAGES.REDEEMING_VOUCHER,
-    title: 'Reward 1 Free Haircut',
-    description: 'Redeem Now'
+    title: 'app.reward_one_free_haircut',
+    description: 'app.redeem_now'
   },
   {
     id: 2,
     image: LOCAL_IMAGES.REDEEMING_VOUCHER,
-    title: 'Reward 1 Free Haircut',
-    description: 'Redeem Now'
+    title: 'app.reward_one_free_haircut',
+    description: 'app.redeem_now'
   },
   {
     id: 3,
     image: LOCAL_IMAGES.REDEEMING_VOUCHER,
-    title: 'Reward 1 Free Haircut',
-    description: 'Redeem Now'
+    title: 'app.reward_one_free_haircut',
+    description: 'app.redeem_now'
   }
-] as const;
+]
