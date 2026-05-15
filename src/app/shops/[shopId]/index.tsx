@@ -11,6 +11,7 @@ import ContainerView from '@/components/layout/screens/ContainerView';
 import { LOCAL_IMAGES } from '@/constants';
 import { useThemeStyles } from '@/Hooks/theme/useThemeStyles';
 import VouchersList from '@/components/loyalty/vouchers/VouchersList';
+import ScreenView from '@/components/layout/screens/ScreenView';
 
 const ShopDetailScreen = (): JSX.Element => {
   const { cardShadow } = useThemeStyles();
@@ -19,7 +20,7 @@ const ShopDetailScreen = (): JSX.Element => {
   const shopData = walletData.find((shop) => shop.id === +shopId);
 
   return (
-    <ScrollingView>
+    <ScreenView>
       <View className='w-full h-[220px] relative'>
         <ImageBackground
           source={shopData?.image}
@@ -32,7 +33,7 @@ const ShopDetailScreen = (): JSX.Element => {
           />
         </ImageBackground>
       </View>
-      <ContainerView className='relative pt-28'>
+      <ContainerView className='relative pt-32'>
         <View
           style={[cardShadow, { borderWidth: 0.5 }]}
           className='w-full min-h-130 flex flex-col gap-4 px-4 py-6 border-neutral-500 dark:border-neutral-700 rounded-xl bg-neutral-100 dark:bg-secondary absolute -top-16 z-100'
@@ -66,11 +67,11 @@ const ShopDetailScreen = (): JSX.Element => {
             textClassName='text-sm'
           />
         </View>
-        <View className='w-full h-full'>
+        <ScrollingView>
           <VouchersList />
-        </View>
+        </ScrollingView>
       </ContainerView>
-    </ScrollingView>
+    </ScreenView>
   );
 };
 
