@@ -1,5 +1,6 @@
 import React, { JSX } from 'react';
 import { View, Image, ImageBackground } from 'react-native';
+import ScreenView from '@/components/layout/screens/ScreenView';
 import ScrollingView from '@/components/layout/screens/ScrollingView';
 import GoBackButton from '@/components/ui/globals/buttons/GoBackButton';
 import MainButton from '@/components/ui/globals/buttons/MainButton';
@@ -11,7 +12,7 @@ import ContainerView from '@/components/layout/screens/ContainerView';
 import { LOCAL_IMAGES } from '@/constants';
 import { useThemeStyles } from '@/Hooks/theme/useThemeStyles';
 import VouchersList from '@/components/loyalty/vouchers/VouchersList';
-import ScreenView from '@/components/layout/screens/ScreenView';
+import LoyaltyCardList from '@/components/loyalty/loyalty-cards/LoyaltyCardList';
 
 const ShopDetailScreen = (): JSX.Element => {
   const { cardShadow } = useThemeStyles();
@@ -48,14 +49,13 @@ const ShopDetailScreen = (): JSX.Element => {
             </View>
             <View className='flex flex-col gap-1'>
               <AppText
-                className='text-lg font-semibold text-neutral-900 dark:text-neutral-200'
+                className='text-lg font-semibold text-neutral-900 dark:text-neutral-400'
                 weight='semiBold'
               >
                 {shopData?.name}
               </AppText>
               <AppText
-                className='text-sm font-medium text-neutral-700 dark:text-neutral-200'
-                weight='medium'
+                className='text-sm font-sm text-neutral-700 dark:text-neutral-500'
               >
                 {shopData?.address}
               </AppText>
@@ -69,6 +69,7 @@ const ShopDetailScreen = (): JSX.Element => {
         </View>
         <ScrollingView>
           <VouchersList />
+          <LoyaltyCardList />
         </ScrollingView>
       </ContainerView>
     </ScreenView>
