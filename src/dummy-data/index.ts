@@ -11,7 +11,7 @@ export const walletData: WalletItem[] = [
     title: 'Snpiz Barbershops',
     image: barbershoMockImage,
     address: 'Carrickmacross, Monaghan',
-    points: 1,
+    stamps: 1,
     threshold: 10
   },
   {
@@ -20,7 +20,7 @@ export const walletData: WalletItem[] = [
     title: 'Turkish Barbershops',
     image: barbershoMockImage,
     address: 'Carrickmacross, Monaghan',
-    points: 3,
+    stamps: 3,
     threshold: 10
   },
   {
@@ -29,7 +29,7 @@ export const walletData: WalletItem[] = [
     title: 'Crafton Barbershops',
     image: barbershoMockImage,
     address: 'Carrickmacross, Monaghan',
-    points: 9,
+    stamps: 9,
     threshold: 10
   }
 ];
@@ -77,4 +77,37 @@ export const vouchersList = [
     title: 'app.reward_one_free_haircut',
     description: 'app.redeem_now'
   }
-]
+];
+
+export const loyaltyCardsData = [
+  {
+    id: 1,
+    logo: barbershoMockImage,
+    icon: LOCAL_IMAGES.LOGO_TRANS,
+    title: 'app.collect_stamps_and_get_free_haircut',
+    description: 'app.redeem_now',
+    userId: 21,
+    threshold: 10,
+    stamps: 4
+  },
+  {
+    id: 2,
+    logo: barbershoMockImage,
+    icon: LOCAL_IMAGES.LOGO_TRANS,
+    title: 'app.collect_stamps_and_get_free_haircut',
+    description: 'app.redeem_now',
+    userId: 21,
+    threshold: 5,
+    stamps: 2
+  },
+  {
+    id: 3,
+    logo: barbershoMockImage,
+    icon: LOCAL_IMAGES.LOGO_TRANS,
+    title: 'app.collect_stamps_and_get_free_haircut',
+    description: 'app.redeem_now',
+    userId: 22,
+    threshold: 8,
+    stamps: 4
+  }
+];

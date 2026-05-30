@@ -6,7 +6,6 @@ import { LOCAL_STORAGE_KEYS } from '@/constants';
 
 // Setting the app direction. If it's Arabic then Right-To-Left else Left-To-Rright(Default)
 export const initAppLanguage = async (): Promise<void> => {
-
   const savedLang = await AsyncStorage.getItem(LOCAL_STORAGE_KEYS.APP_LANG);
   const lang = savedLang ? JSON.parse(savedLang) : 'en';
 
@@ -16,15 +15,17 @@ export const initAppLanguage = async (): Promise<void> => {
 
   I18nManager.allowRTL(isRTL);
   I18nManager.forceRTL(isRTL);
-}
+};
 
 // Getting the current language of the app
 export const getCurrentLanguage = (): string => {
   return i18n.language;
-}
+};
 
 // Translating the texts dynamically by calling this function anywhere in the app
-export const getTranslated = (key: string): string => {
-  if (!key) return key;
-  return i18n.t(key);
-}
+export const getTranslated = (
+  key: string,
+  params: Record<string, string> = {}
+): string => {
+  return i18n.t(key, params);
+};

@@ -5,7 +5,7 @@ export type WalletItem = {
   name: string,
   image: any,
   address: string,
-  points: number,
+  stamps: number,
   threshold: number,
 }
 
