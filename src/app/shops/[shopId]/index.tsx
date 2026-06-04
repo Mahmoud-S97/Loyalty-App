@@ -34,7 +34,7 @@ const ShopDetailScreen = (): JSX.Element => {
           />
         </ImageBackground>
       </View>
-      <ContainerView className='relative pt-32'>
+      <ContainerView className='flex-0 relative pt-24'>
         <View
           style={[cardShadow, { borderWidth: 0.5 }]}
           className='w-full min-h-130 flex flex-col gap-4 px-4 py-6 border-neutral-500 dark:border-neutral-700 rounded-xl bg-neutral-100 dark:bg-secondary absolute -top-16 z-100'
@@ -54,9 +54,7 @@ const ShopDetailScreen = (): JSX.Element => {
               >
                 {shopData?.name}
               </AppText>
-              <AppText
-                className='text-sm font-sm text-neutral-700 dark:text-neutral-500'
-              >
+              <AppText className='text-sm font-sm text-neutral-700 dark:text-neutral-500'>
                 {shopData?.address}
               </AppText>
             </View>
@@ -67,11 +65,11 @@ const ShopDetailScreen = (): JSX.Element => {
             textClassName='text-sm'
           />
         </View>
-        <ScrollingView>
-          <VouchersList />
-          <LoyaltyCardList />
-        </ScrollingView>
       </ContainerView>
+      <ScrollingView>
+        <VouchersList />
+        <LoyaltyCardList />
+      </ScrollingView>
     </ScreenView>
   );
 };

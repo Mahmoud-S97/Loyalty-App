@@ -20,7 +20,7 @@ const VoucherCard = ({
     <TouchableOpacity
       style={[cardShadow, { borderWidth: 0.5, width: CARD_WIDTH }]}
       activeOpacity={0.8}
-      className='bg-primary border-neutral-500 dark:border-neutral-700 rounded-xl overflow-hidden'
+      className='bg-primary border-neutral-500 dark:border-neutral-700 rounded-xl'
     >
       {image && (
         <ImageBackground
