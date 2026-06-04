@@ -11,6 +11,11 @@ import AnimatedSplashScreen from './AnimatedSplashScreen';
 import { APP_COLORS } from '@/constants/theme';
 import { AppThemeProvider } from '@/store/context/theme';
 import { useAppTheme } from '@/Hooks/theme/useAppTheme';
+import { is_IOS } from '@/utils';
+
+type Edges = 'top' | 'bottom';
+
+const edges: Edges[] = is_IOS() ? ['top'] : ['top', 'bottom'];
 
 SplashScreen.preventAutoHideAsync();
 
@@ -21,7 +26,7 @@ const RenderApp = (): JSX.Element => {
     <SafeAreaProvider>
       <SafeAreaView
         className='flex-1 bg-neutral-100 dark:bg-neutral-900'
-        edges={['top']}
+        edges={edges}
       >
         <Stack
           screenOptions={{
