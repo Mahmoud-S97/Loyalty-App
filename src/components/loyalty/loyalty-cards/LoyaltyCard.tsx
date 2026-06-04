@@ -1,4 +1,4 @@
-import { JSX, memo } from 'react';
+import { Fragment, JSX, memo } from 'react';
 import { TouchableOpacity, ImageBackground, View } from 'react-native';
 import { Image } from 'expo-image';
 import AppText from '@/components/ui/content/AppText';
@@ -22,63 +22,72 @@ const LoyaltyCard = ({
   const SPACING = 16;
 
   return (
-    <TouchableOpacity
-      style={[cardShadow, { borderWidth: 2, width: CARD_WIDTH }]}
-      activeOpacity={0.8}
-      className='w-full min-h-54 p-6 bg-neutral-50 dark:bg-secondary border-brand-500 dark:border-neutral-700 rounded-xl overflow-hidden'
-    >
-      <View className='flex flex-col gap-6'>
-        <View className='flex flex-row items-center gap-4'>
-          {logo && (
-            <View className='flex items-center justify-center rounded-md overflow-hidden'>
-              <Image
-                source={logo}
-                alt={title}
-                style={{ width: 60, height: 60, borderRadius: 15 }}
-                contentFit='cover'
-                transition={200}
-                cachePolicy='memory-disk'
-                priority='high'
-                placeholder={{ blurhash: 'L5H2EC=PM+yV0g-mq.wG9c010J}I' }}
-              />
+    <View style={{ width: CARD_WIDTH }} className='min-h-30'>
+      <AppText
+        className='w-full pb-4 text-xs text-neutral-800 dark:text-neutral-600'
+        numberOfLines={1}
+        tanslationParams={{ stamps: String(threshold - stamps) }}
+      >
+        app.collect_more_stamps_to_get_free_haircut
+      </AppText>
+      <TouchableOpacity
+        style={[cardShadow, { borderWidth: 2, width: '100%' }]}
+        activeOpacity={0.8}
+        className='h-[90%] p-6 bg-neutral-50 dark:bg-secondary border-brand-500 dark:border-neutral-800 rounded-xl'
+      >
+        <View className='flex flex-col gap-6'>
+          <View className='flex flex-row items-center gap-4'>
+            {logo && (
+              <View className='flex items-center justify-center rounded-md overflow-hidden'>
+                <Image
+                  source={logo}
+                  alt={title}
+                  style={{ width: 60, height: 60, borderRadius: 15 }}
+                  contentFit='cover'
+                  transition={200}
+                  cachePolicy='memory-disk'
+                  priority='high'
+                  placeholder={{ blurhash: 'L5H2EC=PM+yV0g-mq.wG9c010J}I' }}
+                />
+              </View>
+            )}
+            <View className='flex-1'>
+              <AppText
+                className='font-semibold text- text-neutral-800 dark:text-neutral-500'
+                weight='semiBold'
+                tanslationParams={{ stamps: String(threshold) }}
+              >
+                {title}
+              </AppText>
             </View>
-          )}
-          <View className='flex-1'>
-            <AppText
-              className='font-semibold text-lg text-neutral-800 dark:text-neutral-500'
-              weight='semiBold'
-              tanslationParams={{ stamps: String(threshold) }}
-            >
-              {title}
-            </AppText>
+          </View>
+          <View className='flex flex-row items-center justify-center gap-4 flex-wrap'>
+            {Array(threshold)
+              .fill('')
+              .map((item, index) => (
+                <View
+                  key={index}
+                  style={{ borderWidth: 2 }}
+                  className='w-12 h-12 flex items-center overflow-hidden justify-center rounded-full bg-brand-200 dark:bg-zinc-700 border-brand-500 dark:border-neutral-800 ring-1 ring-primary'
+                >
+                  {index < stamps && (
+                    <Image
+                      source={icon}
+                      alt={title}
+                      style={{ width: 30, height: 30 }}
+                      contentFit='cover'
+                      transition={200}
+                      cachePolicy='memory-disk'
+                      priority='high'
+                      placeholder={{ blurhash: 'L5H2EC=PM+yV0g-mq.wG9c010J}I' }}
+                    />
+                  )}
+                </View>
+              ))}
           </View>
         </View>
-        <View className='flex flex-row gap-4 flex-wrap'>
-          {Array(threshold)
-            .fill('')
-            .map((item, index) => (
-              <View
-                key={index}
-                style={{ borderWidth: 2 }}
-                className='w-12 h-12 flex items-center overflow-hidden justify-center rounded-full bg-brand-200 dark:bg-zinc-700 border-brand-500 dark:border-neutral-700 ring-1 ring-primary'
-              >
-                {index < stamps && (
-                  <Image
-                    source={icon}
-                    alt={title}
-                    style={{ width: 30, height: 30 }}
-                    contentFit='cover'
-                    transition={200}
-                    cachePolicy='memory-disk'
-                    priority='high'
-                    placeholder={{ blurhash: 'L5H2EC=PM+yV0g-mq.wG9c010J}I' }}
-                  />
-                )}
-              </View>
-            ))}
-        </View>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 };
 

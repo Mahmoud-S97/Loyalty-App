@@ -19,7 +19,7 @@ const VouchersList = (): JSX.Element => {
   return (
     <View className='flex-1'>
       <AppText
-        className='text-start text-md mt-2 mb-4 font-semibold text-brand-500 dark:text-neutral-600'
+        className='text-start text-lg ps-4 font-semibold text-brand-500 dark:text-neutral-600'
         weight='semiBold'
       >
         app.your_vouchers
@@ -29,6 +29,7 @@ const VouchersList = (): JSX.Element => {
         keyExtractor={(item) => item.id.toString()}
         renderItem={renderVoucherItem}
         contentContainerStyle={{ gap: SPACING }}
+        contentContainerClassName='px-4 py-6'
         horizontal
         showsHorizontalScrollIndicator={false}
         snapToAlignment='start'
