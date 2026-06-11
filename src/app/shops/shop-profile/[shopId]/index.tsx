@@ -32,12 +32,12 @@ const ShopProfileScreen = (): JSX.Element => {
         <View className='flex flex-row items-center gap-4'>
           <Image
             source={shopData?.image}
-            className='size-16'
+            className='size-16 rounded-xl'
             resizeMode='cover'
           />
           <View className='flex flex-col gap-1'>
             <AppText
-              className='text-xl font-semibold text-neutral-900 dark:text-neutral-400'
+              className='text-lg font-semibold text-neutral-900 dark:text-neutral-400'
               weight='semiBold'
             >
               {shopData?.name}
