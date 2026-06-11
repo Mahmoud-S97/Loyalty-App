@@ -4,7 +4,7 @@ import ScreenView from '@/components/layout/screens/ScreenView';
 import ScrollingView from '@/components/layout/screens/ScrollingView';
 import GoBackButton from '@/components/ui/globals/buttons/GoBackButton';
 import MainButton from '@/components/ui/globals/buttons/MainButton';
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, router } from 'expo-router';
 import { walletData } from '@/dummy-data';
 import { APP_COLORS } from '@/constants/theme';
 import AppText from '@/components/ui/content/AppText';
@@ -63,6 +63,7 @@ const ShopDetailScreen = (): JSX.Element => {
             title='Visit Profile'
             className='h-10 bg-primary rounded-lg'
             textClassName='text-sm'
+            onPress={() => router.push(`/shops/shop-profile/${shopId}`)}
           />
         </View>
       </ContainerView>
