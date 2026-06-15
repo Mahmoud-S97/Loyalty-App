@@ -5,7 +5,7 @@ import ContainerView from '@/components/layout/screens/ContainerView';
 import ScrollingView from '@/components/layout/screens/ScrollingView';
 import { LOCAL_IMAGES } from '@/constants/images';
 import AppText from '@/components/ui/content/AppText';
-import { FontAwesome5, Ionicons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { APP_COLORS } from '@/constants/theme';
 import { ACCOUNT_DETAILS } from '@/constants';
 import { useAppTheme } from '@/Hooks/theme/useAppTheme';
@@ -50,6 +50,7 @@ const AccountScreen = (): JSX.Element => {
             <View className='w-full bg-neutral-100 dark:bg-secondary gap-2'>
               {item.rows.map((row: any, index: number) => (
                 <TouchableOpacity
+                  testID={`AccountScreen:TouchableOpacity:Row:${row.route}`}
                   key={index}
                   activeOpacity={0.7}
                   className='flex-row w-full h-14 py-1 px-4 items-center justify-between'

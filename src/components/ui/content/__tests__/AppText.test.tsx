@@ -20,7 +20,7 @@ describe('<AppText />', () => {
             welcome
         </AppText>);
 
-        expect(getTranslated).toHaveBeenCalledWith('welcome');
+        expect(getTranslated).toHaveBeenCalledWith('welcome', undefined);
         expect(getByText('Welcome to BESTIE Loyalty App')).toBeTruthy();
     });
 });

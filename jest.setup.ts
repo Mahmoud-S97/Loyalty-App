@@ -4,22 +4,30 @@ import mockAsyncStorage from '@react-native-async-storage/async-storage/jest/asy
 
 jest.mock('@react-native-async-storage/async-storage', () => mockAsyncStorage)
 
+
+const mockNavigate = jest.fn();
+const mockPush = jest.fn();
+const mockBack = jest.fn();
+const mockReplace = jest.fn();
+const mockCanGoBack = jest.fn();
+const mockDismissAll = jest.fn();
+
 jest.mock('expo-router', () => {
   return {
     useRouter: () => ({
-      push: jest.fn(),
-      back: jest.fn(),
-      replace: jest.fn(),
-      canGoBack: jest.fn(),
-      dismissAll: jest.fn()
+      push: mockPush,
+      back: mockBack,
+      replace: mockReplace,
+      canGoBack: mockCanGoBack,
+      dismissAll: mockDismissAll
     }),
     router: {
-      navigate: jest.fn(),
-      back: jest.fn(),
-      push: jest.fn(),
-      replace: jest.fn(),
-      canGoBack: jest.fn(),
-      dismissAll: jest.fn()
+      navigate: mockNavigate,
+      push: mockPush,
+      back: mockBack,
+      replace: mockReplace,
+      canGoBack: mockCanGoBack,
+      dismissAll: mockDismissAll
     },
   };
 });
