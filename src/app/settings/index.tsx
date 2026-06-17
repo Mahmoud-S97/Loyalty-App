@@ -15,7 +15,6 @@ const SettingsScreen = (): JSX.Element => {
   return (
     <ScrollingView className='bg-neutral-50'>
       <MainHeader
-        withGoBackButton={true}
         textClassName='text-start'
         title='app.settings'
       />

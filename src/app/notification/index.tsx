@@ -19,7 +19,7 @@ const NotificationScreen = (): JSX.Element => {
 
   return (
     <ScreenView className='p-0 bg-neutral-50'>
-      <MainHeader withGoBackButton={true} textClassName='text-start ps-6' title='app.notifications' endComponent={RenderHeaderEndComponent()} />
+      <MainHeader textClassName='text-start ps-6' title='app.notifications' endComponent={RenderHeaderEndComponent()} />
       <NotificationList notificationData={notificationData} />
     </ScreenView>
   )

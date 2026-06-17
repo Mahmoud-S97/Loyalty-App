@@ -8,7 +8,7 @@ import MainHeader from '@/components/layout/header/MainHeader';
 const WalletScreen = (): JSX.Element => {
   return (
     <ScreenView>
-      <MainHeader title='app.your_wallet' className='bg-brand-400' textClassName='w-full text-start' />
+      <MainHeader withGoBackButton={false} title='app.your_wallet' className='bg-brand-400' textClassName='w-full text-start' />
       <WalletList walletData={walletData} />
     </ScreenView>
   )

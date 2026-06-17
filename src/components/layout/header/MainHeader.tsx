@@ -20,7 +20,7 @@ const MainHeader = ({
   title,
   startComponent,
   endComponent,
-  withGoBackButton = false,
+  withGoBackButton = true,
   withTranslation = true
 }: MainHeaderProps) => {
   const renderTitle = withTranslation ? getTranslated(title || '') : title;
