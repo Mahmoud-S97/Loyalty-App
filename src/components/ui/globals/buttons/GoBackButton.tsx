@@ -7,13 +7,14 @@ import { useAppTheme } from '@/Hooks/theme/useAppTheme';
 import { useThemeStyles } from '@/Hooks/theme/useThemeStyles';
 
 type GoBackButtonProps = {
-  className?: string,
-  iconSize?: number,
-  iconColor?: string,
+  testID?: string;
+  className?: string;
+  iconSize?: number;
+  iconColor?: string;
   onPress?: () => void
 }
 
-const GoBackButton = ({ className, iconSize, iconColor, onPress }: GoBackButtonProps) => {
+const GoBackButton = ({ testID, className, iconSize, iconColor, onPress }: GoBackButtonProps) => {
 
   const router = useRouter();
   const { currentThemeColor } = useAppTheme();
@@ -24,7 +25,7 @@ const GoBackButton = ({ className, iconSize, iconColor, onPress }: GoBackButtonP
   if (!router.canGoBack()) return null;
 
   return (
-    <TouchableOpacity testID='GoBackButton:Button' activeOpacity={0.6} style={shadow} className={cn('w-[45px] h-[45px] m-5 flex justify-center items-center rounded-full bg-neutral-50 dark:bg-neutral-800', className)} onPress={onPress || goBackHandler}>
+    <TouchableOpacity testID={testID ?? 'GoBackButton:Button'} activeOpacity={0.6} style={shadow} className={cn('w-[45px] h-[45px] m-5 flex justify-center items-center rounded-full bg-neutral-50 dark:bg-neutral-800', className)} onPress={onPress || goBackHandler}>
       <FontAwesome5
         name='chevron-left'
         size={iconSize || 20}

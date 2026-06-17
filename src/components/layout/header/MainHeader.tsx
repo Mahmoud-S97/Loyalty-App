@@ -20,22 +20,24 @@ const MainHeader = ({
   title,
   startComponent,
   endComponent,
-  withGoBackButton,
+  withGoBackButton = false,
   withTranslation = true
 }: MainHeaderProps) => {
   const renderTitle = withTranslation ? getTranslated(title || '') : title;
 
   return (
     <View
+    testID="MainHeader:View:Container"
       className={cn(
         'w-full h-[70] flex flex-row items-center justify-between p-4 bg-neutral-50 dark:bg-brand-400 border-b border-neutral-700',
         className
       )}
     >
-      {withGoBackButton && <GoBackButton className="m-0" />}
+      {withGoBackButton && <GoBackButton testID='MainHeader:GoBackButton' className="m-0" />}
       {startComponent}
       {title && (
         <Text
+        testID="MainHeader:Text:Title"
           className={cn(
             'w-[60%] text-center text-xl font-medium text-neutral-900',
             textClassName
