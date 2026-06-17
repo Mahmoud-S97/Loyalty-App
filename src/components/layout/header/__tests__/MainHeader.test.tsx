@@ -3,7 +3,6 @@ import { Text } from 'react-native';
 import { render } from '@testing-library/react-native';
 import MainHeader from '../MainHeader';
 import { getTranslated } from '@/lib/localization';
-import GoBackButton from '@/components/ui/globals/buttons/GoBackButton';
 
 jest.mock('@/lib/localization', () => ({
   getTranslated: jest.fn()
@@ -20,6 +19,8 @@ describe('<MainHeader />', () => {
     (getTranslated as jest.Mock).mockReturnValue('Translated Header');
 
     const { getByText } = render(<MainHeader title='header.title' />);
+
+    expect(getTranslated).toHaveBeenCalledTimes(1);
 
     expect(getTranslated).toHaveBeenCalledWith('header.title');
 
@@ -44,10 +45,16 @@ describe('<MainHeader />', () => {
     expect(getByTestId('MainHeader:Text:Title')).toBeTruthy();
   });
 
-  it('renders GoBackButton when enabled', () => {
-    const { getByTestId } = render(<MainHeader withGoBackButton={true} />);
+  it('renders GoBackButton by default', () => {
+    const { getByTestId } = render(<MainHeader />);
 
     expect(getByTestId('MainHeader:GoBackButton')).toBeTruthy();
+  });
+
+  it('hide rendering of GoBackButton when disabled', () => {
+    const { queryByTestId } = render(<MainHeader withGoBackButton={false} />);
+
+    expect(queryByTestId('MainHeader:GoBackButton')).toBeNull();
   });
 
   it('renders startComponent', () => {
