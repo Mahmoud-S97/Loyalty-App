@@ -2,7 +2,7 @@ import React, { JSX } from 'react';
 import { Switch, TouchableOpacity, View } from 'react-native';
 import { useColorScheme } from 'nativewind';
 import ScrollingView from '@/components/layout/screens/ScrollingView';
-import MainHeader from '@/components/layout/header/MainHeader';
+import MainHeader from '@/components/layout/navigation/header/MainHeader';
 import AppText from '@/components/ui/content/AppText';
 import ContainerView from '@/components/layout/screens/ContainerView';
 import { ACCOUNT_SETTINGS } from '@/constants';

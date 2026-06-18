@@ -1,7 +1,7 @@
 import React, { JSX, ReactNode } from 'react';
 import { TouchableOpacity } from 'react-native';
 import ScreenView from '@/components/layout/screens/ScreenView';
-import MainHeader from '@/components/layout/header/MainHeader';
+import MainHeader from '@/components/layout/navigation/header/MainHeader';
 import NotificationList from '@/components/loyalty/notification/NotificationList';
 import { notificationData } from '@/dummy-data';
 import AppText from '@/components/ui/content/AppText';
