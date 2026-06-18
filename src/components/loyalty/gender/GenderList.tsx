@@ -3,11 +3,11 @@ import { View } from "react-native";
 import GenderIcon from "./GenderIcon";
 import { GENDER_ICONS } from "@/constants";
 
-const GenderList = (): JSX.Element => {
+const GenderList = ({ testID }: { testID: string }): JSX.Element => {
   const [gender, setGender] = useState<string>("male");
 
   return (
-    <View className="w-full px-4 flex flex-row items-center gap-6">
+    <View testID={testID ?? 'GenderList:Container'} className="w-full px-4 flex flex-row items-center gap-6">
       {GENDER_ICONS.map((icon) => (
         <GenderIcon
           key={icon.id}
