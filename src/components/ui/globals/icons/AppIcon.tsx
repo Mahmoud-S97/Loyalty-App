@@ -34,6 +34,8 @@ type IconName<T extends IconType> = React.ComponentProps<
 >['name'];
 
 type DynamicIconProps<T extends IconType> = {
+  iconContainerTestID?: string;
+  testID?: string;
   type: T;
   name: IconName<T>;
   size?: number;
@@ -47,6 +49,8 @@ type DynamicIconProps<T extends IconType> = {
 /* -------------------------------------------------------------------------- */
 
 const AppIcon = <T extends IconType>({
+  iconContainerTestID,
+  testID,
   type,
   name,
   size = 24,
@@ -57,9 +61,9 @@ const AppIcon = <T extends IconType>({
   const Icon = ICONS[type] as React.ComponentType<any>;
 
   return (
-    <View testID="AppIcon:Container" className={cn('items-center justify-center', containerClassName)}>
+    <View testID={iconContainerTestID ?? "AppIcon:Container"} className={cn('items-center justify-center', containerClassName)}>
       <Icon
-        testID="AppIcon:Icon"
+        testID={testID ?? "AppIcon:Icon"}
         name={name}
         size={size}
         color={color}
