@@ -25,6 +25,7 @@ const VouchersList = (): JSX.Element => {
         app.your_vouchers
       </AppText>
       <FlatList
+        testID='VouchersList:FlatList'
         data={vouchersList}
         keyExtractor={(item) => item.id.toString()}
         renderItem={renderVoucherItem}

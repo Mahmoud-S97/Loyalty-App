@@ -18,12 +18,14 @@ const VoucherCard = ({
 
   return (
     <TouchableOpacity
+      testID='VoucherCard:TouchableOpacity'
       style={[cardShadow, { borderWidth: 0.5, width: CARD_WIDTH }]}
       activeOpacity={0.8}
       className='bg-primary border-neutral-500 dark:border-neutral-700 rounded-xl'
     >
       {image && (
         <ImageBackground
+          testID='VoucherCard:ImageBackground'
           source={image}
           className='w-full h-[160px] relative rounded-xl overflow-hidden'
           resizeMode='cover'
