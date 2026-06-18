@@ -57,8 +57,9 @@ const AppIcon = <T extends IconType>({
   const Icon = ICONS[type] as React.ComponentType<any>;
 
   return (
-    <View className={cn('items-center justify-center', containerClassName)}>
+    <View testID="AppIcon:Container" className={cn('items-center justify-center', containerClassName)}>
       <Icon
+        testID="AppIcon:Icon"
         name={name}
         size={size}
         color={color}
