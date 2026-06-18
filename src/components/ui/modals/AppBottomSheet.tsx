@@ -1,5 +1,3 @@
-// components/ui/modals/app-sheet.tsx
-
 import React, {
   forwardRef,
   useCallback,
@@ -90,6 +88,7 @@ const AppBottomSheet = forwardRef<AppBottomSheetRef, AppBottomSheetProps>(
         }}
       >
         <View
+          testID='AppBottomSheet:Container'
           className={cn(
             'flex-1 overflow-hidden rounded-t-[32px] bg-zinc-100 dark:bg-zinc-900',
             className
@@ -97,6 +96,7 @@ const AppBottomSheet = forwardRef<AppBottomSheetRef, AppBottomSheetProps>(
         >
           {scrollable ? (
             <BottomSheetScrollView
+              testID='AppBottomSheet:ScrollView'
               contentContainerStyle={{
                 paddingBottom: 40
               }}
@@ -106,7 +106,10 @@ const AppBottomSheet = forwardRef<AppBottomSheetRef, AppBottomSheetProps>(
               {children}
             </BottomSheetScrollView>
           ) : (
-            <BottomSheetView className={cn('flex-1 p-6', contentClassName)}>
+            <BottomSheetView
+              testID='AppBottomSheet:View'
+              className={cn('flex-1 p-6', contentClassName)}
+            >
               {children}
             </BottomSheetView>
           )}
