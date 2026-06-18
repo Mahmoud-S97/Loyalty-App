@@ -1,100 +1,105 @@
-import { render } from '@testing-library/react-native';
+import { fireEvent, render } from '@testing-library/react-native';
 import HomeScreen from '../home';
 import scanningAnimation from '@/assets/lottie/NFC-QR-Reader.json';
+import { router } from 'expo-router';
 
 // Mock the rendered components which have their own unit-tests
 jest.mock('@/components/ui/globals/buttons/MainButton');
 jest.mock('@/components/ui/content/AppText');
 
 jest.mock('@expo/vector-icons/FontAwesome', () => {
-    const React = require('react');
-    const { View } = require('react-native');
+  const React = require('react');
+  const { View } = require('react-native');
 
-    return ({ name, size, color, testID }: { name: string, size: number, color: string, testID: string }) => (
-        <View
-            testID={testID}
-            name={name}
-            size={size}
-            color={color}
-        />
-    )
+  return ({
+    name,
+    size,
+    color,
+    testID
+  }: {
+    name: string;
+    size: number;
+    color: string;
+    testID: string;
+  }) => <View testID={testID} name={name} size={size} color={color} />;
 });
 
 jest.mock('lottie-react-native', () => {
-    const React = require('react');
-    const { View } = require('react-native');
+  const React = require('react');
+  const { View } = require('react-native');
 
-    return ({ testID, ...props }: any) => (
-        <View testID={testID} {...props} />
-    )
+  return ({ testID, ...props }: any) => <View testID={testID} {...props} />;
 });
 
 // Mock the rendered screen-wrappers which have their own unit-tests
 jest.mock('@/components/layout/screens/ScreenView', () => 'ScreenView');
 jest.mock('@/components/layout/screens/ContainerView', () => 'ContainerView');
 
-
 describe('<HomeScreen />', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
-    beforeEach(() => {
-        jest.clearAllMocks();
-    });
+  it('renders Home-Screen correctly', () => {
+    const { getByText, getByTestId } = render(<HomeScreen />);
 
-    it('renders Home-Screen correctly', () => {
+    expect(getByText('app.scan_NFC_or_QR')).toBeTruthy();
+    expect(getByTestId('HomeScreen:LottieViewWrapper')).toBeTruthy();
+  });
 
-        const { getByText, getByTestId } = render(<HomeScreen />);
+  it('renders Notification button correctly', () => {
+    const { getByTestId } = render(<HomeScreen />);
 
-        expect(getByText('app.scan_NFC_or_QR')).toBeTruthy();
-        expect(getByTestId('HomeScreen:LottieViewWrapper')).toBeTruthy();
-    });
+    const notificationButton = getByTestId('HomeScreen:NotificationButton');
 
-    // Will be handled later, for now just asserting the existancy
-    it('navigates to Notification-Screen when Notification-Button is pressed', () => {
+    expect(notificationButton).toBeTruthy();
+  });
 
-        const { getByTestId } = render(<HomeScreen />);
+  it('navigates to Notification-Screen when Notification-Button is pressed', () => {
+    const { getByTestId } = render(<HomeScreen />);
 
-        const notificationButton = getByTestId('HomeScreen:NotificationButton');
+    const notificationButton = getByTestId('HomeScreen:NotificationButton');
 
-        expect(notificationButton).toBeTruthy();
-    });
+    fireEvent.press(notificationButton);
 
-    it('renders Notification-Icon inside the Notification-Button', () => {
+    expect(router.push).toHaveBeenCalledWith('/notification');
+  });
 
-        const { getByTestId } = render(<HomeScreen />);
+  it('renders Notification-Icon inside the Notification-Button', () => {
+    const { getByTestId } = render(<HomeScreen />);
 
-        const icon = getByTestId('HomeScreen:NotificationIcon');
+    const icon = getByTestId('HomeScreen:NotificationIcon');
 
-        expect(icon).toBeTruthy();
-    });
+    expect(icon).toBeTruthy();
+  });
 
-    it('uses bell icon for Notification-Button', () => {
+  it('uses bell icon for Notification-Button', () => {
+    const { getByTestId } = render(<HomeScreen />);
 
-        const { getByTestId } = render(<HomeScreen />);
+    const icon = getByTestId('HomeScreen:NotificationIcon');
 
-        const icon = getByTestId('HomeScreen:NotificationIcon');
+    expect(icon.props.name).toBe('bell-o');
+    expect(icon.props.size).toBe(22);
+  });
 
-        expect(icon.props.name).toBe('bell-o');
-        expect(icon.props.size).toBe(22);
-    });
+  it('renders LottieView correctly', () => {
+    const { getByTestId } = render(<HomeScreen />);
 
-    it('renders LottieView correctly', () => {
+    const lottieView = getByTestId('HomeScreen:LottieView');
 
-        const { getByTestId } = render(<HomeScreen />);
+    expect(lottieView.props.source).toBe(scanningAnimation);
+    expect(lottieView.props.autoPlay).toBe(true);
+    expect(lottieView.props.loop).toBe(true);
+  });
 
-        const lottieView = getByTestId('HomeScreen:LottieView');
+  it('renders scanning-buttons wrapper correctly', () => {
+    const { getByTestId } = render(<HomeScreen />);
 
-        expect(lottieView.props.source).toBe(scanningAnimation);
-        expect(lottieView.props.autoPlay).toBe(true);
-        expect(lottieView.props.loop).toBe(true);
-    });
+    const scanningBtnsWrapper = getByTestId(
+      'HomeScreen:ScanningButtonsWrapper'
+    );
 
-    it('renders scanning-buttons wrapper correctly', () => {
-
-        const { getByTestId } = render(<HomeScreen />);
-
-        const scanningBtnsWrapper = getByTestId('HomeScreen:ScanningButtonsWrapper');
-
-        expect(scanningBtnsWrapper).toBeTruthy();
-        expect(scanningBtnsWrapper.children.length).toBe(2);
-    });
+    expect(scanningBtnsWrapper).toBeTruthy();
+    expect(scanningBtnsWrapper.children.length).toBe(2);
+  });
 });
