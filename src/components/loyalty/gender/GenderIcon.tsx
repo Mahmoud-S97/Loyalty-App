@@ -26,12 +26,14 @@ const GenderIcon = ({
 }: GenderIconProps) => {
   return (
     <View
+    testID="GenderIcon:Container"
       className={cn(
         "flex flex-col items-center justify-center gap-3",
         className,
       )}
     >
       <TouchableOpacity
+      testID="GenderIcon:Button"
         activeOpacity={0.8}
         onPress={onPress}
         className={cn(
@@ -40,6 +42,7 @@ const GenderIcon = ({
         )}
       >
         <Ionicons
+        testID="GenderIcon:Icon"
           name={iconName}
           size={iconSize}
           color={APP_COLORS.neutral[500]}
