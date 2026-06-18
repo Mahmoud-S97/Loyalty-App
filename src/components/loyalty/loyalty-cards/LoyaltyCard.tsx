@@ -26,11 +26,12 @@ const LoyaltyCard = ({
       <AppText
         className='w-full pb-4 text-xs text-neutral-800 dark:text-neutral-600'
         numberOfLines={1}
-        tanslationParams={{ stamps: String(threshold - stamps) }}
+        translationParams={{ stamps: String(threshold - stamps) }}
       >
         app.collect_more_stamps_to_get_free_haircut
       </AppText>
       <TouchableOpacity
+      testID='LoyaltyCard:TouchableOpacity'
         style={[cardShadow, { borderWidth: 2, width: '100%' }]}
         activeOpacity={0.8}
         className='h-[90%] p-6 bg-neutral-50 dark:bg-secondary border-brand-500 dark:border-neutral-800 rounded-xl'
@@ -40,6 +41,7 @@ const LoyaltyCard = ({
             {logo && (
               <View className='flex items-center justify-center rounded-md overflow-hidden'>
                 <Image
+                  testID="LoyaltyCard:Logo"
                   source={logo}
                   alt={title}
                   style={{ width: 60, height: 60, borderRadius: 15 }}
@@ -55,7 +57,7 @@ const LoyaltyCard = ({
               <AppText
                 className='font-semibold text- text-neutral-800 dark:text-neutral-500'
                 weight='semiBold'
-                tanslationParams={{ stamps: String(threshold) }}
+                translationParams={{ stamps: String(threshold) }}
               >
                 {title}
               </AppText>
@@ -70,8 +72,9 @@ const LoyaltyCard = ({
                   style={{ borderWidth: 2 }}
                   className='w-12 h-12 flex items-center overflow-hidden justify-center rounded-full bg-brand-200 dark:bg-zinc-700 border-brand-500 dark:border-neutral-800 ring-1 ring-primary'
                 >
-                  {index < stamps && (
+                  {(index < stamps) && (stamps <= threshold) && (
                     <Image
+                    testID="LoyaltyCard:StampImage"
                       source={icon}
                       alt={title}
                       style={{ width: 30, height: 30 }}

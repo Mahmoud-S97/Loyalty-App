@@ -9,7 +9,7 @@ type AppTextProps = {
   numberOfLines?: number;
   className?: string;
   withTranslation?: boolean;
-  tanslationParams?: Record<string, string>;
+  translationParams?: Record<string, string>;
   weight?: 'regular' | 'medium' | 'semiBold' | 'bold';
 };
 
@@ -18,13 +18,13 @@ const AppText = ({
   numberOfLines,
   className,
   withTranslation = true,
-  tanslationParams,
+  translationParams,
   weight = 'regular'
 }: AppTextProps): JSX.Element => {
   const getFontWeightClases = getFontWeight(weight);
   const renderChildren =
     withTranslation && typeof children === 'string'
-      ? getTranslated(children, tanslationParams)
+      ? getTranslated(children, translationParams)
       : children;
 
   return (

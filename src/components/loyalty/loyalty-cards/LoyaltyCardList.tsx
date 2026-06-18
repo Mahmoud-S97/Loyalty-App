@@ -25,6 +25,7 @@ const LoyaltyCardList = (): JSX.Element => {
         app.your_loyalty_card
       </AppText>
       <FlatList
+      testID="LoyaltyCardList:FlatList"
         data={loyaltyCardsData}
         keyExtractor={(item) => item.id.toString()}
         renderItem={renderVoucherItem}
