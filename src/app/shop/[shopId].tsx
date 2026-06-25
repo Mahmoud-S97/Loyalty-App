@@ -3,7 +3,7 @@ import { View, Image, ImageBackground } from 'react-native';
 import ScrollingView from '@/components/layout/screens/ScrollingView';
 import GoBackButton from '@/components/ui/globals/buttons/GoBackButton';
 import { useLocalSearchParams } from 'expo-router';
-import { walletData } from '@/dummy-data';
+import { shops } from '@/dummy-data';
 import { APP_COLORS } from '@/constants/theme';
 import AppText from '@/components/ui/content/AppText';
 import ContainerView from '@/components/layout/screens/ContainerView';
@@ -12,13 +12,14 @@ import LoyaltyCardList from '@/components/loyalty/loyalty-cards/LoyaltyCardList'
 const ShopProfileScreen = (): JSX.Element => {
   const { shopId } = useLocalSearchParams();
 
-  const shopData = walletData.find((shop) => shop.id === +shopId);
+  const shopData = shops.find((shop) => shop.id === shopId);
 
   return (
     <ScrollingView>
       <View className='w-full h-[220px] relative'>
         <ImageBackground
-          source={shopData?.image}
+          source={{ uri: shopData?.coverImage }}
+          alt={shopData?.name}
           resizeMode='cover'
           className='flex-1'
         >
@@ -31,7 +32,8 @@ const ShopProfileScreen = (): JSX.Element => {
       <ContainerView className='items-start pb-2'>
         <View className='flex flex-row items-center gap-4'>
           <Image
-            source={shopData?.image}
+            source={{ uri: shopData?.logo }}
+            alt={shopData?.name}
             className='size-16 rounded-xl'
             resizeMode='cover'
           />
@@ -46,7 +48,7 @@ const ShopProfileScreen = (): JSX.Element => {
               className='text-md font-md text-neutral-900 dark:text-neutral-400'
               weight='medium'
             >
-              {shopData?.title}
+              {shopData?.description}
             </AppText>
             <AppText className='text-sm font-sm text-neutral-700 dark:text-neutral-500'>
               {shopData?.address}

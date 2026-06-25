@@ -1,41 +1,7 @@
 import { LOCAL_IMAGES } from '@/constants';
-import { WalletItem } from '@/types';
+import { Shop, UserVoucher, Voucher } from '@/types';
 
 const barbershoMockImage = require('@/assets/images/app/mock/snipz-barbershop.jpeg');
-
-export const walletData: WalletItem[] = [
-  // Dummy list
-  {
-    id: 1,
-    name: 'Snipz Barbershop',
-    title: 'Snpiz Barbershops',
-    description: 'A barbershop specialized in haircuts, beards fade, and men stylish',
-    image: barbershoMockImage,
-    address: 'Carrickmacross, Monaghan',
-    stamps: 1,
-    threshold: 10
-  },
-  {
-    id: 2,
-    name: 'Turkish Barbershop',
-    title: 'Turkish Barbershops',
-    description: 'A barbershop specialized in haircuts, beards fade, and men stylish',
-    image: barbershoMockImage,
-    address: 'Carrickmacross, Monaghan',
-    stamps: 3,
-    threshold: 10
-  },
-  {
-    id: 3,
-    name: 'Crafton Barbershop',
-    title: 'Crafton Barbershops',
-    description: 'A barbershop specialized in haircuts, beards fade, and men stylish',
-    image: barbershoMockImage,
-    address: 'Carrickmacross, Monaghan',
-    stamps: 9,
-    threshold: 10
-  }
-];
 
 export const notificationData = [
   {
@@ -113,4 +79,84 @@ export const loyaltyCardsData = [
     threshold: 8,
     stamps: 4
   }
+];
+
+
+export const shops: Shop[] = [
+  {
+    id: "shop_1",
+    name: "Fade Factory",
+    description: "Premium barbershop in Dublin",
+    address: "Dublin 18, Ireland",
+    coverImage: "https://images.unsplash.com/photo-1621605815971-fbc98d665033",
+    logo: "https://images.unsplash.com/photo-1511367461989-f85a21fda167",
+    isActive: true,
+  },
+  {
+    id: "shop_2",
+    name: "Urban Cuts",
+    description: "Modern grooming experience",
+    address: "Dublin City Centre",
+    coverImage: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438",
+    logo: "https://images.unsplash.com/photo-1511367461989-f85a21fda167",
+    isActive: true,
+  },
+];
+
+export const vouchers: Voucher[] = [
+  {
+    id: "voucher_1",
+    shopId: "shop_1",
+    title: "Earn 1 Free Haircut",
+    threshold: 10,
+    rewardTitle: "Free Haircut",
+    isActive: true,
+  },
+  {
+    id: "voucher_2",
+    shopId: "shop_1",
+    title: "Free Beard Trim",
+    threshold: 5,
+    rewardTitle: "Beard Trim",
+    isActive: true,
+  },
+];
+
+export const userVouchers: UserVoucher[] = [
+  {
+    id: "uv_1",
+    userId: "user_1",
+    shopId: "shop_1",
+    shopName: "Fade Factory",
+    shopCoverImage:
+      "https://images.unsplash.com/photo-1621605815971-fbc98d665033",
+    shopLogo: "https://images.unsplash.com/photo-1511367461989-f85a21fda167",
+    shopDescription: "Premium barbershop in Dublin",
+    shopAddress: "Dublin 18, Ireland",
+    voucherId: "voucher_1",
+    voucherTitle: "Earn 1 Free Haircut",
+    threshold: 10,
+    stamps: 6,
+    isCompleted: false,
+    createdAt: "2026-06-01",
+    updatedAt: "2026-06-20",
+  },
+  {
+    id: "uv_2",
+    userId: "user_1",
+    shopId: "shop_1",
+    shopName: "Fade Factory",
+    shopCoverImage:
+      "https://images.unsplash.com/photo-1621605815971-fbc98d665033",
+    shopLogo: "https://images.unsplash.com/photo-1511367461989-f85a21fda167",
+    shopDescription: "Premium barbershop in Dublin",
+    shopAddress: "Dublin 18, Ireland",
+    voucherId: "voucher_2",
+    voucherTitle: "Free Beard Trim",
+    threshold: 5,
+    stamps: 5,
+    isCompleted: true,
+    createdAt: "2026-06-01",
+    updatedAt: "2026-06-22",
+  },
 ];

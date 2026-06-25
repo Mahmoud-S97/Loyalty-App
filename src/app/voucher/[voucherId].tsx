@@ -4,8 +4,8 @@ import ScreenView from '@/components/layout/screens/ScreenView';
 import ScrollingView from '@/components/layout/screens/ScrollingView';
 import GoBackButton from '@/components/ui/globals/buttons/GoBackButton';
 import MainButton from '@/components/ui/globals/buttons/MainButton';
-import { useLocalSearchParams, router } from 'expo-router';
-import { walletData } from '@/dummy-data';
+import { useLocalSearchParams, router, RelativePathString } from 'expo-router';
+import { userVouchers } from '@/dummy-data';
 import { APP_COLORS } from '@/constants/theme';
 import AppText from '@/components/ui/content/AppText';
 import ContainerView from '@/components/layout/screens/ContainerView';
@@ -14,17 +14,22 @@ import { useThemeStyles } from '@/Hooks/theme/useThemeStyles';
 import VouchersList from '@/components/loyalty/vouchers/VouchersList';
 import LoyaltyCardList from '@/components/loyalty/loyalty-cards/LoyaltyCardList';
 
-const ShopDetailScreen = (): JSX.Element => {
+const VoucherDetailScreen = (): JSX.Element => {
   const { cardShadow } = useThemeStyles();
-  const { shopId } = useLocalSearchParams();
+  const { voucherId } = useLocalSearchParams();
 
-  const shopData = walletData.find((shop) => shop.id === +shopId);
+  const selectedWalletItem = userVouchers.find((voucher) => voucher.id === voucherId);
+
+  const onVisitShopHandler = (): void => {
+    const path = `/shop/${selectedWalletItem?.shopId}` as RelativePathString;
+    router.push(path);
+  };
 
   return (
     <ScreenView>
       <View className='w-full h-[220px] relative'>
         <ImageBackground
-          source={shopData?.image}
+          source={{uri: selectedWalletItem?.shopCoverImage}}
           resizeMode='cover'
           className='flex-1'
         >
@@ -52,10 +57,10 @@ const ShopDetailScreen = (): JSX.Element => {
                 className='text-lg font-semibold text-neutral-900 dark:text-neutral-400'
                 weight='semiBold'
               >
-                {shopData?.name}
+                {selectedWalletItem?.shopName}
               </AppText>
               <AppText className='text-sm font-sm text-neutral-700 dark:text-neutral-500'>
-                {shopData?.address}
+                {selectedWalletItem?.shopAddress}
               </AppText>
             </View>
           </View>
@@ -63,7 +68,7 @@ const ShopDetailScreen = (): JSX.Element => {
             title='Visit Profile'
             className='h-10 bg-primary rounded-lg'
             textClassName='text-sm'
-            onPress={() => router.push(`/shops/shop-profile/${shopId}`)}
+            onPress={onVisitShopHandler}
           />
         </View>
       </ContainerView>
@@ -75,4 +80,4 @@ const ShopDetailScreen = (): JSX.Element => {
   );
 };
 
-export default ShopDetailScreen;
+export default VoucherDetailScreen;

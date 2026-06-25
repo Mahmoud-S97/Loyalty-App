@@ -12,23 +12,31 @@ import AppText from '@/components/ui/content/AppText';
 import { APP_COLORS } from '@/constants/theme';
 import { cn } from '@/lib/nativeWindCSS/cn';
 import { Ionicons } from '@expo/vector-icons';
-import { WalletItem } from '@/types';
 import { useThemeStyles } from '@/Hooks/theme/useThemeStyles';
+import { RelativePathString, router } from 'expo-router';
+import { WalletItem } from './types';
 
 type WalletCardProps = {
   item: WalletItem;
   index: number;
   className?: string;
-  onPress?: () => void;
 };
 
-const animatedIds = new Set<number>();
+const animatedIds = new Set<string>();
 
 const WalletCard = ({
-  item: { id, title, name, image, address, stamps = 0, threshold = 10 },
+  item: {
+    id,
+    shopName,
+    shopCoverImage,
+    shopDescription,
+    shopAddress,
+    voucherTitle,
+    stamps,
+    threshold
+  },
   index,
-  className,
-  onPress
+  className
 }: WalletCardProps) => {
   const { cardShadow } = useThemeStyles();
 
@@ -62,6 +70,11 @@ const WalletCard = ({
   const rawPercent = (stamps / threshold) * 100;
   const percentage: DimensionValue = `${Math.min(rawPercent, 100)}%`;
 
+  const navigationHandler = (): void => {
+    const path = `/voucher/${id}` as RelativePathString;
+    router.push(path);
+  };
+
   return (
     <Animated.View
       testID='WalletCard:AnimatedView'
@@ -80,13 +93,13 @@ const WalletCard = ({
       <TouchableOpacity
         testID='WalletCard:TouchableOpacity'
         activeOpacity={0.8}
-        onPress={onPress}
+        onPress={navigationHandler}
       >
         <Image
           className='w-full h-[150px] rounded-2xl'
           resizeMode='cover'
-          source={image}
-          alt={title}
+          source={{ uri: shopCoverImage }}
+          alt={shopName}
         />
         <ContainerView className='justify-start items-start p-4'>
           <View className='flex-row justify-between items-center'>
@@ -96,21 +109,21 @@ const WalletCard = ({
                 withTranslation={false}
                 className='w-full font-bold text-neutral-800 dark:text-neutral-800'
               >
-                {name}
+                {shopName}
               </AppText>
               <AppText
                 numberOfLines={1}
                 withTranslation={false}
                 className='w-full my-1 text-neutral-800 dark:text-neutral-800'
               >
-                {title}
+                {shopDescription}
               </AppText>
               <AppText
                 numberOfLines={1}
                 withTranslation={false}
                 className='w-full text-neutral-600 dark:text-neutral-700'
               >
-                {address}
+                {shopAddress}
               </AppText>
             </View>
             <View className='w-14 h-14 flex-column justify-center items-center self-start bg-brand-400 rounded-full'>
@@ -147,7 +160,7 @@ const WalletCard = ({
               numberOfLines={1}
               className='w-[75%] text-neutral-800 dark:text-neutral-800 font-semibold'
             >
-              app.earn_one_free_haircut
+              {voucherTitle}
             </AppText>
           </View>
         </ContainerView>

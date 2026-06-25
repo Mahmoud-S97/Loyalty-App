@@ -7,18 +7,18 @@ import { NotificationItem } from "@/types";
 import { APP_COLORS } from "@/constants/theme";
 
 
-type NotificationListTypes = {
+type NotificationListProps = {
   notificationData: NotificationItem[]
 }
 
-type NotificationItemTypes = {
+type NotificationItemProps = {
   index: number,
   item: NotificationItem
 }
 
 const TypedSwipeRow = SwipeRow as any;
 
-const NotificationList = ({ notificationData }: NotificationListTypes) => {
+const NotificationList = ({ notificationData }: NotificationListProps) => {
 
   const [isRowOpened, setIsRowOpened] = useState<boolean>(false);
   const rowRefs = useRef<Record<string, SwipeRow<any> | null>>({});
@@ -32,7 +32,7 @@ const NotificationList = ({ notificationData }: NotificationListTypes) => {
     openRowKey.current = key;
   };
 
-  const renderNotificationItem = ({ item, index }: NotificationItemTypes) => {
+  const renderNotificationItem = ({ item, index }: NotificationItemProps) => {
     return (
       <TypedSwipeRow ref={(ref: any) => {
         rowRefs.current[item.id] = ref;

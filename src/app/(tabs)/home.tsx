@@ -16,7 +16,7 @@ import { useThemeStyles } from "@/Hooks/theme/useThemeStyles";
 import i18n from "@/lib/localization/i18n";
 import { useLocalStorage } from "@/Hooks/storage/useLocalStorage";
 import { LOCAL_STORAGE_KEYS } from "@/constants";
-import { walletData } from "@/dummy-data";
+import { notificationData } from "@/dummy-data";
 
 const HomeScreen = (): JSX.Element => {
   const { SCREEN_WIDTH } = useScreenDimensions();
@@ -76,7 +76,7 @@ const HomeScreen = (): JSX.Element => {
         />
         <View className="w-[25px] h-[25px] bg-red-500 rounded-full flex items-center justify-center absolute -top-2 -end-2">
           <Text className="text-neutral-50 font-bold text-xs">
-            {walletData.length}
+            {notificationData.length}
           </Text>
         </View>
       </TouchableOpacity>
