@@ -1,13 +1,26 @@
 import { JSX } from 'react';
 import { FlatList, View } from 'react-native';
 import AppText from '@/components/ui/content/AppText';
-import { loyaltyCardsData, vouchersList } from '@/dummy-data';
+import { userVouchers } from '@/dummy-data';
 import LoyaltyCard from './LoyaltyCard';
-import { VoucherCardProps } from './types';
 import { useScreenDimensions } from '@/Hooks/layout/useScreenDimensions';
+import { LoyaltyCardProps } from './types';
 
 const LoyaltyCardList = (): JSX.Element => {
-  const renderVoucherItem = ({ item }: { item: VoucherCardProps }) => (
+  const loyaltyCardData = userVouchers.map((voucher) => {
+    return {
+      id: voucher.id,
+      shopLogo: voucher.shopLogo,
+      shopId: voucher.shopId,
+      userId: voucher.userId,
+      title: voucher.voucherTitle,
+      threshold: voucher.threshold,
+      stamps: voucher.stamps,
+      isCompleted: voucher.isCompleted
+    };
+  }) as unknown as LoyaltyCardProps[];
+
+  const renderVoucherItem = ({ item }: { item: LoyaltyCardProps }) => (
     <LoyaltyCard {...item} />
   );
 
@@ -25,8 +38,8 @@ const LoyaltyCardList = (): JSX.Element => {
         app.your_loyalty_card
       </AppText>
       <FlatList
-      testID="LoyaltyCardList:FlatList"
-        data={loyaltyCardsData}
+        testID='LoyaltyCardList:FlatList'
+        data={loyaltyCardData}
         keyExtractor={(item) => item.id.toString()}
         renderItem={renderVoucherItem}
         contentContainerStyle={{ gap: SPACING }}

@@ -1,11 +1,12 @@
-import { ImageSourcePropType } from "react-native";
-
-export interface VoucherCardProps {
-  className?: string;
-  logo: ImageSourcePropType | string |  undefined;
-  icon: ImageSourcePropType | string |  undefined;
+import { ImageSourcePropType } from 'react-native';
+export interface LoyaltyCardProps {
+  id: string;
+  voucherId: string;
   title: string;
+  shopLogo: ImageSourcePropType | string | undefined;
   description?: string;
   threshold: number;
   stamps: number;
+  isCompleted: boolean;
+  rewardTitle: string;
 }

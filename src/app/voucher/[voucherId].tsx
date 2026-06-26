@@ -9,7 +9,6 @@ import { userVouchers } from '@/dummy-data';
 import { APP_COLORS } from '@/constants/theme';
 import AppText from '@/components/ui/content/AppText';
 import ContainerView from '@/components/layout/screens/ContainerView';
-import { LOCAL_IMAGES } from '@/constants';
 import { useThemeStyles } from '@/Hooks/theme/useThemeStyles';
 import VouchersList from '@/components/loyalty/vouchers/VouchersList';
 import LoyaltyCardList from '@/components/loyalty/loyalty-cards/LoyaltyCardList';
@@ -47,7 +46,8 @@ const VoucherDetailScreen = (): JSX.Element => {
           <View className='w-full flex flex-row items-center gap-2'>
             <View className='flex items-center justify-center w-16 h-16'>
               <Image
-                source={LOCAL_IMAGES.LOGO_TRANS}
+                source={{ uri: selectedWalletItem?.shopLogo }}
+                alt={selectedWalletItem?.shopName}
                 resizeMode='cover'
                 className='w-full h-full'
               />

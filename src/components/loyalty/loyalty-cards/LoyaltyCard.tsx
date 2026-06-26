@@ -2,20 +2,23 @@ import { Fragment, JSX, memo } from 'react';
 import { TouchableOpacity, ImageBackground, View } from 'react-native';
 import { Image } from 'expo-image';
 import AppText from '@/components/ui/content/AppText';
-import { VoucherCardProps } from './types';
+import { LoyaltyCardProps } from './types';
 import { useThemeStyles } from '@/Hooks/theme/useThemeStyles';
 import { useScreenDimensions } from '@/Hooks/layout/useScreenDimensions';
 import { LOCAL_IMAGES } from '@/constants';
 
+type CustomLoyaltyCardProps = LoyaltyCardProps & {
+  className?: string;
+};
+
 const LoyaltyCard = ({
   className,
-  logo,
-  icon,
+  shopLogo,
   title,
   description,
   threshold,
   stamps
-}: VoucherCardProps): JSX.Element => {
+}: CustomLoyaltyCardProps): JSX.Element => {
   const { cardShadow } = useThemeStyles();
   const { SCREEN_WIDTH } = useScreenDimensions();
   const CARD_WIDTH = SCREEN_WIDTH * 0.82;
@@ -31,18 +34,18 @@ const LoyaltyCard = ({
         app.collect_more_stamps_to_get_free_haircut
       </AppText>
       <TouchableOpacity
-      testID='LoyaltyCard:TouchableOpacity'
+        testID='LoyaltyCard:TouchableOpacity'
         style={[cardShadow, { borderWidth: 2, width: '100%' }]}
         activeOpacity={0.8}
         className='h-[90%] p-6 bg-neutral-50 dark:bg-secondary border-brand-500 dark:border-neutral-800 rounded-xl'
       >
         <View className='flex flex-col gap-6'>
           <View className='flex flex-row items-center gap-4'>
-            {logo && (
+            {shopLogo && (
               <View className='flex items-center justify-center rounded-md overflow-hidden'>
                 <Image
-                  testID="LoyaltyCard:Logo"
-                  source={logo}
+                  testID='LoyaltyCard:Logo'
+                  source={shopLogo}
                   alt={title}
                   style={{ width: 60, height: 60, borderRadius: 15 }}
                   contentFit='cover'
@@ -72,12 +75,12 @@ const LoyaltyCard = ({
                   style={{ borderWidth: 2 }}
                   className='w-12 h-12 flex items-center overflow-hidden justify-center rounded-full bg-brand-200 dark:bg-zinc-700 border-brand-500 dark:border-neutral-800 ring-1 ring-primary'
                 >
-                  {(index < stamps) && (stamps <= threshold) && (
+                  {index < stamps && stamps <= threshold && (
                     <Image
-                    testID="LoyaltyCard:StampImage"
-                      source={icon}
+                      testID='LoyaltyCard:StampImage'
+                      source={shopLogo}
                       alt={title}
-                      style={{ width: 30, height: 30 }}
+                      style={{ width: 30, height: 30, borderRadius: 15 }}
                       contentFit='cover'
                       transition={200}
                       cachePolicy='memory-disk'
