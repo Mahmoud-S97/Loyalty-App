@@ -3,7 +3,7 @@ import { View, Image, ImageBackground } from 'react-native';
 import ScrollingView from '@/components/layout/screens/ScrollingView';
 import GoBackButton from '@/components/ui/globals/buttons/GoBackButton';
 import { useLocalSearchParams } from 'expo-router';
-import { shops } from '@/dummy-data';
+import { USER_WALLET } from '@/dummy-data';
 import { APP_COLORS } from '@/constants/theme';
 import AppText from '@/components/ui/content/AppText';
 import ContainerView from '@/components/layout/screens/ContainerView';
@@ -12,14 +12,19 @@ import LoyaltyCardList from '@/components/loyalty/loyalty-cards/LoyaltyCardList'
 const ShopProfileScreen = (): JSX.Element => {
   const { shopId } = useLocalSearchParams();
 
-  const shopData = shops.find((shop) => shop.id === shopId);
+  const shopData = USER_WALLET.find((wallet) => wallet.shopId === shopId);
+  const loyaltyCardsList = shopData?.loyaltyCards.filter(
+    (card) => card.stamps < shopData.threshold
+  );
+  const threshold = shopData?.threshold ?? 0;
+  const shopLogo = shopData?.shopLogo;
 
   return (
     <ScrollingView>
       <View className='w-full h-[220px] relative'>
         <ImageBackground
-          source={{ uri: shopData?.coverImage }}
-          alt={shopData?.name}
+          source={{ uri: shopData?.shopCoverImage }}
+          alt={shopData?.shopName}
           resizeMode='cover'
           className='flex-1'
         >
@@ -32,8 +37,8 @@ const ShopProfileScreen = (): JSX.Element => {
       <ContainerView className='items-start pb-2'>
         <View className='flex flex-row items-center gap-4'>
           <Image
-            source={{ uri: shopData?.logo }}
-            alt={shopData?.name}
+            source={{ uri: shopData?.shopLogo }}
+            alt={shopData?.shopName}
             className='size-16 rounded-xl'
             resizeMode='cover'
           />
@@ -42,24 +47,28 @@ const ShopProfileScreen = (): JSX.Element => {
               className='text-lg font-semibold text-neutral-900 dark:text-neutral-400'
               weight='semiBold'
             >
-              {shopData?.name}
+              {shopData?.shopName}
             </AppText>
             <AppText
               className='text-md font-md text-neutral-900 dark:text-neutral-400'
               weight='medium'
             >
-              {shopData?.description}
+              {shopData?.shopDescription}
             </AppText>
             <AppText className='text-sm font-sm text-neutral-700 dark:text-neutral-500'>
-              {shopData?.address}
+              {shopData?.shopAddress}
             </AppText>
           </View>
         </View>
         <AppText className='text-sm mt-4 font-md text-neutral-800 dark:text-neutral-400'>
-          {shopData?.description}
+          {shopData?.shopDescription}
         </AppText>
       </ContainerView>
-      <LoyaltyCardList />
+      <LoyaltyCardList
+        loyaltyCardsList={loyaltyCardsList}
+        threshold={threshold}
+        shopLogo={shopLogo}
+      />
     </ScrollingView>
   );
 };

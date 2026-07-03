@@ -1,15 +1,33 @@
 import { JSX } from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList, ImageSourcePropType, View } from 'react-native';
 import AppText from '@/components/ui/content/AppText';
-import { vouchersList } from '@/dummy-data';
 import VoucherCard from './VoucherCard';
-import { VoucherCardProps } from './types';
+import { LoyaltyCard } from './types';
 import { useScreenDimensions } from '@/Hooks/layout/useScreenDimensions';
+import { LOCAL_IMAGES } from '@/constants';
 
-const VouchersList = (): JSX.Element => {
-  const renderVoucherItem = ({ item }: { item: VoucherCardProps }) => (
-    <VoucherCard {...item} />
-  );
+type VouchersListProps = {
+  vouchersList: LoyaltyCard[] | undefined;
+};
+
+type VouchersItemProps = {
+  id: string;
+  stamps: number;
+  image: ImageSourcePropType | undefined;
+  title?: string;
+  description?: string;
+};
+
+const VouchersList = ({ vouchersList }: VouchersListProps): JSX.Element => {
+  const renderVoucherItem = ({ item }: { item: LoyaltyCard }) => {
+    const redeemableVoucher: VouchersItemProps = {
+      ...item,
+      image: LOCAL_IMAGES.REDEEMING_VOUCHER,
+      title: 'app.reward_one_free_haircut',
+      description: 'app.redeem_now'
+    };
+    return <VoucherCard {...redeemableVoucher} />;
+  };
 
   const { SCREEN_WIDTH } = useScreenDimensions();
 

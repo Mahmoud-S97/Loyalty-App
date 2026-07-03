@@ -5,7 +5,7 @@ import ScrollingView from '@/components/layout/screens/ScrollingView';
 import GoBackButton from '@/components/ui/globals/buttons/GoBackButton';
 import MainButton from '@/components/ui/globals/buttons/MainButton';
 import { useLocalSearchParams, router, RelativePathString } from 'expo-router';
-import { userVouchers } from '@/dummy-data';
+import { USER_WALLET } from '@/dummy-data';
 import { APP_COLORS } from '@/constants/theme';
 import AppText from '@/components/ui/content/AppText';
 import ContainerView from '@/components/layout/screens/ContainerView';
@@ -15,9 +15,20 @@ import LoyaltyCardList from '@/components/loyalty/loyalty-cards/LoyaltyCardList'
 
 const VoucherDetailScreen = (): JSX.Element => {
   const { cardShadow } = useThemeStyles();
-  const { voucherId } = useLocalSearchParams();
+  const { walletId } = useLocalSearchParams();
 
-  const selectedWalletItem = userVouchers.find((voucher) => voucher.id === voucherId);
+  const selectedWalletItem = USER_WALLET.find(
+    (wallet) => wallet.id === walletId
+  );
+  const vouchersList = selectedWalletItem?.loyaltyCards?.filter(
+    (voucher) => voucher.stamps >= selectedWalletItem.threshold
+  );
+  const loyaltyCardsList = selectedWalletItem?.loyaltyCards.filter(
+    (card) => card.stamps < selectedWalletItem.threshold
+  );
+
+  const threshold = selectedWalletItem?.threshold ?? 0;
+  const shopLogo = selectedWalletItem?.shopLogo;
 
   const onVisitShopHandler = (): void => {
     const path = `/shop/${selectedWalletItem?.shopId}` as RelativePathString;
@@ -28,7 +39,7 @@ const VoucherDetailScreen = (): JSX.Element => {
     <ScreenView>
       <View className='w-full h-[220px] relative'>
         <ImageBackground
-          source={{uri: selectedWalletItem?.shopCoverImage}}
+          source={{ uri: selectedWalletItem?.shopCoverImage }}
           resizeMode='cover'
           className='flex-1'
         >
@@ -73,8 +84,12 @@ const VoucherDetailScreen = (): JSX.Element => {
         </View>
       </ContainerView>
       <ScrollingView>
-        <VouchersList />
-        <LoyaltyCardList />
+        <VouchersList vouchersList={vouchersList} />
+        <LoyaltyCardList
+          loyaltyCardsList={loyaltyCardsList}
+          threshold={threshold}
+          shopLogo={shopLogo}
+        />
       </ScrollingView>
     </ScreenView>
   );

@@ -4,7 +4,6 @@ import {
   DimensionValue,
   Image,
   TouchableOpacity,
-  useColorScheme,
   View
 } from 'react-native';
 import ContainerView from '@/components/layout/screens/ContainerView';
@@ -27,13 +26,15 @@ const animatedIds = new Set<string>();
 const WalletCard = ({
   item: {
     id,
+    shopId,
     shopName,
+    shopLogo,
     shopCoverImage,
     shopDescription,
     shopAddress,
-    voucherTitle,
-    stamps,
-    threshold
+    threshold,
+    loyaltyCards,
+    rewardTitle
   },
   index,
   className
@@ -67,11 +68,13 @@ const WalletCard = ({
     animatedIds.add(id);
   }, []);
 
+  const stamps = loyaltyCards.find(card => card.stamps < threshold)?.stamps ?? threshold;
+
   const rawPercent = (stamps / threshold) * 100;
   const percentage: DimensionValue = `${Math.min(rawPercent, 100)}%`;
 
   const navigationHandler = (): void => {
-    const path = `/voucher/${id}` as RelativePathString;
+    const path = `/vouchers/${id}` as RelativePathString;
     router.push(path);
   };
 
@@ -160,7 +163,7 @@ const WalletCard = ({
               numberOfLines={1}
               className='w-[75%] text-neutral-800 dark:text-neutral-800 font-semibold'
             >
-              {voucherTitle}
+              {rewardTitle}
             </AppText>
           </View>
         </ContainerView>

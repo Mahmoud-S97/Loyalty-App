@@ -1,11 +1,21 @@
 import { JSX, memo } from 'react';
-import { TouchableOpacity, ImageBackground, View } from 'react-native';
+import { TouchableOpacity, ImageBackground, View, ImageSourcePropType } from 'react-native';
 import AppText from '@/components/ui/content/AppText';
-import { VoucherCardProps } from './types';
 import { useThemeStyles } from '@/Hooks/theme/useThemeStyles';
 import { useScreenDimensions } from '@/Hooks/layout/useScreenDimensions';
 
+type VoucherCardProps = {
+  id: string;
+  stamps: number;
+  className?: string;
+  image: ImageSourcePropType | undefined;
+  title?: string;
+  description?: string
+}
+
 const VoucherCard = ({
+  id,
+  stamps,
   className,
   image,
   title,

@@ -9,10 +9,11 @@ type WalletItemProps = {
 };
 
 type WalletListProps = {
-  userVouchers: WalletItem[];
+  userWallet: WalletItem[];
 };
 
-const WalletList = ({ userVouchers }: WalletListProps) => {
+const WalletList = ({ userWallet }: WalletListProps) => {
+
   const renderWalletItem = ({ item, index }: WalletItemProps) => {
     return <WalletCard index={index} item={item} />;
   };
@@ -20,7 +21,7 @@ const WalletList = ({ userVouchers }: WalletListProps) => {
   return (
     <FlatList
       testID='WalletList:FlatList'
-      data={userVouchers}
+      data={userWallet}
       keyExtractor={(item) => item.id.toString()}
       renderItem={renderWalletItem}
       contentContainerClassName='px-4 pt-6 pb-24'

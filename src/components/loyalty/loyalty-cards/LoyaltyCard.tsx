@@ -1,24 +1,37 @@
-import { Fragment, JSX, memo } from 'react';
-import { TouchableOpacity, ImageBackground, View } from 'react-native';
+import { JSX, memo } from 'react';
+import {
+  TouchableOpacity,
+  ImageBackground,
+  View,
+  ImageSourcePropType
+} from 'react-native';
 import { Image } from 'expo-image';
 import AppText from '@/components/ui/content/AppText';
-import { LoyaltyCardProps } from './types';
 import { useThemeStyles } from '@/Hooks/theme/useThemeStyles';
 import { useScreenDimensions } from '@/Hooks/layout/useScreenDimensions';
 import { LOCAL_IMAGES } from '@/constants';
 
-type CustomLoyaltyCardProps = LoyaltyCardProps & {
+type LoyaltyCardProps = {
+  id: string;
+  stamps: number;
+  threshold: number;
   className?: string;
+  loyaltyIcon: ImageSourcePropType | undefined;
+  shopLogo: string | undefined;
+  title?: string;
+  description?: string;
 };
 
 const LoyaltyCard = ({
+  id,
   className,
+  loyaltyIcon,
   shopLogo,
   title,
   description,
   threshold,
   stamps
-}: CustomLoyaltyCardProps): JSX.Element => {
+}: LoyaltyCardProps): JSX.Element => {
   const { cardShadow } = useThemeStyles();
   const { SCREEN_WIDTH } = useScreenDimensions();
   const CARD_WIDTH = SCREEN_WIDTH * 0.82;
@@ -78,7 +91,7 @@ const LoyaltyCard = ({
                   {index < stamps && stamps <= threshold && (
                     <Image
                       testID='LoyaltyCard:StampImage'
-                      source={shopLogo}
+                      source={loyaltyIcon}
                       alt={title}
                       style={{ width: 30, height: 30, borderRadius: 15 }}
                       contentFit='cover'

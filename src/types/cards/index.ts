@@ -1,48 +1,26 @@
-export interface Shop {
+export interface LoyaltyCardDto {
   id: string;
-  name: string;
-  description: string;
-  logo: string;
-  coverImage: string;
-  address: string;
-  isActive: boolean;
-}
-
-export interface LoyaltyCard {
-  id: string;
-  voucherId: string;
-  threshold: number;
   stamps: number;
-  isCompleted: boolean;
-  rewardTitle: string;
+  createdAt: string;
 }
 
-export interface Voucher {
+export interface UserShopWalletDto {
   id: string;
-  shopId: string;
-  title: string; // "Earn 1 free haircut"
-  description?: string;
-  threshold: number; // e.g. 10 stamps
-  rewardTitle: string; // "Free Haircut"
-  rewardDescription?: string;
-  isActive: boolean;
-}
-
-// UserVoucher = Wallet-Item
-export interface UserVoucher {
-  id: string;
-  userId: string;
   shopId: string;
   shopName: string;
-  shopCoverImage: string;
-  shopLogo: string;
   shopDescription: string;
   shopAddress: string;
-  voucherId: string;
-  voucherTitle: string; // "Earn 1 free haircut"
-  threshold: number; // 10
-  stamps: number; // current progress
-  isCompleted: boolean;
-  createdAt: string;
-  updatedAt: string;
+  shopLogo: string;
+  shopCoverImage: string;
+  rewardTitle: string;
+  threshold: number;
+  loyaltyCards: LoyaltyCardDto[];
+}
+
+export interface RedemptionDto {
+  id: string;
+  shopId: string;
+  shopName: string;
+  rewardTitle: string;
+  redeemedAt: string;
 }

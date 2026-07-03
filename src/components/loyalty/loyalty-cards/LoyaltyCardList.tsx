@@ -1,28 +1,44 @@
 import { JSX } from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList, ImageSourcePropType, View } from 'react-native';
 import AppText from '@/components/ui/content/AppText';
-import { userVouchers } from '@/dummy-data';
 import LoyaltyCard from './LoyaltyCard';
 import { useScreenDimensions } from '@/Hooks/layout/useScreenDimensions';
-import { LoyaltyCardProps } from './types';
+import { LoyaltyCardTypes } from './types';
+import { LOCAL_IMAGES } from '@/constants';
 
-const LoyaltyCardList = (): JSX.Element => {
-  const loyaltyCardData = userVouchers.map((voucher) => {
-    return {
-      id: voucher.id,
-      shopLogo: voucher.shopLogo,
-      shopId: voucher.shopId,
-      userId: voucher.userId,
-      title: voucher.voucherTitle,
-      threshold: voucher.threshold,
-      stamps: voucher.stamps,
-      isCompleted: voucher.isCompleted
+type LoyaltyListProps = {
+  loyaltyCardsList: LoyaltyCardTypes[] | undefined;
+  threshold: number;
+  shopLogo: string | undefined;
+};
+
+type LoyaltyCardProps = {
+  id: string;
+  stamps: number;
+  threshold: number;
+  loyaltyIcon: ImageSourcePropType | undefined;
+  shopLogo: string | undefined;
+  title?: string;
+  description?: string;
+  className?: string;
+};
+
+const LoyaltyCardList = ({
+  loyaltyCardsList,
+  threshold,
+  shopLogo
+}: LoyaltyListProps): JSX.Element => {
+  const renderVoucherItem = ({ item }: { item: LoyaltyCardTypes }) => {
+    const loyaltyCardData: LoyaltyCardProps = {
+      ...item,
+      loyaltyIcon: LOCAL_IMAGES.LOGO_TRANS,
+      shopLogo,
+      threshold,
+      title: 'app.reward_one_free_haircut',
+      description: 'app.redeem_now'
     };
-  }) as unknown as LoyaltyCardProps[];
-
-  const renderVoucherItem = ({ item }: { item: LoyaltyCardProps }) => (
-    <LoyaltyCard {...item} />
-  );
+    return <LoyaltyCard {...loyaltyCardData} />;
+  };
 
   const { SCREEN_WIDTH } = useScreenDimensions();
 
@@ -39,7 +55,7 @@ const LoyaltyCardList = (): JSX.Element => {
       </AppText>
       <FlatList
         testID='LoyaltyCardList:FlatList'
-        data={loyaltyCardData}
+        data={loyaltyCardsList}
         keyExtractor={(item) => item.id.toString()}
         renderItem={renderVoucherItem}
         contentContainerStyle={{ gap: SPACING }}
