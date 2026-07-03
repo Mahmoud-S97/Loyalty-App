@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
 import WalletScreen from '../wallet';
-import { walletData } from '@/dummy-data';
+import { USER_WALLET } from '@/dummy-data';
 
 jest.mock('@/components/layout/screens/ScreenView', () => 'ScreenView');
 
@@ -55,6 +55,6 @@ describe('<WalletScreen />', () => {
 
     const walletList = getByTestId('WalletScreen:WalletList');
 
-    expect(walletList.props.walletData).toEqual(walletData);
+    expect(walletList.props.userWallet).toEqual(USER_WALLET);
   });
 });

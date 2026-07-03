@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
 import VoucherCard from '../VoucherCard';
-import { vouchersList } from '@/dummy-data';
+import { LOCAL_IMAGES } from '@/constants';
 
 jest.mock('@/components/ui/content/AppText');
 
@@ -19,8 +19,9 @@ jest.mock('@/Hooks/layout/useScreenDimensions', () => ({
 
 describe('<VoucherCard />', () => {
   const baseProps = {
-    id: 1,
-    image: vouchersList[0].image,
+    id: 'card_1',
+    stamps: 6,
+    image: LOCAL_IMAGES.REDEEMING_VOUCHER,
     title: 'Reward Free Haircut',
     description: 'Redeem Now'
   };
@@ -55,7 +56,13 @@ describe('<VoucherCard />', () => {
 
   it('does not render ImageBackground when image is missing', () => {
     const { queryByText } = render(
-      <VoucherCard title='No Image' description='Test' />
+      <VoucherCard
+        title='No Image'
+        description='Test'
+        id='card_2'
+        stamps={4}
+        image={undefined}
+      />
     );
 
     expect(queryByText('No Image')).toBeNull();

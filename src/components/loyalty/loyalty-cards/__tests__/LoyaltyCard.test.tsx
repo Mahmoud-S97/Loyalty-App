@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
 import LoyaltyCard from '../LoyaltyCard';
+import { LOCAL_IMAGES } from '@/constants';
 
 jest.mock('@/components/ui/content/AppText');
 
@@ -29,12 +30,13 @@ jest.mock('@/Hooks/layout/useScreenDimensions', () => ({
 
 describe('<LoyaltyCard />', () => {
   const baseProps = {
+    id: 'card_1',
     title: 'Test Card',
     description: 'desc',
     threshold: 5,
     stamps: 2,
-    logo: 'logo.png',
-    icon: 'icon.png'
+    shopLogo: 'logo.png',
+    loyaltyIcon: LOCAL_IMAGES.LOGO_TRANS
   };
 
   beforeEach(() => {
