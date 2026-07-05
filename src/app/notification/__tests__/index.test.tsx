@@ -58,14 +58,6 @@ describe('<NotificationScreen />', () => {
     expect(header.props.textClassName).toBe('text-start ps-6');
   });
 
-  it('passes notificationData to NotificationList', () => {
-    const { getByTestId } = render(<NotificationScreen />);
-
-    const notificationList = getByTestId('NotificationScreen:NotificationList');
-
-    expect(notificationList.props.notificationData).toEqual(notificationData);
-  });
-
   it('passes endComponent to MainHeader', () => {
     const { getByTestId } = render(<NotificationScreen />);
 

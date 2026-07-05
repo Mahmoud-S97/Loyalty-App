@@ -48,6 +48,7 @@
     "update": "تحديث",
     "empty_wallet_msg": "لا توجد بطاقات ولاء حتى الآن.",
     "empty_wallet_encouragement_msg": "زور أحد الحلاقين المشاركين، وقرب جهازك من جهاز NFC وابدأ بجمع الأختام للحصول على مكافأتك القادمة.",
+    "no_notifications_yet": "لا توجد إشعارات حتى الآن.",
     "no_data_found": "لا يوجد بيانات حتى الآن.",
     "account_settings": {
       "language": "اللغة",

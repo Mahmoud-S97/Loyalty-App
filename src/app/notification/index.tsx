@@ -6,23 +6,31 @@ import NotificationList from '@/components/loyalty/notification/NotificationList
 import { notificationData } from '@/dummy-data';
 import AppText from '@/components/ui/content/AppText';
 
-
 const NotificationScreen = (): JSX.Element => {
-
   const RenderHeaderEndComponent = (): ReactNode => {
+    if (notificationData.length === 0) return null;
     return (
       <TouchableOpacity activeOpacity={0.7} className='px-4 py-2 rounded-md'>
-        <AppText className='text-red-500 dark:text-red-700 font-semibold' weight='semiBold'>app.clear_all</AppText>
+        <AppText
+          className='text-red-500 dark:text-red-700 font-semibold'
+          weight='semiBold'
+        >
+          app.clear_all
+        </AppText>
       </TouchableOpacity>
-    )
-  }
+    );
+  };
 
   return (
     <ScreenView className='p-0 bg-neutral-50'>
-      <MainHeader textClassName='text-start ps-6' title='app.notifications' endComponent={RenderHeaderEndComponent()} />
+      <MainHeader
+        textClassName='text-start ps-6'
+        title='app.notifications'
+        endComponent={RenderHeaderEndComponent()}
+      />
       <NotificationList notificationData={notificationData} />
     </ScreenView>
-  )
-}
+  );
+};
 
 export default NotificationScreen;

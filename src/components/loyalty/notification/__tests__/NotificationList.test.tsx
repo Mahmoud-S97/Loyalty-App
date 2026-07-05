@@ -11,25 +11,26 @@ describe('<NotificationList />', () => {
   });
 
   it('renders NotificationList correctly', () => {
-
-    const { getByTestId } = render(<NotificationList notificationData={notificationData} />);
+    const { getByTestId } = render(
+      <NotificationList notificationData={notificationData} />
+    );
 
     expect(getByTestId('NotificationList:FlatList')).toBeTruthy();
   });
 
   it('renders Notification-Items from notificationData correctly', () => {
-
     const notificationItem = notificationData.slice(0, 1);
 
-    const { getByTestId, getByText } = render(<NotificationList notificationData={notificationItem} />);
+    const { getByTestId, getByText } = render(
+      <NotificationList notificationData={notificationItem} />
+    );
 
     expect(getByTestId('NotificationList:NotificationCard-1')).toBeTruthy();
     expect(getByText('BESTIE Team')).toBeTruthy();
   });
 
   it('renders empty state when notificationData is empty', () => {
-
-    const {getByText} = render(<NotificationList notificationData={[]} />);
-    expect(getByText('No notification items found')).toBeTruthy();
+    const { getByTestId } = render(<NotificationList notificationData={[]} />);
+    expect(getByTestId('EmptyStateMessage:Notifications')).toBeTruthy();
   });
-})
+});
