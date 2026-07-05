@@ -1,4 +1,4 @@
-import { JSX } from 'react';
+import { JSX, ReactNode } from 'react';
 import { FlatList, ImageSourcePropType, View } from 'react-native';
 import AppText from '@/components/ui/content/AppText';
 import LoyaltyCard from './LoyaltyCard';
@@ -27,7 +27,7 @@ const LoyaltyCardList = ({
   loyaltyCardsList,
   threshold,
   shopLogo
-}: LoyaltyListProps): JSX.Element => {
+}: LoyaltyListProps): ReactNode => {
   const renderVoucherItem = ({ item }: { item: LoyaltyCardTypes }) => {
     const loyaltyCardData: LoyaltyCardProps = {
       ...item,
@@ -44,6 +44,8 @@ const LoyaltyCardList = ({
 
   const CARD_WIDTH = SCREEN_WIDTH * 0.82;
   const SPACING = 16;
+
+  if (loyaltyCardsList?.length === 0) return null;
 
   return (
     <View className='flex-1 mt-2 pb-20'>
