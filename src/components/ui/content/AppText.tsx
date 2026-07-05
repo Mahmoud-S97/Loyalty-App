@@ -3,15 +3,14 @@ import { Text } from 'react-native';
 import { cn } from '@/lib/nativeWindCSS/cn';
 import { getTranslated } from '@/lib/localization';
 import { getFontWeight } from '@/utils';
-
-type AppTextProps = {
+export interface AppTextProps {
   children: string | ReactNode;
   numberOfLines?: number;
   className?: string;
   withTranslation?: boolean;
   translationParams?: Record<string, string>;
   weight?: 'regular' | 'medium' | 'semiBold' | 'bold';
-};
+}
 
 const AppText = ({
   children,

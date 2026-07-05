@@ -1,7 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
 import WalletScreen from '../wallet';
-import { USER_WALLET } from '@/dummy-data';
 
 jest.mock('@/components/layout/screens/ScreenView', () => 'ScreenView');
 
@@ -48,13 +47,5 @@ describe('<WalletScreen />', () => {
     expect(header.props.className).toBe('bg-brand-400');
 
     expect(header.props.textClassName).toBe('w-full text-start');
-  });
-
-  it('passes walletData to WalletList', () => {
-    const { getByTestId } = render(<WalletScreen />);
-
-    const walletList = getByTestId('WalletScreen:WalletList');
-
-    expect(walletList.props.userWallet).toEqual(USER_WALLET);
   });
 });

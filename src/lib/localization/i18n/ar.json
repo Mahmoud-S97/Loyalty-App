@@ -46,6 +46,9 @@
     "clear_all": "حذف الكل",
     "date_of_birth": "تاريخ الميلاد",
     "update": "تحديث",
+    "empty_wallet_msg": "لا توجد بطاقات ولاء حتى الآن.",
+    "empty_wallet_encouragement_msg": "زور أحد الحلاقين المشاركين، وقرب جهازك من جهاز NFC وابدأ بجمع الأختام للحصول على مكافأتك القادمة.",
+    "no_data_found": "لا يوجد بيانات حتى الآن.",
     "account_settings": {
       "language": "اللغة",
       "dark_mode": "تشغيل الوضع الليلي"

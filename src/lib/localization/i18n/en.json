@@ -46,6 +46,9 @@
     "clear_all": "Clear All",
     "date_of_birth": "Date of Birth",
     "update": "Update",
+    "empty_wallet_msg": "No loyalty cards yet.",
+    "empty_wallet_encouragement_msg": "Visit a participating barber, scan your NFC tag, and start collecting stamps toward your next reward.",
+    "no_data_found": "No data found.",
     "account_settings": {
       "language": "Language",
       "dark_mode": "Dark Mode"

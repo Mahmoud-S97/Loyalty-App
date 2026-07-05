@@ -3,5 +3,6 @@ import { ImageSourcePropType } from 'react-native';
 export const LOCAL_IMAGES: Record<string, ImageSourcePropType> = {
   LOGO: require('@/assets/images/app/logo.png'),
   LOGO_TRANS: require('@/assets/images/app/logo-trans.png'),
-  REDEEMING_VOUCHER: require('@/assets/images/app/vouchers/voucher.png')
+  REDEEMING_VOUCHER: require('@/assets/images/app/vouchers/voucher.png'),
+  EMPTY_WALLET: require('@/assets/images/app/vouchers/empty-wallet.png')
 };
