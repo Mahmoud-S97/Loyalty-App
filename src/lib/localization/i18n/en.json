@@ -49,6 +49,7 @@
     "empty_wallet_msg": "No loyalty cards yet.",
     "empty_wallet_encouragement_msg": "Visit a participating barber, scan your NFC tag, and start collecting stamps toward your next reward.",
     "no_notifications_yet": "No notifications yet.",
+    "no_vouchers_yet": "No vouchers yet.",
     "no_data_found": "No data found.",
     "account_settings": {
       "language": "Language",

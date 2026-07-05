@@ -1,10 +1,17 @@
 import { JSX } from 'react';
-import { FlatList, ImageSourcePropType, View } from 'react-native';
+import {
+  FlatList,
+  ImageBackground,
+  ImageSourcePropType,
+  View
+} from 'react-native';
 import AppText from '@/components/ui/content/AppText';
 import VoucherCard from './VoucherCard';
 import { LoyaltyCard } from './types';
 import { useScreenDimensions } from '@/Hooks/layout/useScreenDimensions';
 import { LOCAL_IMAGES } from '@/constants';
+import EmptyStateMessage from '@/components/ui/globals/messages/EmptyStateMessage';
+import { useThemeStyles } from '@/Hooks/theme/useThemeStyles';
 
 type VouchersListProps = {
   vouchersList: LoyaltyCard[] | undefined;
@@ -19,6 +26,8 @@ type VouchersItemProps = {
 };
 
 const VouchersList = ({ vouchersList }: VouchersListProps): JSX.Element => {
+  const { cardShadow } = useThemeStyles();
+
   const renderVoucherItem = ({ item }: { item: LoyaltyCard }) => {
     const redeemableVoucher: VouchersItemProps = {
       ...item,
@@ -60,6 +69,23 @@ const VouchersList = ({ vouchersList }: VouchersListProps): JSX.Element => {
         maxToRenderPerBatch={4}
         windowSize={5}
         removeClippedSubviews
+        ListEmptyComponent={
+          <EmptyStateMessage
+            containerClassName='flex-1 border-neutral-500 dark:border-neutral-700 rounded-xl'
+            style={[cardShadow, { borderWidth: 0.5, width: CARD_WIDTH }]}
+          >
+            <ImageBackground
+              source={LOCAL_IMAGES.EMPTY_VOUCHER}
+              className='w-full h-[160px] relative rounded-xl flex items-center justify-start pt-6 overflow-hidden'
+              resizeMode='cover'
+              alt='Not vouchers yet.'
+            >
+              <AppText className='text-lg text-center font-bold !text-neutral-800 italic capitalize'>
+                app.no_vouchers_yet
+              </AppText>
+            </ImageBackground>
+          </EmptyStateMessage>
+        }
       />
     </View>
   );

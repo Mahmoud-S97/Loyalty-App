@@ -8,6 +8,7 @@ import { cn } from '@/lib/nativeWindCSS/cn';
 interface EmptyStateMessageProps
   extends PropsWithChildren, Omit<AppTextProps, 'children'> {
   testID?: string;
+  style?: Record<any, any>;
   message?: string;
   containerClassName?: string;
 }
@@ -15,6 +16,7 @@ interface EmptyStateMessageProps
 const EmptyStateMessage = ({
   children,
   testID,
+  style,
   message = 'app.no_data_found',
   containerClassName,
   ...textProps
@@ -26,6 +28,7 @@ const EmptyStateMessage = ({
         'flex items-center justify-center self-stretch',
         containerClassName
       )}
+      style={style}
     >
       {children ? (
         children
