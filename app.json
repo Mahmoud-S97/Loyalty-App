@@ -7,7 +7,6 @@
     "icon": "./src/assets/images/startup/icon.png",
     "scheme": "bestieapp",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
     "ios": {
       "supportsTablet": true
     },
@@ -16,7 +15,6 @@
         "backgroundColor": "#ffffff",
         "foregroundImage": "./src/assets/images/startup/icon-trans.png"
       },
-      "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
     },
     "web": {
