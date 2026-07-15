@@ -1,12 +1,13 @@
 import { useRef, useState } from 'react';
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { SwipeRow } from 'react-native-swipe-list-view';
-import { FontAwesome } from '@expo/vector-icons';
 import NotificationCard from './NotificationCard';
 import { NotificationItem } from '@/types';
 import { APP_COLORS } from '@/constants/theme';
 import EmptyStateMessage from '@/components/ui/globals/messages/EmptyStateMessage';
 import { cn } from '@/lib/nativeWindCSS/cn';
+import AppIcon from '@/components/ui/globals/icons/AppIcon';
+import { is_RTL } from '@/utils';
 
 type NotificationListProps = {
   notificationData: NotificationItem[];
@@ -38,8 +39,10 @@ const NotificationList = ({ notificationData }: NotificationListProps) => {
         ref={(ref: any) => {
           rowRefs.current[item.id] = ref;
         }}
-        rightOpenValue={-80}
-        disableRightSwipe={true}
+        rightOpenValue={is_RTL() ? 0 : -80}
+        leftOpenValue={is_RTL() ? 80 : 0}
+        disableRightSwipe={!is_RTL()}
+        disableLeftSwipe={is_RTL()}
         onRowOpen={() => onRowOpen(item.id)}
       >
         <View className='flex-1 items-end justify-center bg-neutral-50 dark:bg-secondary'>
@@ -49,7 +52,8 @@ const NotificationList = ({ notificationData }: NotificationListProps) => {
               className='w-1/2 h-full self-end items-end justify-center bg-red-500'
               onPress={() => {}}
             >
-              <FontAwesome
+              <AppIcon
+                type='FontAwesome'
                 name='trash-o'
                 color={APP_COLORS.neutral[100]}
                 size={30}

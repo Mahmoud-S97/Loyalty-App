@@ -25,21 +25,26 @@ const MainHeader = ({
 }: MainHeaderProps) => {
   const renderTitle = withTranslation ? getTranslated(title || '') : title;
 
+  const hasEndComponent = !!endComponent;
+
   return (
     <View
-    testID="MainHeader:View:Container"
+      testID='MainHeader:View:Container'
       className={cn(
-        'w-full h-[70] flex flex-row items-center justify-between p-4 bg-neutral-50 dark:bg-brand-400 border-b border-neutral-700',
+        'w-full h-[70] flex flex-row items-center gap-8 p-4 bg-neutral-50 dark:bg-brand-400 border-b border-neutral-700',
+        hasEndComponent ? 'justify-between gap-0' : undefined,
         className
       )}
     >
-      {withGoBackButton && <GoBackButton testID='MainHeader:GoBackButton' className="m-0" />}
+      {withGoBackButton && (
+        <GoBackButton testID='MainHeader:GoBackButton' className='m-0' />
+      )}
       {startComponent}
       {title && (
         <Text
-        testID="MainHeader:Text:Title"
+          testID='MainHeader:Text:Title'
           className={cn(
-            'w-[60%] text-center text-xl font-medium text-neutral-900',
+            'text-center text-xl font-medium text-neutral-900',
             textClassName
           )}
           numberOfLines={1}

@@ -4,6 +4,7 @@ import {
   Ionicons,
   MaterialIcons,
   FontAwesome,
+  FontAwesome5,
   Feather,
   AntDesign
 } from '@expo/vector-icons';
@@ -17,6 +18,7 @@ const ICONS = {
   Ionicons,
   MaterialIcons,
   FontAwesome,
+  FontAwesome5,
   Feather,
   AntDesign
 };

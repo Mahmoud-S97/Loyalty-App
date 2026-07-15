@@ -5,17 +5,24 @@ import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { cn } from '@/lib/nativeWindCSS/cn';
 import { useAppTheme } from '@/Hooks/theme/useAppTheme';
 import { useThemeStyles } from '@/Hooks/theme/useThemeStyles';
+import AppIcon from '../icons/AppIcon';
+import { is_RTL } from '@/utils';
 
 type GoBackButtonProps = {
   testID?: string;
   className?: string;
   iconSize?: number;
   iconColor?: string;
-  onPress?: () => void
-}
+  onPress?: () => void;
+};
 
-const GoBackButton = ({ testID, className, iconSize, iconColor, onPress }: GoBackButtonProps) => {
-
+const GoBackButton = ({
+  testID,
+  className,
+  iconSize,
+  iconColor,
+  onPress
+}: GoBackButtonProps) => {
   const router = useRouter();
   const { currentThemeColor } = useAppTheme();
   const { shadow } = useThemeStyles();
@@ -25,14 +32,24 @@ const GoBackButton = ({ testID, className, iconSize, iconColor, onPress }: GoBac
   if (!router.canGoBack()) return null;
 
   return (
-    <TouchableOpacity testID={testID ?? 'GoBackButton:Button'} activeOpacity={0.6} style={shadow} className={cn('w-[45px] h-[45px] m-5 flex justify-center items-center rounded-full bg-neutral-50 dark:bg-neutral-800', className)} onPress={onPress || goBackHandler}>
-      <FontAwesome5
-        name='chevron-left'
+    <TouchableOpacity
+      testID={testID ?? 'GoBackButton:Button'}
+      activeOpacity={0.6}
+      style={shadow}
+      className={cn(
+        'w-[45px] h-[45px] m-5 flex justify-center items-center rounded-full bg-neutral-50 dark:bg-neutral-800',
+        className
+      )}
+      onPress={onPress || goBackHandler}
+    >
+      <AppIcon
+        type='FontAwesome5'
+        name={is_RTL() ? 'chevron-right' : 'chevron-left'}
         size={iconSize || 20}
         color={iconColor || currentThemeColor}
       />
     </TouchableOpacity>
-  )
-}
+  );
+};
 
 export default GoBackButton;
