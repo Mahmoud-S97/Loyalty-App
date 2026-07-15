@@ -46,7 +46,7 @@ const VouchersList = ({ vouchersList }: VouchersListProps): JSX.Element => {
   return (
     <View className='flex-1'>
       <AppText
-        className='text-start text-lg ps-4 font-semibold text-brand-500 dark:text-neutral-600'
+        className='text-start text-lg ps-4 text-brand-500 dark:text-neutral-600'
         weight='semiBold'
       >
         app.your_vouchers
@@ -80,7 +80,7 @@ const VouchersList = ({ vouchersList }: VouchersListProps): JSX.Element => {
               resizeMode='cover'
               alt='Not vouchers yet.'
             >
-              <AppText className='text-lg text-center font-bold !text-neutral-800 italic capitalize'>
+              <AppText className='text-lg text-center !text-neutral-800 italic capitalize' weight='bold'>
                 app.no_vouchers_yet
               </AppText>
             </ImageBackground>

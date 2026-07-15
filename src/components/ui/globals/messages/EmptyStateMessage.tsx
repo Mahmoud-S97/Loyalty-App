@@ -34,7 +34,7 @@ const EmptyStateMessage = ({
         children
       ) : (
         <AppText
-          className='text-center font-medium text-xl italic text-neutral-500 dark:text-neutral-400'
+          className='text-center text-xl italic text-neutral-500 dark:text-neutral-400'
           {...textProps}
           weight='medium'
         >

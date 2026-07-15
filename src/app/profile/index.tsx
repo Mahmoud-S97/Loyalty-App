@@ -29,7 +29,8 @@ const ProfileScreen = (): JSX.Element => {
         <AppText
           withTranslation={false}
           numberOfLines={2}
-          className='font-semibold text-xl mt-6 text-center self-center px-4'
+          className='text-xl mt-6 text-center self-center px-4'
+          weight='semiBold'
         >
           Mahmoud Al-Saleh
         </AppText>
@@ -46,9 +47,10 @@ const ProfileScreen = (): JSX.Element => {
             testID='ProfileScreen:MainInputField'
             value='Mahmoud Saleh'
             className='w-full px-0 rounded-none border-b border-neutral-500 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900'
-            textInputClassName='ms-0 font-semibold bg-neutral-100 dark:bg-neutral-900'
+            textInputClassName='ms-0 bg-neutral-100 dark:bg-neutral-900'
             withShadow={false}
             withIcon={false}
+            weight='semiBold'
           />
         </View>
         <View className='w-full flex flex-col items-start justify-center mb-8'>
@@ -57,9 +59,10 @@ const ProfileScreen = (): JSX.Element => {
             testID='ProfileScreen:MainInputField'
             value='example@gmail.com'
             className='w-full px-0 rounded-none border-b border-neutral-500 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900'
-            textInputClassName='ms-0 font-semibold bg-neutral-100 dark:bg-neutral-900'
+            textInputClassName='ms-0 bg-neutral-100 dark:bg-neutral-900'
             withShadow={false}
             withIcon={false}
+            weight='semiBold'
           />
         </View>
         <View className='w-full flex flex-col items-start justify-center mb-8'>
@@ -68,9 +71,10 @@ const ProfileScreen = (): JSX.Element => {
             testID='ProfileScreen:MainInputField'
             value='1997/03/11'
             className='w-full px-0 rounded-none border-b border-neutral-500 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900'
-            textInputClassName='ms-0 font-semibold bg-neutral-100 dark:bg-neutral-900'
+            textInputClassName='ms-0 bg-neutral-100 dark:bg-neutral-900'
             withShadow={false}
             withIcon={false}
+            weight='semiBold'
           />
         </View>
         <View className='w-full flex flex-col items-start justify-center gap-6 mb-8'>

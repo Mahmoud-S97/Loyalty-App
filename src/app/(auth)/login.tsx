@@ -32,10 +32,10 @@ const LoginScreen = () => {
       <ScrollingView>
         <ContainerView>
           <View className='flex-column w-full p-2 justify-center items-center my-7'>
-            <AppText className='text-3xl text-center font-bold'>
+            <AppText className='text-3xl text-center' weight='bold'>
               auth.login
             </AppText>
-            <AppText className='text-sm text-center font-bold text-neutral-800 dark:text-neutral-500 mt-4 tracking-wide'>
+            <AppText className='text-sm text-center text-neutral-800 dark:text-neutral-500 mt-4' weight='semiBold'>
               auth.login_entries_with_welcoming_msg
             </AppText>
           </View>
@@ -81,7 +81,7 @@ const LoginScreen = () => {
             </View>
             <MainButton
               className='bg-neutral-100 dark:bg-neutral-300'
-              textClassName='text-neutral-900 dark:text-neutral-800 font-medium'
+              textClassName='text-neutral-900 dark:text-neutral-800'
               title='auth.continue_with_google'
               image={LOCAL_ICONS.GOOGLE}
               onPress={() => {}}
@@ -95,7 +95,7 @@ const LoginScreen = () => {
               <AppText className='me-2 text-neutral-800 dark:text-neutral-500'>
                 auth.have_not_an_account
               </AppText>
-              <AppText className='text-primary font-[600]'>auth.signUp</AppText>
+              <AppText className='text-primary' weight='semiBold'>auth.signUp</AppText>
             </TouchableOpacity>
           </View>
         </ContainerView>

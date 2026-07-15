@@ -5,6 +5,7 @@ import { cn } from '@/lib/nativeWindCSS/cn';
 import MainButton from '@/components/ui/globals/buttons/MainButton';
 import { useThemeStyles } from '@/Hooks/theme/useThemeStyles';
 import { NotificationItem } from '@/types';
+import { getFontWeight } from '@/utils';
 
 type NotificationCardProps = {
   className?: string;
@@ -82,20 +83,29 @@ const NotificationCard = ({
           </View>
           <View className='flex-1 flex-col items-start justify-start gap-2'>
             <Text
-              className='text-lg text-left font-medium text-neutral-900 dark:text-neutral-400'
+              className='text-lg text-left text-neutral-900 dark:text-neutral-400'
               numberOfLines={2}
+              style={{
+                fontFamily: getFontWeight('medium')
+              }}
             >
               {title}
             </Text>
             <Text
               className='text-md text-left text-start text-neutral-800 dark:text-neutral-500'
               numberOfLines={3}
+              style={{
+                fontFamily: getFontWeight('regular')
+              }}
             >
               {body}
             </Text>
             <Text
               className='text-xs text-left mt-2 text-neutral-700 dark:text-neutral-600'
               numberOfLines={1}
+              style={{
+                fontFamily: getFontWeight('regular')
+              }}
             >
               {createdAt}
             </Text>

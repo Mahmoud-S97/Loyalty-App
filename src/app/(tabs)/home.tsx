@@ -61,7 +61,7 @@ const HomeScreen = (): JSX.Element => {
             style={lottieCustomStyles}
           />
         </View>
-        <AppText className='text-center font-medium text-lg my-2'>
+        <AppText className='text-center text-lg my-2' weight='medium'>
           app.scan_NFC_or_QR
         </AppText>
         <View

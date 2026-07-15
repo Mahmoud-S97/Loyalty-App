@@ -12,7 +12,7 @@ const NotificationScreen = (): JSX.Element => {
     return (
       <TouchableOpacity activeOpacity={0.7} className='px-4 py-2 rounded-md'>
         <AppText
-          className='text-red-500 dark:text-red-700 font-semibold'
+          className='text-red-500 dark:text-red-700'
           weight='semiBold'
         >
           app.clear_all

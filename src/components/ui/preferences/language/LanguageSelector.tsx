@@ -39,7 +39,7 @@ const LanguageSelector = ({
             android_ripple={{ color: APP_COLORS.neutral[500] }}
             className='flex-row items-center justify-between rounded-2xl bg-neutral-100 dark:bg-secondary px-5 py-4'
           >
-            <AppText className='text-base font-medium text-neutral-900 dark:text-neutral-100'>
+            <AppText className='text-neutral-900 dark:text-neutral-100'>
               {title}
             </AppText>
 

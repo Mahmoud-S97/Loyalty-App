@@ -110,21 +110,22 @@ const WalletCard = ({
               <AppText
                 numberOfLines={1}
                 withTranslation={false}
-                className='w-full font-bold text-neutral-800 dark:text-neutral-800'
+                className='w-full text-left text-neutral-800 dark:text-neutral-800'
+                weight='bold'
               >
                 {shopName}
               </AppText>
               <AppText
                 numberOfLines={1}
                 withTranslation={false}
-                className='w-full my-1 text-neutral-800 dark:text-neutral-800'
+                className='w-full text-left my-1 text-neutral-800 dark:text-neutral-800'
               >
                 {shopDescription}
               </AppText>
               <AppText
                 numberOfLines={1}
                 withTranslation={false}
-                className='w-full text-neutral-600 dark:text-neutral-700'
+                className='w-full text-left text-neutral-700 dark:text-neutral-700'
               >
                 {shopAddress}
               </AppText>
@@ -135,7 +136,7 @@ const WalletCard = ({
                 size={20}
                 color={APP_COLORS.brand[900]}
               />
-              <AppText className='text-sm font-bold text-brand-900 dark:text-brand-900'>
+              <AppText className='text-sm text-brand-900 dark:text-brand-900' weight='bold'>
                 x1
               </AppText>
             </View>
@@ -157,11 +158,13 @@ const WalletCard = ({
             <AppText
               numberOfLines={1}
               withTranslation={false}
-              className='w-[20%] text-neutral-800 dark:text-neutral-800 font-bold'
+              className='w-[20%] text-neutral-800 dark:text-neutral-800'
+              weight='bold'
             >{`${stamps}/${threshold}`}</AppText>
             <AppText
               numberOfLines={1}
-              className='w-[75%] text-neutral-800 dark:text-neutral-800 font-semibold'
+              className='w-[75%] text-neutral-800 dark:text-neutral-800'
+              weight='semiBold'
             >
               {rewardTitle}
             </AppText>

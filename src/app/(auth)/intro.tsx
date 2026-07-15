@@ -15,14 +15,14 @@ const IntroScreen = () => {
       <ContainerView>
         <View
           testID='IntroScreen:HeroSection'
-          className='flex w-full justify-center items-center my-20'
+          className='flex w-full justify-center items-center my-16 px-4'
         >
           <Image
             testID='IntroScreen:LogoImage'
             source={LOCAL_IMAGES.LOGO_TRANS}
             className='w-[120px] h-[120px] border-[1px] border-neutral-500 dark:border-neutral-800 rounded-lg'
           />
-          <AppText className='text-2xl text-center font-[600] mt-5'>
+          <AppText className='text-2xl text-center mt-8' weight='bold'>
             welcome
           </AppText>
         </View>
@@ -44,14 +44,14 @@ const IntroScreen = () => {
           />
           <View className='flex-row justify-between items-center my-5'>
             <View className='w-[44%] h-[1px] bg-neutral-500' />
-            <AppText className='w-[12%] text-center uppercase'>
+            <AppText className='w-[12%] text-center uppercase' weight='bold'>
               prepositions.or
             </AppText>
             <View className='w-[44%] h-[1px] bg-neutral-500' />
           </View>
           <MainButton
             className='bg-neutral-100 dark:bg-neutral-300'
-            textClassName='text-neutral-900 dark:text-neutral-800 font-medium'
+            textClassName='text-neutral-900 dark:text-neutral-800'
             title='auth.continue_with_google'
             image={LOCAL_ICONS.GOOGLE}
           />

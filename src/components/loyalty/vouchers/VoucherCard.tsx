@@ -41,14 +41,14 @@ const VoucherCard = ({
           resizeMode='cover'
         >
           <AppText
-            className='text-lg text-start text-neutral-100 dark:text-neutral-400 p-4 font-semibold'
+            className='text-lg text-start text-neutral-100 dark:text-neutral-400 p-4'
             weight='semiBold'
           >
             {title}
           </AppText>
           <View className='w-full h-12 px-2 py-1 flex flex-row items-center justify-center absolute bottom-0 z-10 bg-brand-500 dark:bg-brand-500'>
             <AppText
-              className='text-lg text-neutral-100 dark:text-neutral-400 font-semibold'
+              className='text-lg text-neutral-100 dark:text-neutral-400'
               weight='semiBold'
             >
               {description}

@@ -2,14 +2,15 @@ import React, { JSX, ReactNode } from 'react';
 import { Text } from 'react-native';
 import { cn } from '@/lib/nativeWindCSS/cn';
 import { getTranslated } from '@/lib/localization';
-import { getFontWeight } from '@/utils';
+import { AppFontWeight, getFontWeight } from '@/utils';
+import { useAppFonts } from '@/Hooks/typography/useAppFonts';
 export interface AppTextProps {
   children: string | ReactNode;
   numberOfLines?: number;
   className?: string;
   withTranslation?: boolean;
   translationParams?: Record<string, string>;
-  weight?: 'regular' | 'medium' | 'semiBold' | 'bold';
+  weight?: AppFontWeight
 }
 
 const AppText = ({
@@ -20,21 +21,22 @@ const AppText = ({
   translationParams,
   weight = 'regular'
 }: AppTextProps): JSX.Element => {
-  const getFontWeightClases = getFontWeight(weight);
   const renderChildren =
     withTranslation && typeof children === 'string'
       ? getTranslated(children, translationParams)
       : children;
-
+ 
   return (
     <Text
       testID='AppText:Text'
       numberOfLines={numberOfLines}
       className={cn(
-        'text-neutral-900 dark:text-neutral-500 font-normal text-base',
-        getFontWeightClases,
+        'text-neutral-900 dark:text-neutral-500 text-base',
         className
       )}
+      style={{
+        fontFamily: getFontWeight(weight)
+      }}
     >
       {renderChildren}
     </Text>

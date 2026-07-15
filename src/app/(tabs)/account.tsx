@@ -9,6 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { APP_COLORS } from '@/constants/theme';
 import { ACCOUNT_DETAILS } from '@/constants';
 import { useAppTheme } from '@/Hooks/theme/useAppTheme';
+import AppIcon from '@/components/ui/globals/icons/AppIcon';
 
 const AccountScreen = (): JSX.Element => {
   const { currentThemeColor } = useAppTheme();
@@ -31,7 +32,8 @@ const AccountScreen = (): JSX.Element => {
         <AppText
           withTranslation={false}
           numberOfLines={2}
-          className='font-semibold text-xl mt-6 text-center self-center px-4'
+          className='text-xl mt-6 text-center self-center px-4'
+          weight='semiBold'
         >
           Mahmoud Al-Saleh - محمود الصالح
         </AppText>
@@ -44,7 +46,7 @@ const AccountScreen = (): JSX.Element => {
         </AppText>
         {ACCOUNT_DETAILS.map((item: any, index: number) => (
           <View key={index} className='flex-1'>
-            <AppText className='mt-10 mb-4 text-lg font-medium px-4'>
+            <AppText className='mt-10 mb-4 text-lg px-4 text-left' weight='medium'>
               {item.heading}
             </AppText>
             <View className='w-full bg-neutral-100 dark:bg-secondary gap-2'>
@@ -57,14 +59,16 @@ const AccountScreen = (): JSX.Element => {
                   onPress={() => handleRowNavigation(row.route)}
                 >
                   <View className='flex-row gap-6 items-center'>
-                    <Ionicons
+                    <AppIcon
+                    type='Ionicons'
                       name={row.mainIcon}
                       size={24}
                       color={currentThemeColor}
                     />
                     <AppText className='text-lg'>{row.label}</AppText>
                   </View>
-                  <Ionicons
+                  <AppIcon
+                  type='Ionicons'
                     name={row.arrowIcon}
                     size={24}
                     color={currentThemeColor}

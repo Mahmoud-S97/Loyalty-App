@@ -45,11 +45,11 @@ const WalletList = ({ userWallet }: WalletListProps) => {
               style={{ width: 250, height: 200, borderRadius: 20 }}
             />
             <View className='flex flex-col gap-3 justify-center items-center mt-6'>
-              <AppText className='text-2xl font-bold text-center' weight='bold'>
+              <AppText className='text-2xl text-center' weight='bold'>
                 app.empty_wallet_msg
               </AppText>
               <AppText
-                className='text-lg font-medium text-center leading-7'
+                className='text-lg text-center leading-7'
                 weight='medium'
               >
                 app.empty_wallet_encouragement_msg

@@ -7,9 +7,10 @@ import { getTranslated } from '@/lib/localization';
 import { useAppTheme } from '@/Hooks/theme/useAppTheme';
 import { useThemeStyles } from '@/Hooks/theme/useThemeStyles';
 import AppIcon from '../icons/AppIcon';
-import { is_RTL } from '@/utils';
+import { AppFontWeight, getFontWeight, is_RTL } from '@/utils';
 
 type InputFieldProps = {
+  testID?: string;
   icon?: ComponentProps<typeof MaterialIcons>['name'];
   iconSize?: number;
   iconColor?: string;
@@ -28,7 +29,7 @@ type InputFieldProps = {
   value?: string;
   onChangeText?: (value: any) => void;
   toggleShowPassword?: () => void;
-  testID?: string;
+  weight?: AppFontWeight
 };
 
 const MainInputField = ({
@@ -50,7 +51,8 @@ const MainInputField = ({
   scrollEnabled,
   value,
   onChangeText,
-  toggleShowPassword
+  toggleShowPassword,
+  weight = 'medium'
 }: InputFieldProps) => {
   const { is_dark } = useAppTheme();
   const { shadow } = useThemeStyles();
@@ -61,7 +63,7 @@ const MainInputField = ({
       testID='MainInputField:WrapperView'
       style={applyShadow}
       className={cn(
-        'w-full h-[55px] bg-neutral-50 dark:bg-neutral-800 rounded-full flex-row items-center py-2 px-4',
+        'w-full h-[55px] bg-neutral-50 dark:bg-neutral-800 rounded-full flex-row items-center px-4',
         className
       )}
     >
@@ -78,7 +80,7 @@ const MainInputField = ({
       <TextInput
         testID={testID ?? 'MainInputField:TextInput'}
         className={cn(
-          'w-[90%] h-full ms-3 font-medium text-base text-neutral-900 dark:text-neutral-400 bg-neutral-50 dark:bg-neutral-800',
+        'w-[90%] h-full ms-3 text-base text-neutral-900 dark:text-neutral-400 bg-neutral-50 dark:bg-neutral-800 rounded-full',
           textInputClassName
         )}
         placeholderTextColor={
@@ -95,7 +97,8 @@ const MainInputField = ({
         scrollEnabled={scrollEnabled ?? true}
         style={{
           writingDirection: is_RTL() ? 'rtl' : 'ltr',
-          textAlign: is_RTL() ? 'right' : 'left'
+          textAlign: is_RTL() ? 'right' : 'left',
+          fontFamily: getFontWeight(weight)
         }}
       />
       {isPasswordField && (

@@ -3,6 +3,7 @@ import GoBackButton from '@/components/ui/globals/buttons/GoBackButton';
 import { Text, View } from 'react-native';
 import { cn } from '@/lib/nativeWindCSS/cn';
 import { getTranslated } from '@/lib/localization';
+import { AppFontWeight, getFontWeight } from '@/utils';
 
 type MainHeaderProps = {
   className?: string;
@@ -12,6 +13,7 @@ type MainHeaderProps = {
   endComponent?: React.ReactNode;
   withGoBackButton?: boolean;
   withTranslation?: boolean;
+  weight?: AppFontWeight
 };
 
 const MainHeader = ({
@@ -21,7 +23,8 @@ const MainHeader = ({
   startComponent,
   endComponent,
   withGoBackButton = true,
-  withTranslation = true
+  withTranslation = true,
+  weight = 'bold'
 }: MainHeaderProps) => {
   const renderTitle = withTranslation ? getTranslated(title || '') : title;
 
@@ -44,10 +47,13 @@ const MainHeader = ({
         <Text
           testID='MainHeader:Text:Title'
           className={cn(
-            'text-center text-xl font-medium text-neutral-900',
+            'text-center text-xl text-neutral-900',
             textClassName
           )}
           numberOfLines={1}
+          style={{
+            fontFamily: getFontWeight(weight)
+          }}
         >
           {renderTitle}
         </Text>

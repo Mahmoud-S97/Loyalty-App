@@ -1,18 +1,28 @@
 import React, { JSX, useRef } from 'react';
-import { View, TouchableOpacity, Image, StyleSheet, Animated, Easing } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import * as Haptics from "expo-haptics";
-import { CurvedTabBarBackground } from "./CurvedTabBarBackground";
-import { APP_COLORS } from "@/constants/theme";
-import { LOCAL_IMAGES } from "@/constants/images";
-import AppText from "@/components/ui/content/AppText";
+import {
+  View,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  Animated,
+  Easing
+} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import * as Haptics from 'expo-haptics';
+import { CurvedTabBarBackground } from './CurvedTabBarBackground';
+import { APP_COLORS } from '@/constants/theme';
+import { LOCAL_IMAGES } from '@/constants/images';
+import AppText from '@/components/ui/content/AppText';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { cn } from '@/lib/nativeWindCSS/cn';
 import { useAppTheme } from '@/Hooks/theme/useAppTheme';
 import { useThemeStyles } from '@/Hooks/theme/useThemeStyles';
 
-const CustomTabBar = ({ state, navigation, descriptors }: BottomTabBarProps): JSX.Element => {
-
+const CustomTabBar = ({
+  state,
+  navigation,
+  descriptors
+}: BottomTabBarProps): JSX.Element => {
   const { is_dark } = useAppTheme();
   const { shadow } = useThemeStyles();
 
@@ -22,10 +32,9 @@ const CustomTabBar = ({ state, navigation, descriptors }: BottomTabBarProps): JS
   const rotation = rotateAnimation.interpolate({
     inputRange: [0, 1],
     outputRange: ['0deg', '360deg']
-  })
+  });
 
   const animateBrandOnce = () => {
-
     rotateAnimation.setValue(0);
     scaleAnimation.setValue(1);
 
@@ -38,7 +47,7 @@ const CustomTabBar = ({ state, navigation, descriptors }: BottomTabBarProps): JS
       }),
       Animated.sequence([
         Animated.timing(scaleAnimation, {
-          toValue: 1.90,
+          toValue: 1.9,
           duration: 200,
           useNativeDriver: true
         }),
@@ -52,25 +61,30 @@ const CustomTabBar = ({ state, navigation, descriptors }: BottomTabBarProps): JS
   };
 
   return (
-    <View testID='CustomTabBar:View' className="w-full absolute bottom-0 left-0 right-0">
+    <View
+      testID='CustomTabBar:View'
+      className='w-full absolute bottom-0 left-0 right-0'
+    >
       <View style={StyleSheet.absoluteFill}>
         <CurvedTabBarBackground />
       </View>
-      <View testID='CustomTabBar:ContainerView' className="w-full h-[68px] flex-row justify-between items-center pb-3">
+      <View
+        testID='CustomTabBar:ContainerView'
+        className='w-full h-[68px] flex-row justify-between items-center pb-3'
+      >
         {state.routes.map((route: any, index: number) => {
-          if (route.name === "home") return <View key={route.key} className="flex-0 w-0" />;
+          if (route.name === 'home')
+            return <View key={route.key} className='flex-0 w-0' />;
 
           const isFocused = state.index === index;
-          const icon =
-            route.name === "wallet" ?
-              "wallet" : 'person'
+          const icon = route.name === 'wallet' ? 'wallet' : 'person';
 
           return (
             <TouchableOpacity
               testID={`CustomTabBar:Tab-${route.name}`}
               activeOpacity={0.8}
               key={route.key}
-              className="flex-1 items-center justify-center"
+              className='flex-1 items-center justify-center'
               onPress={() => {
                 Haptics.selectionAsync();
                 navigation.navigate(route.name);
@@ -79,9 +93,21 @@ const CustomTabBar = ({ state, navigation, descriptors }: BottomTabBarProps): JS
               <Ionicons
                 name={isFocused ? icon : `${icon}-outline`}
                 size={28}
-                color={isFocused ? (is_dark ? APP_COLORS.brand[500] : APP_COLORS.primary) : APP_COLORS.neutral[700]}
+                color={
+                  isFocused
+                    ? is_dark
+                      ? APP_COLORS.brand[500]
+                      : APP_COLORS.primary
+                    : APP_COLORS.neutral[700]
+                }
               />
-              <AppText className={cn('text-xs text-neutral-700 dark:text-neutral-700 font-semibold', { 'text-primary dark:text-brand-500': isFocused })}>{`app.${route.name}`}</AppText>
+              <AppText
+                className={cn(
+                  'text-xs text-neutral-700 dark:text-neutral-700',
+                  { 'text-primary dark:text-brand-500': isFocused }
+                )}
+                weight='semiBold'
+              >{`app.${route.name}`}</AppText>
             </TouchableOpacity>
           );
         })}
@@ -90,17 +116,26 @@ const CustomTabBar = ({ state, navigation, descriptors }: BottomTabBarProps): JS
         testID='CustomTabBar:CircleButton'
         activeOpacity={0.9}
         style={shadow}
-        className={cn('w-[64px] h-[64px] absolute -top-[32px] self-center items-center justify-center rounded-full bg-neutral-300 dark:bg-secondary', { 'bg-primary dark:bg-primary': state.index === 0 })}
+        className={cn(
+          'w-[64px] h-[64px] absolute -top-[32px] self-center items-center justify-center rounded-full bg-neutral-300 dark:bg-secondary',
+          { 'bg-primary dark:bg-primary': state.index === 0 }
+        )}
         onPress={() => {
           animateBrandOnce();
           Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-          navigation.navigate("home");
+          navigation.navigate('home');
         }}
       >
-        <Animated.Image source={LOCAL_IMAGES.LOGO_TRANS} className="w-[50px] h-[50px]" style={{ transform: [{ rotate: rotation }, { scale: scaleAnimation }] }} />
+        <Animated.Image
+          source={LOCAL_IMAGES.LOGO_TRANS}
+          className='w-[50px] h-[50px]'
+          style={{
+            transform: [{ rotate: rotation }, { scale: scaleAnimation }]
+          }}
+        />
       </TouchableOpacity>
     </View>
   );
-}
+};
 
 export default CustomTabBar;

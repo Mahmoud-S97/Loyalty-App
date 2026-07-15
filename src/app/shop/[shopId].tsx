@@ -44,23 +44,23 @@ const ShopProfileScreen = (): JSX.Element => {
           />
           <View className='flex flex-col gap-1'>
             <AppText
-              className='text-lg font-semibold text-neutral-900 dark:text-neutral-400'
+              className='text-lg text-neutral-900 dark:text-neutral-400'
               weight='semiBold'
             >
               {shopData?.shopName}
             </AppText>
             <AppText
-              className='text-md font-md text-neutral-900 dark:text-neutral-400'
+              className='text-md text-neutral-900 dark:text-neutral-400'
               weight='medium'
             >
               {shopData?.shopDescription}
             </AppText>
-            <AppText className='text-sm font-sm text-neutral-700 dark:text-neutral-500'>
+            <AppText className='text-sm text-neutral-700 dark:text-neutral-500'>
               {shopData?.shopAddress}
             </AppText>
           </View>
         </View>
-        <AppText className='text-sm mt-4 font-md text-neutral-800 dark:text-neutral-400'>
+        <AppText className='text-sm mt-4 text-neutral-800 dark:text-neutral-400'>
           {shopData?.shopDescription}
         </AppText>
       </ContainerView>
