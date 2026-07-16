@@ -46,7 +46,7 @@ const VouchersList = ({ vouchersList }: VouchersListProps): JSX.Element => {
   return (
     <View className='flex-1'>
       <AppText
-        className='text-start text-lg ps-4 text-brand-500 dark:text-neutral-600'
+        className='text-left text-lg ps-4 text-brand-500 dark:text-neutral-600'
         weight='semiBold'
       >
         app.your_vouchers

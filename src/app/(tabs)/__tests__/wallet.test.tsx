@@ -46,6 +46,6 @@ describe('<WalletScreen />', () => {
 
     expect(header.props.className).toBe('bg-brand-400');
 
-    expect(header.props.textClassName).toBe('w-full text-start');
+    expect(header.props.textClassName).toBe('w-full text-left');
   });
 });

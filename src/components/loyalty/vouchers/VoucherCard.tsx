@@ -41,7 +41,7 @@ const VoucherCard = ({
           resizeMode='cover'
         >
           <AppText
-            className='text-lg text-start text-neutral-100 dark:text-neutral-400 p-4'
+            className='text-lg text-left text-neutral-100 dark:text-neutral-400 p-4'
             weight='semiBold'
           >
             {title}

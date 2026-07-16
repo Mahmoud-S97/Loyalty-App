@@ -85,7 +85,7 @@ const SignUpScreen = () => {
             </View>
             <MainButton
               className='bg-neutral-100'
-              textClassName='text-neutral-900 dark:text-neutral-800'
+              textClassName='text-base text-neutral-900 dark:text-neutral-800'
               title='auth.continue_with_google'
               image={LOCAL_ICONS.GOOGLE}
             />

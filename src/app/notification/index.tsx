@@ -24,7 +24,7 @@ const NotificationScreen = (): JSX.Element => {
   return (
     <ScreenView className='p-0 bg-neutral-50'>
       <MainHeader
-        textClassName='text-start ps-6'
+        textClassName='text-left ps-6'
         title='app.notifications'
         endComponent={RenderHeaderEndComponent()}
       />

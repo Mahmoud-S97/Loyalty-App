@@ -50,7 +50,7 @@ const LoyaltyCardList = ({
   return (
     <View className='flex-1 mt-2 pb-20'>
       <AppText
-        className='text-start text-lg ps-4 text-brand-500 dark:text-neutral-600'
+        className='text-left text-lg ps-4 text-brand-500 dark:text-neutral-600'
         weight='semiBold'
       >
         app.your_loyalty_card

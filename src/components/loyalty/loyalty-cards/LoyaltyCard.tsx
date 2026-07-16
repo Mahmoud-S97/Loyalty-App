@@ -40,7 +40,7 @@ const LoyaltyCard = ({
   return (
     <View style={{ width: CARD_WIDTH }} className='min-h-30'>
       <AppText
-        className='w-full pb-4 text-xs text-neutral-800 dark:text-neutral-600'
+        className='w-full pb-4 text-xs text-left text-neutral-800 dark:text-neutral-600'
         numberOfLines={1}
         translationParams={{ stamps: String(threshold - stamps) }}
       >
@@ -71,7 +71,7 @@ const LoyaltyCard = ({
             )}
             <View className='flex-1'>
               <AppText
-                className='text-neutral-800 dark:text-neutral-500'
+                className='text-left text-neutral-800 dark:text-neutral-500'
                 weight='semiBold'
                 translationParams={{ stamps: String(threshold) }}
               >

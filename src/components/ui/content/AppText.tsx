@@ -8,15 +8,17 @@ export interface AppTextProps {
   children: string | ReactNode;
   numberOfLines?: number;
   className?: string;
+  style?: Record<any, any>;
   withTranslation?: boolean;
   translationParams?: Record<string, string>;
-  weight?: AppFontWeight
+  weight?: AppFontWeight;
 }
 
 const AppText = ({
   children,
   numberOfLines,
   className,
+  style,
   withTranslation = true,
   translationParams,
   weight = 'regular'
@@ -25,7 +27,7 @@ const AppText = ({
     withTranslation && typeof children === 'string'
       ? getTranslated(children, translationParams)
       : children;
- 
+
   return (
     <Text
       testID='AppText:Text'
@@ -34,9 +36,12 @@ const AppText = ({
         'text-neutral-900 dark:text-neutral-500 text-base',
         className
       )}
-      style={{
-        fontFamily: getFontWeight(weight)
-      }}
+      style={[
+        {
+          fontFamily: getFontWeight(weight)
+        },
+        style
+      ]}
     >
       {renderChildren}
     </Text>

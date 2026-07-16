@@ -72,7 +72,7 @@ const SettingsScreen = (): JSX.Element => {
 
   return (
     <ScrollingView className='bg-neutral-50'>
-      <MainHeader textClassName='text-start' title='app.settings' />
+      <MainHeader textClassName='text-left' title='app.settings' />
       <ContainerView className='px-0'>
         <View className='w-full bg-neutral-100 dark:bg-secondary gap-2'>
           {ACCOUNT_SETTINGS.map((row, index: number) => {

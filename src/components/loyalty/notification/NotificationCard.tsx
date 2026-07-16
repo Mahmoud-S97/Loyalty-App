@@ -92,7 +92,7 @@ const NotificationCard = ({
               {title}
             </Text>
             <Text
-              className='text-md text-left text-start text-neutral-800 dark:text-neutral-500'
+              className='text-md text-left text-left text-neutral-800 dark:text-neutral-500'
               numberOfLines={3}
               style={{
                 fontFamily: getFontWeight('regular')

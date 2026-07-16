@@ -43,7 +43,7 @@ const MainButton = ({
   iconColor,
   disabled,
   onPress,
-  weight = 'bold'
+  weight = 'semiBold'
 }: MainButtonProps) => {
   const { shadow } = useThemeStyles();
 

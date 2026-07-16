@@ -81,7 +81,7 @@ const LoginScreen = () => {
             </View>
             <MainButton
               className='bg-neutral-100 dark:bg-neutral-300'
-              textClassName='text-neutral-900 dark:text-neutral-800'
+              textClassName='text-base text-neutral-900 dark:text-neutral-800'
               title='auth.continue_with_google'
               image={LOCAL_ICONS.GOOGLE}
               onPress={() => {}}

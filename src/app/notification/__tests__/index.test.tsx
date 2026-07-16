@@ -55,7 +55,7 @@ describe('<NotificationScreen />', () => {
 
     const header = getByTestId('NotificationScreen:MainHeader');
 
-    expect(header.props.textClassName).toBe('text-start ps-6');
+    expect(header.props.textClassName).toBe('text-left ps-6');
   });
 
   it('passes endComponent to MainHeader', () => {
