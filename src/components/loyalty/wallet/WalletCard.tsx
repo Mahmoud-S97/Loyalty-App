@@ -70,6 +70,10 @@ const WalletCard = ({
 
   const stamps = loyaltyCards.find(card => card.stamps < threshold)?.stamps ?? threshold;
 
+  const vouchersLength = loyaltyCards?.filter(
+    (voucher) => voucher.stamps >= threshold
+  ).length;
+
   const rawPercent = (stamps / threshold) * 100;
   const percentage: DimensionValue = `${Math.min(rawPercent, 100)}%`;
 
@@ -137,7 +141,7 @@ const WalletCard = ({
                 color={APP_COLORS.brand[900]}
               />
               <AppText className='text-sm text-brand-900 dark:text-brand-900' weight='bold'>
-                x1
+                {`x${vouchersLength}`}
               </AppText>
             </View>
           </View>
