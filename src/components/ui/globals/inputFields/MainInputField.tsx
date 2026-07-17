@@ -72,7 +72,7 @@ const MainInputField = ({
           name={icon}
           size={iconSize ?? 24}
           color={
-            iconColor ??
+            iconColor ||
             (is_dark ? APP_COLORS.neutral[400] : APP_COLORS.neutral[800])
           }
         />
@@ -113,7 +113,7 @@ const MainInputField = ({
             name={!secureTextEntry ? 'eye' : 'eye-slash'}
             size={iconSize ?? 20}
             color={
-              iconColor ??
+              iconColor ||
               (is_dark ? APP_COLORS.neutral[400] : APP_COLORS.neutral[800])
             }
           />

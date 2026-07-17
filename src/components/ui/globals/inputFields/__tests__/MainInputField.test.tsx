@@ -1,75 +1,148 @@
-import React, { act } from 'react';
+import React from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
 import MainInputField from '../MainInputField';
 
 jest.mock('@expo/vector-icons/MaterialIcons', () => {
-    const React = require('react');
-    const { View } = require('react-native');
+  const React = require('react');
+  const { View } = require('react-native');
 
-    return ({ name, size, color }: { name: string, size: number, color: string }) => (
-        <View
-            testID='GoBackButton:MaterialIcons'
-            name={name}
-            size={size}
-            color={color}
-        />
-    )
+  return ({ name, size, color }: any) => (
+    <View
+      testID='MainInputField:MaterialIcons'
+      name={name}
+      size={size}
+      color={color}
+    />
+  );
 });
 
-jest.mock('@expo/vector-icons/FontAwesome5', () => {
-    const React = require('react');
-    const { View } = require('react-native');
+jest.mock('@/components/ui/globals/icons/AppIcon', () => {
+  const React = require('react');
+  const { View } = require('react-native');
 
-    return ({ name, size, color }: { name: string, size: number, color: string }) => (
-        <View
-            testID='GoBackButton:FontAwesome5'
-            name={name}
-            size={size}
-            color={color}
-        />
-    )
+  return ({ name, size, color, type }: any) => (
+    <View
+      testID='AppIcon:Icon'
+      name={name}
+      size={size}
+      color={color}
+      type={type}
+    />
+  );
 });
-
 
 describe('<MainInputField />', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
-    beforeEach(() => {
-        jest.clearAllMocks();
-    });
+  it('renders wrapper and TextInput correctly', () => {
+    const { getByTestId } = render(
+      <MainInputField value='example@gmail.com' />
+    );
 
-    it('renders MainInputField (wrapper-view and TextInput) correctly', () => {
+    const wrapper = getByTestId('MainInputField:WrapperView');
+    const input = getByTestId('MainInputField:TextInput');
 
-        const { getByTestId } = render(<MainInputField value='example@gmail.com' />);
+    expect(wrapper).toBeTruthy();
+    expect(input).toBeTruthy();
 
-        const wrapperView = getByTestId('MainInputField:WrapperView');
-        const textInput = getByTestId('MainInputField:TextInput');
+    expect(input.props.value).toBe('example@gmail.com');
+  });
 
-        expect(wrapperView).toBeTruthy();
-        expect(textInput).toBeTruthy();
-        expect(textInput.props.value).toBe('example@gmail.com');
-    });
+  it('uses custom testID for TextInput', () => {
+    const { getByTestId } = render(<MainInputField testID='EmailInput' />);
 
-    it('renders icon beside the TextInput when icon name is passed as a prop', () => {
+    expect(getByTestId('EmailInput')).toBeTruthy();
+  });
 
-        const { getByTestId } = render(<MainInputField value='' icon='home' iconColor='red' iconSize={25} />);
+  it('renders MaterialIcons when icon prop is provided', () => {
+    const { getByTestId } = render(
+      <MainInputField icon='home' iconColor='red' iconSize={25} />
+    );
 
-        const icon = getByTestId('GoBackButton:MaterialIcons');
-        expect(icon).toBeTruthy();
-        expect(icon.props.color).toBe('red');
-        expect(icon.props.size).toBe(25);
-    });
+    const icon = getByTestId('MainInputField:MaterialIcons');
 
-    it('renders eye-button to show or hide the input password', () => {
+    expect(icon.props.name).toBe('home');
+    expect(icon.props.color).toBe('red');
+    expect(icon.props.size).toBe(25);
+  });
 
-        const { getByTestId } = render(<MainInputField value='' secureTextEntry={true} isPasswordField={true} iconSize={26} iconColor='blue' />);
+  it('does not render icon when withIcon is false', () => {
+    const { queryByTestId } = render(
+      <MainInputField icon='home' withIcon={false} />
+    );
 
-        const eyeButton = getByTestId('MainInputField:ToggleEyeButton');
-        const eyeIcon = getByTestId('GoBackButton:FontAwesome5');
+    expect(queryByTestId('MainInputField:MaterialIcons')).toBeNull();
+  });
 
-        expect(eyeButton).toBeTruthy();
-        expect(eyeIcon).toBeTruthy();
-        expect(eyeIcon.props.size).toBe(26);
-        expect(eyeIcon.props.color).toBe('blue');
+  it('renders password toggle button', () => {
+    const toggleShowPassword = jest.fn();
 
-    });
+    const { getByTestId } = render(
+      <MainInputField
+        secureTextEntry
+        isPasswordField
+        iconSize={26}
+        iconColor='blue'
+        toggleShowPassword={toggleShowPassword}
+      />
+    );
+
+    const button = getByTestId('MainInputField:ToggleEyeButton');
+
+    const icon = getByTestId('AppIcon:Icon');
+
+    expect(button).toBeTruthy();
+
+    expect(icon.props.type).toBe('FontAwesome5');
+
+    expect(icon.props.name).toBe('eye-slash');
+
+    expect(icon.props.size).toBe(26);
+
+    expect(icon.props.color).toBe('blue');
+  });
+
+  it('calls toggleShowPassword when eye button is pressed', () => {
+    const toggleShowPassword = jest.fn();
+
+    const { getByTestId } = render(
+      <MainInputField isPasswordField toggleShowPassword={toggleShowPassword} />
+    );
+
+    fireEvent.press(getByTestId('MainInputField:ToggleEyeButton'));
+
+    expect(toggleShowPassword).toHaveBeenCalledTimes(1);
+  });
+
+  it('passes TextInput props correctly', () => {
+    const onChangeText = jest.fn();
+
+    const { getByTestId } = render(
+      <MainInputField
+        value='hello'
+        maxLength={10}
+        multiline
+        scrollEnabled={false}
+        editable={false}
+        secureTextEntry
+        onChangeText={onChangeText}
+      />
+    );
+
+    const input = getByTestId('MainInputField:TextInput');
+
+    expect(input.props.value).toBe('hello');
+
+    expect(input.props.maxLength).toBe(10);
+
+    expect(input.props.multiline).toBe(true);
+
+    expect(input.props.scrollEnabled).toBe(false);
+
+    expect(input.props.editable).toBe(false);
+
+    expect(input.props.secureTextEntry).toBe(true);
+  });
 });
