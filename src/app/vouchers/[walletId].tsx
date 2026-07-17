@@ -54,7 +54,7 @@ const VoucherDetailScreen = (): JSX.Element => {
           style={[cardShadow, { borderWidth: 0.5 }]}
           className='w-full min-h-130 flex flex-col gap-4 px-4 py-6 border-neutral-500 dark:border-neutral-700 rounded-xl bg-neutral-100 dark:bg-secondary absolute -top-16 z-100'
         >
-          <View className='w-full flex flex-row items-center gap-3'>
+          <View className='w-full flex flex-row items-center gap-4'>
             <View className='flex items-center justify-center w-16 h-16'>
               <Image
                 source={{ uri: selectedWalletItem?.shopLogo }}
@@ -63,14 +63,14 @@ const VoucherDetailScreen = (): JSX.Element => {
                 className='w-full h-full'
               />
             </View>
-            <View className='flex flex-col gap-1'>
+            <View className='flex-1 flex-col gap-1'>
               <AppText
                 className='text-lg text-left text-neutral-900 dark:text-neutral-400'
                 weight='semiBold'
               >
                 {selectedWalletItem?.shopName}
               </AppText>
-              <AppText className='text-sm text-left text-neutral-700 dark:text-neutral-500'>
+              <AppText numberOfLines={2} className='text-sm text-left text-neutral-700 dark:text-neutral-500'>
                 {selectedWalletItem?.shopAddress}
               </AppText>
             </View>

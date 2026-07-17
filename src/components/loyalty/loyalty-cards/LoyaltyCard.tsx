@@ -71,7 +71,7 @@ const LoyaltyCard = ({
             )}
             <View className='flex-1'>
               <AppText
-                className='text-left text-neutral-800 dark:text-neutral-500'
+                className='text-left text-lg font-semibold text-neutral-800 dark:text-neutral-500'
                 weight='semiBold'
                 translationParams={{ stamps: String(threshold) }}
               >

@@ -39,28 +39,28 @@ const ShopProfileScreen = (): JSX.Element => {
           <Image
             source={{ uri: shopData?.shopLogo }}
             alt={shopData?.shopName}
-            className='size-16 rounded-xl'
+            className='size-20 rounded-xl'
             resizeMode='cover'
           />
-          <View className='flex flex-col gap-1'>
+          <View className='flex-1 flex-col'>
             <AppText
-              className='text-lg text-neutral-900 dark:text-neutral-400'
-              weight='semiBold'
+              className='text-xl text-left text-neutral-900 dark:text-neutral-400'
+              weight='bold'
             >
               {shopData?.shopName}
             </AppText>
             <AppText
-              className='text-md text-neutral-900 dark:text-neutral-400'
+              className='text-lg text-left text-neutral-900 dark:text-neutral-400'
               weight='medium'
             >
               {shopData?.shopDescription}
             </AppText>
-            <AppText className='text-sm text-neutral-700 dark:text-neutral-500'>
+            <AppText className='text-sm text-left text-neutral-700 dark:text-neutral-500'>
               {shopData?.shopAddress}
             </AppText>
           </View>
         </View>
-        <AppText className='text-sm mt-4 text-neutral-800 dark:text-neutral-400'>
+        <AppText className='text-sm mt-4 text-left text-neutral-800 dark:text-neutral-400'>
           {shopData?.shopDescription}
         </AppText>
       </ContainerView>

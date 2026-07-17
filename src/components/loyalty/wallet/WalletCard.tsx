@@ -154,19 +154,19 @@ const WalletCard = ({
               }}
             />
           </View>
-          <View className='flex-row justify-between items-center'>
+          <View className='w-full flex flex-row items-center gap-6'>
             <AppText
               numberOfLines={1}
               withTranslation={false}
-              className='w-[20%] text-neutral-800 dark:text-neutral-800'
+              className='text-left text-neutral-800 dark:text-neutral-800'
               weight='bold'
             >{`${stamps}/${threshold}`}</AppText>
             <AppText
-              numberOfLines={1}
-              className='w-[75%] text-neutral-800 dark:text-neutral-800'
+              numberOfLines={2}
+              className='flex-1 text-left text-neutral-800 dark:text-neutral-800'
               weight='semiBold'
             >
-              {rewardTitle}
+              app.earn_one_free_haircut
             </AppText>
           </View>
         </ContainerView>

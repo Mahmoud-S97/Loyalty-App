@@ -47,13 +47,13 @@ module.exports = {
         }
       },
       fontSize: {
-        xs: [12, { lineHeight: '16px' }],
-        sm: [14, { lineHeight: '20px' }],
-        base: [16, { lineHeight: '24px' }],
-        lg: [18, { lineHeight: '26px' }],
-        xl: [22, { lineHeight: '30px' }],
-        '2xl': [26, { lineHeight: '36px' }],
-        '3xl': [30, { lineHeight: '42px' }]
+        xs: [12, { lineHeight: '18px' }],
+        sm: [14, { lineHeight: '22px' }],
+        base: [16, { lineHeight: '26px' }],
+        lg: [18, { lineHeight: '28px' }],
+        xl: [22, { lineHeight: '38px' }],
+        '2xl': [26, { lineHeight: '42px' }],
+        '3xl': [30, { lineHeight: '46px' }]
       }
     }
   },
