@@ -5,21 +5,26 @@ import MainHeader from '@/components/layout/navigation/header/MainHeader';
 import NotificationList from '@/components/loyalty/notification/NotificationList';
 import { notificationData } from '@/dummy-data';
 import AppText from '@/components/ui/content/AppText';
+import NotificationsScreenSkeleton from '@/components/ui/skeletons/notifications/NotificationsScreenSkeleton';
 
 const NotificationScreen = (): JSX.Element => {
+  // Later will be handled through APIs call!
+  const isLoading = false;
+
   const RenderHeaderEndComponent = (): ReactNode => {
     if (notificationData.length === 0) return null;
     return (
       <TouchableOpacity activeOpacity={0.7} className='px-4 py-2 rounded-md'>
-        <AppText
-          className='text-red-500 dark:text-red-700'
-          weight='semiBold'
-        >
+        <AppText className='text-red-500 dark:text-red-700' weight='semiBold'>
           app.clear_all
         </AppText>
       </TouchableOpacity>
     );
   };
+
+  if (isLoading) {
+    return <NotificationsScreenSkeleton />;
+  }
 
   return (
     <ScreenView className='p-0 bg-neutral-50'>

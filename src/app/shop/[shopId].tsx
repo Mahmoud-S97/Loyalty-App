@@ -8,9 +8,13 @@ import { APP_COLORS } from '@/constants/theme';
 import AppText from '@/components/ui/content/AppText';
 import ContainerView from '@/components/layout/screens/ContainerView';
 import LoyaltyCardList from '@/components/loyalty/loyalty-cards/LoyaltyCardList';
+import ShopProfileScreenSkeleton from '@/components/ui/skeletons/shop/ShopProfileScreenSkeleton';
 
 const ShopProfileScreen = (): JSX.Element => {
   const { shopId } = useLocalSearchParams();
+
+  // Later will be handled through APIs call!
+  const isLoading = false;
 
   const shopData = USER_WALLET.find((wallet) => wallet.shopId === shopId);
   const loyaltyCardsList = shopData?.loyaltyCards.filter(
@@ -18,6 +22,10 @@ const ShopProfileScreen = (): JSX.Element => {
   );
   const threshold = shopData?.threshold ?? 0;
   const shopLogo = shopData?.shopLogo;
+
+  if (isLoading) {
+    return <ShopProfileScreenSkeleton />;
+  }
 
   return (
     <ScrollingView>

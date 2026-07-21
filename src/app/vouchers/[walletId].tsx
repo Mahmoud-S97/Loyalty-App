@@ -12,10 +12,14 @@ import ContainerView from '@/components/layout/screens/ContainerView';
 import { useThemeStyles } from '@/Hooks/theme/useThemeStyles';
 import VouchersList from '@/components/loyalty/vouchers/VouchersList';
 import LoyaltyCardList from '@/components/loyalty/loyalty-cards/LoyaltyCardList';
+import VoucherDetailScreenSkeleton from '@/components/ui/skeletons/wallet/voucher-detail-screen/VoucherDetailScreenSkeleton';
 
 const VoucherDetailScreen = (): JSX.Element => {
   const { cardShadow } = useThemeStyles();
   const { walletId } = useLocalSearchParams();
+
+  // Later will be handled through APIs call!
+  const isLoading = false;
 
   const selectedWalletItem = USER_WALLET.find(
     (wallet) => wallet.id === walletId
@@ -34,6 +38,10 @@ const VoucherDetailScreen = (): JSX.Element => {
     const path = `/shop/${selectedWalletItem?.shopId}` as RelativePathString;
     router.push(path);
   };
+
+  if(isLoading) {
+    return <VoucherDetailScreenSkeleton />
+  }
 
   return (
     <ScreenView>
