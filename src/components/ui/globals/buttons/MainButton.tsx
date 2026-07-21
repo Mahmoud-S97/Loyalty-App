@@ -1,5 +1,6 @@
 import React, { ReactNode, ComponentProps } from 'react';
 import {
+  ActivityIndicator,
   Image,
   ImageSourcePropType,
   Platform,
@@ -26,6 +27,7 @@ type MainButtonProps = {
   iconSize?: number;
   iconColor?: string;
   disabled?: boolean;
+  isLoading?: boolean;
   onPress?: () => void;
   weight?: AppFontWeight;
 };
@@ -42,12 +44,13 @@ const MainButton = ({
   iconSize,
   iconColor,
   disabled,
+  isLoading,
   onPress,
   weight = 'semiBold'
 }: MainButtonProps) => {
   const { shadow } = useThemeStyles();
 
-  const combinedClasses = disabled ? className + ' bg-neutral-500' : className;
+  const combinedClasses = disabled ? className + ' !opacity-60' : className;
   const combinedTextClasses = disabled
     ? textClassName + ' text-neutral-200'
     : textClassName;
@@ -64,32 +67,38 @@ const MainButton = ({
         combinedClasses
       )}
     >
-      {icon && (
-        <MaterialIcons
-          name={icon}
-          size={iconSize || 24}
-          color={iconColor || APP_COLORS.neutral[900]}
-        />
+      {isLoading ? (
+        <ActivityIndicator size='small' color={'#ABABAB'} />
+      ) : (
+        <>
+          {icon && (
+            <MaterialIcons
+              name={icon}
+              size={iconSize || 24}
+              color={iconColor || APP_COLORS.neutral[900]}
+            />
+          )}
+          {image && (
+            <Image
+              testID='MainButton:Image'
+              source={image}
+              className={cn('w-7 h-7 object-contain', imageClassName)}
+            />
+          )}
+          {children && children}
+          <Text
+            className={cn(
+              'text-lg text-center text-neutral-200 dark:text-neutral-400 ms-2',
+              combinedTextClasses
+            )}
+            style={{
+              fontFamily: getFontWeight(weight)
+            }}
+          >
+            {getTranslated(title || '')}
+          </Text>
+        </>
       )}
-      {image && (
-        <Image
-          testID='MainButton:Image'
-          source={image}
-          className={cn('w-7 h-7 object-contain', imageClassName)}
-        />
-      )}
-      {children && children}
-      <Text
-        className={cn(
-          'text-lg text-center text-neutral-200 dark:text-neutral-400 ms-2',
-          combinedTextClasses
-        )}
-        style={{
-          fontFamily: getFontWeight(weight)
-        }}
-      >
-        {getTranslated(title || '')}
-      </Text>
     </TouchableOpacity>
   );
 };
