@@ -2,6 +2,7 @@ import './global.css';
 import React, { JSX, useEffect, useState } from 'react';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { StatusBar } from 'expo-status-bar';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -24,6 +25,7 @@ const RenderApp = (): JSX.Element => {
 
   return (
     <SafeAreaProvider>
+      <StatusBar style='auto' />
       <SafeAreaView
         className='flex-1 bg-neutral-100 dark:bg-neutral-900'
         edges={edges}
