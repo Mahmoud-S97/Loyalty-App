@@ -27,6 +27,7 @@ import { useNFC } from '@/Hooks/loyalty/useNFC';
 import { getTranslated } from '@/lib/localization';
 import { promptAlert } from '@/lib/alerts/promptAlert';
 import { NFCErrorCode } from '@/lib/nfc/nfc.errors';
+import { logger } from '@/lib/logger';
 
 const HomeScreen = (): JSX.Element => {
   const { SCREEN_WIDTH } = useScreenDimensions();
@@ -43,8 +44,6 @@ const HomeScreen = (): JSX.Element => {
 
   const handleNFCScan = async () => {
     const scanningResult = await scanForShop();
-
-    console.log('scanningResult: ', scanningResult);
 
     if (!scanningResult.success && scanningResult.error) {
       const errorCode = scanningResult.error.code;
@@ -74,6 +73,8 @@ const HomeScreen = (): JSX.Element => {
     }
 
     // Success flow...
+
+    logger.log('scanningResult: ', scanningResult);
   };
 
   return (
