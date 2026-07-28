@@ -1,5 +1,10 @@
 {
   "welcome": "مرحبًا بك في تطبيق BESTIE للولاء",
+  "common": {
+    "cancel": "إلغاء",
+    "ok": "حسنا",
+    "open_settings": "افتح الإعدادات"
+  },
   "auth": {
     "login": "تسجيل الدخول",
     "signUp": "إنشاء حساب",
@@ -61,6 +66,38 @@
       "female": "أنثى",
       "other": "آخر",
       "rather_not_say": "بل لا أقول"
+    },
+    "nfc": {
+      "errors": {
+        "NFC_NOT_SUPPORTED": {
+          "title": "تقنية NFC غير مدعومة",
+          "message": "تقنية NFC غير مدعومة على هذا الجهاز."
+        },
+        "NFC_NOT_ENABLED": {
+          "title": "تقنية NFC غير مفعّلة",
+          "message": "يرجى تفعيل خاصية NFC في إعدادات جهازك."
+        },
+        "NFC_TIMEOUT": {
+          "title": "انتهت مهلة مسح NFC",
+          "message": "لم نتمكن من العثور على وسم متجر BESTIE. يرجى المحاولة مرة أخرى."
+        },
+        "NFC_NO_TAG": {
+          "title": "NFC لا توجد علامة",
+          "message": "لم يتم اكتشاف أي علامة NFC."
+        },
+        "NFC_INVALID_TAG": {
+          "title": "علامة NFC غير صالحة",
+          "message": "لا تحتوي علامة NFC على أي بيانات."
+        },
+        "NFC_INVALID_SHOP_ID": {
+          "title": "معرف المتجر غير صالح (NFC)",
+          "message": "لا تحتوي علامة NFC على مُعرِّف متجر صالح."
+        },
+        "NFC_UNKNOWN": {
+          "title": "خطأ في مسح علامة NFC",
+          "message": "فشل مسح NFC، يرجى المحاولة مرة أخرى."
+        }
+      }
     }
   },
   "prepositions": {

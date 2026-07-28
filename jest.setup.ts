@@ -2,8 +2,9 @@ import { APP_COLORS } from '@/constants/theme';
 import { jest } from '@jest/globals';
 import mockAsyncStorage from '@react-native-async-storage/async-storage/jest/async-storage-mock';
 
-jest.mock('@react-native-async-storage/async-storage', () => mockAsyncStorage)
+jest.mock('@react-native-async-storage/async-storage', () => mockAsyncStorage);
 
+jest.mock('react-native-nfc-manager');
 
 const mockNavigate = jest.fn();
 const mockPush = jest.fn();
@@ -28,7 +29,7 @@ jest.mock('expo-router', () => {
       replace: mockReplace,
       canGoBack: mockCanGoBack,
       dismissAll: mockDismissAll
-    },
+    }
   };
 });
 
@@ -44,4 +45,4 @@ jest.mock('@/Hooks/theme/useAppTheme', () => ({
 
 afterEach(() => {
   jest.clearAllMocks();
-})
+});

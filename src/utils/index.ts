@@ -1,5 +1,6 @@
-import { I18nManager, Platform } from 'react-native';
+import { Alert, I18nManager, Platform } from 'react-native';
 import i18n from '@/lib/localization/i18n';
+import { getTranslated } from '@/lib/localization';
 
 export type AppFontWeight = 'regular' | 'medium' | 'semiBold' | 'bold';
 
@@ -21,7 +22,7 @@ export const getFontWeight = (weight: AppFontWeight): string => {
   const fonts = {
     regular: isArabic ? 'CairoRegular' : 'InterRegular',
     medium: isArabic ? 'CairoMedium' : 'InterMedium',
-    semiBold: isArabic ? 'CairoSemiBold' : 'InterSemiBold:',
+    semiBold: isArabic ? 'CairoSemiBold' : 'InterSemiBold',
     bold: isArabic ? 'CairoBold' : 'InterBold'
   };
   return fonts[weight];

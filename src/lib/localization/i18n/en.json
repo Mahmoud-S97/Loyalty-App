@@ -1,5 +1,10 @@
 {
   "welcome": "Welcome to BESTIE Loyalty App",
+  "common": {
+    "cancel": "Cancel",
+    "ok": "Ok",
+    "open_settings": "Open Settings"
+  },
   "auth": {
     "login": "Login",
     "signUp": "Sign Up",
@@ -61,6 +66,38 @@
       "female": "Female",
       "other": "Other",
       "rather_not_say": "Rather not say"
+    },
+    "nfc": {
+      "errors": {
+        "NFC_NOT_SUPPORTED": {
+          "title": "NFC Not Supported",
+          "message": "NFC is not supported on this device."
+        },
+        "NFC_NOT_ENABLED": {
+          "title": "NFC Not Enabled",
+          "message": "Please enable NFC in your device settings."
+        },
+        "NFC_TIMEOUT": {
+          "title": "NFC Scan Timed Out",
+          "message": "We couldn't detect a BESTIE shop tag. Please try again."
+        },
+        "NFC_NO_TAG": {
+          "title": "NFC No Tag",
+          "message": "No NFC tag was detected."
+        },
+        "NFC_INVALID_TAG": {
+          "title": "NFC Invalid Tag",
+          "message": "The NFC tag does not contain any data."
+        },
+        "NFC_INVALID_SHOP_ID": {
+          "title": "NFC Invalid Shop ID",
+          "message": "The NFC tag does not contain a valid shop ID."
+        },
+        "NFC_UNKNOWN": {
+          "title": "Scanning NFC Tag Error",
+          "message": "Failed to scan NFC tag, please try again."
+        }
+      }
     }
   },
   "prepositions": {

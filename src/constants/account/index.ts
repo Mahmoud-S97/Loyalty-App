@@ -1,4 +1,4 @@
-import { is_RTL } from "@/utils";
+import { is_RTL } from '@/utils';
 
 type AccountDetailsRow = {
   label: string;
@@ -12,7 +12,7 @@ type AccountDetailsSection = {
   rows: AccountDetailsRow[];
 };
 
-const arrowIcon = is_RTL() ? 'chevron-back' : 'chevron-forward';
+const getArrowIcon = () => (is_RTL() ? 'chevron-back' : 'chevron-forward');
 
 export const ACCOUNT_DETAILS: AccountDetailsSection[] = [
   {
@@ -21,13 +21,13 @@ export const ACCOUNT_DETAILS: AccountDetailsSection[] = [
       {
         label: 'app.profile',
         mainIcon: 'person-outline',
-        arrowIcon: arrowIcon,
+        arrowIcon: getArrowIcon(),
         route: '/profile'
       },
       {
         label: 'app.activity',
         mainIcon: 'time-outline',
-        arrowIcon: arrowIcon,
+        arrowIcon: getArrowIcon(),
         route: '/activity'
       }
     ]
@@ -38,13 +38,13 @@ export const ACCOUNT_DETAILS: AccountDetailsSection[] = [
       {
         label: 'app.settings',
         mainIcon: 'settings-outline',
-        arrowIcon: arrowIcon,
+        arrowIcon: getArrowIcon(),
         route: '/settings'
       },
       {
         label: 'app.logout',
         mainIcon: 'log-out-outline',
-        arrowIcon: arrowIcon,
+        arrowIcon: getArrowIcon(),
         route: '/logout'
       }
     ]
@@ -56,14 +56,14 @@ export const ACCOUNT_SETTINGS = [
     label: 'app.account_settings.language',
     iconName: 'globe-outline',
     iconType: 'Ionicons',
-    arrowIcon: arrowIcon,
+    arrowIcon: getArrowIcon(),
     cta: 'language'
   },
   {
     label: 'app.account_settings.dark_mode',
     iconName: 'dark-mode',
     iconType: 'MaterialIcons',
-    arrowIcon: arrowIcon,
+    arrowIcon: getArrowIcon(),
     cta: 'appearance'
   }
 ] as const;

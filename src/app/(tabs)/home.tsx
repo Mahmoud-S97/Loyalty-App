@@ -1,7 +1,15 @@
 import React, { JSX } from 'react';
-import { I18nManager, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Alert,
+  I18nManager,
+  Text,
+  TouchableOpacity,
+  View,
+  Linking
+} from 'react-native';
 import { router } from 'expo-router';
 import * as Updates from 'expo-updates';
+import NfcManager from 'react-native-nfc-manager';
 import ScreenView from '@/components/layout/screens/ScreenView';
 import ContainerView from '@/components/layout/screens/ContainerView';
 import LottieView from 'lottie-react-native';
@@ -15,16 +23,57 @@ import { useAppTheme } from '@/Hooks/theme/useAppTheme';
 import { useThemeStyles } from '@/Hooks/theme/useThemeStyles';
 import i18n from '@/lib/localization/i18n';
 import { notificationData } from '@/dummy-data';
+import { useNFC } from '@/Hooks/loyalty/useNFC';
+import { getTranslated } from '@/lib/localization';
+import { promptAlert } from '@/lib/alerts/promptAlert';
+import { NFCErrorCode } from '@/lib/nfc/nfc.errors';
 
 const HomeScreen = (): JSX.Element => {
   const { SCREEN_WIDTH } = useScreenDimensions();
   const { currentThemeColor } = useAppTheme();
   const { shadow } = useThemeStyles();
 
+  const { scanForShop, isScanning, error } = useNFC();
+
   const lottieCustomStyles = {
     width: SCREEN_WIDTH / 1.4,
     height: 250,
     transform: [{ scale: 1.5 }]
+  };
+
+  const handleNFCScan = async () => {
+    const scanningResult = await scanForShop();
+
+    console.log('scanningResult: ', scanningResult);
+
+    if (!scanningResult.success && scanningResult.error) {
+      const errorCode = scanningResult.error.code;
+      const errorTitle = getTranslated(`app.nfc.errors.${errorCode}.title`);
+      const errorMessage = getTranslated(`app.nfc.errors.${errorCode}.message`);
+
+      let alertActions = [];
+
+      const isNfcDisabled = errorCode === NFCErrorCode.NOT_ENABLED;
+
+      if (isNfcDisabled) {
+        alertActions.push(
+          {
+            text: getTranslated('common.cancel'),
+            style: 'cancel'
+          },
+          {
+            text: getTranslated('common.open_settings'),
+            style: 'default',
+            onPress: async () => await NfcManager.goToNfcSetting()
+          }
+        );
+      }
+
+      promptAlert(errorTitle, errorMessage, alertActions);
+      return;
+    }
+
+    // Success flow...
   };
 
   return (
@@ -73,6 +122,9 @@ const HomeScreen = (): JSX.Element => {
             title='app.tap_NFC_tag'
             icon='nfc'
             iconColor={APP_COLORS.neutral[400]}
+            disabled={isScanning}
+            isLoading={isScanning}
+            onPress={handleNFCScan}
           />
           <MainButton
             className='w-full bg-primary dark:bg-brand-800'
