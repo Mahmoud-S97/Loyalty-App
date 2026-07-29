@@ -1,15 +1,15 @@
 {
   "expo": {
     "name": "BESTIE",
-    "slug": "BESTIE",
+    "slug": "bestie",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/images/startup/icon.png",
-    "scheme": "bestieapp",
+    "scheme": "bestie",
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.BESTIE"
+      "bundleIdentifier": "com.mahmoudsaleh.bestie"
     },
     "android": {
       "adaptiveIcon": {
@@ -17,7 +17,7 @@
         "foregroundImage": "./src/assets/images/startup/icon-trans.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.anonymous.BESTIE"
+      "package": "com.mahmoudsaleh.bestie"
     },
     "web": {
       "bundler": "metro",
