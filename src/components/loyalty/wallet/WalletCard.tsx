@@ -41,6 +41,8 @@ const WalletCard = ({
 }: WalletCardProps) => {
   const { cardShadow } = useThemeStyles();
 
+  const isPressed = useRef<boolean>(false);
+
   const fadingAnimation = useRef(
     new Animated.Value(animatedIds.has(id) ? 1 : 0)
   ).current;
@@ -68,7 +70,8 @@ const WalletCard = ({
     animatedIds.add(id);
   }, []);
 
-  const stamps = loyaltyCards.find(card => card.stamps < threshold)?.stamps ?? threshold;
+  const stamps =
+    loyaltyCards.find((card) => card.stamps < threshold)?.stamps ?? threshold;
 
   const vouchersLength = loyaltyCards?.filter(
     (voucher) => voucher.stamps >= threshold
@@ -78,8 +81,13 @@ const WalletCard = ({
   const percentage: DimensionValue = `${Math.min(rawPercent, 100)}%`;
 
   const navigationHandler = (): void => {
+    if (isPressed.current) return;
+
+    isPressed.current = true;
+
     const path = `/vouchers/${id}` as RelativePathString;
     router.push(path);
+    setTimeout(() => (isPressed.current = false), 700);
   };
 
   return (
@@ -140,7 +148,10 @@ const WalletCard = ({
                 size={20}
                 color={APP_COLORS.brand[900]}
               />
-              <AppText className='text-sm text-brand-900 dark:text-brand-900' weight='bold'>
+              <AppText
+                className='text-sm text-brand-900 dark:text-brand-900'
+                weight='bold'
+              >
                 {`x${vouchersLength}`}
               </AppText>
             </View>

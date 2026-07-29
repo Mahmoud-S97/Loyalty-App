@@ -1,4 +1,4 @@
-import React, { JSX } from 'react';
+import React, { JSX, useRef } from 'react';
 import {
   Alert,
   I18nManager,
@@ -34,12 +34,24 @@ const HomeScreen = (): JSX.Element => {
   const { currentThemeColor } = useAppTheme();
   const { shadow } = useThemeStyles();
 
+  const isNotificationsButtonPressed = useRef<boolean>(false);
+
   const { scanForShop, isScanning, error } = useNFC();
 
   const lottieCustomStyles = {
     width: SCREEN_WIDTH / 1.4,
     height: 250,
     transform: [{ scale: 1.5 }]
+  };
+
+  const navigateToNotificationsHandler = () => {
+    if (isNotificationsButtonPressed.current) return;
+
+    isNotificationsButtonPressed.current = true;
+
+    router.push('/notification');
+
+    setTimeout(() => (isNotificationsButtonPressed.current = false), 700);
   };
 
   const handleNFCScan = async () => {
@@ -84,7 +96,7 @@ const HomeScreen = (): JSX.Element => {
         activeOpacity={0.8}
         style={shadow}
         className='w-[50px] h-[50px] m-5 flex absolute z-10 justify-center items-center self-end rounded-full bg-neutral-50 dark:bg-neutral-800'
-        onPress={() => router.push('/notification')}
+        onPress={navigateToNotificationsHandler}
       >
         <FontAwesome
           testID='HomeScreen:NotificationIcon'

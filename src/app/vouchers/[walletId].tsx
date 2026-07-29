@@ -1,4 +1,4 @@
-import React, { JSX } from 'react';
+import React, { JSX, useRef } from 'react';
 import { View, Image, ImageBackground } from 'react-native';
 import ScreenView from '@/components/layout/screens/ScreenView';
 import ScrollingView from '@/components/layout/screens/ScrollingView';
@@ -18,6 +18,8 @@ const VoucherDetailScreen = (): JSX.Element => {
   const { cardShadow } = useThemeStyles();
   const { walletId } = useLocalSearchParams();
 
+  const isShopProfileButtonPressed = useRef<boolean>(false);
+
   // Later will be handled through APIs call!
   const isLoading = false;
 
@@ -35,12 +37,18 @@ const VoucherDetailScreen = (): JSX.Element => {
   const shopLogo = selectedWalletItem?.shopLogo;
 
   const onVisitShopHandler = (): void => {
+    if (isShopProfileButtonPressed.current) return;
+
+    isShopProfileButtonPressed.current = true;
+
     const path = `/shop/${selectedWalletItem?.shopId}` as RelativePathString;
     router.push(path);
+
+    setTimeout(() => (isShopProfileButtonPressed.current = false), 700);
   };
 
-  if(isLoading) {
-    return <VoucherDetailScreenSkeleton />
+  if (isLoading) {
+    return <VoucherDetailScreenSkeleton />;
   }
 
   return (
@@ -78,7 +86,10 @@ const VoucherDetailScreen = (): JSX.Element => {
               >
                 {selectedWalletItem?.shopName}
               </AppText>
-              <AppText numberOfLines={2} className='text-sm text-left text-neutral-700 dark:text-neutral-500'>
+              <AppText
+                numberOfLines={2}
+                className='text-sm text-left text-neutral-700 dark:text-neutral-500'
+              >
                 {selectedWalletItem?.shopAddress}
               </AppText>
             </View>
