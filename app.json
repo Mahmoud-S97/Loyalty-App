@@ -9,7 +9,8 @@
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.mahmoudsaleh.bestie"
+      "bundleIdentifier": "com.mahmoudsaleh.bestie",
+      "googleServicesFile": "./GoogleService-Info.plist"
     },
     "android": {
       "adaptiveIcon": {
@@ -17,7 +18,8 @@
         "foregroundImage": "./src/assets/images/startup/icon-trans.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.mahmoudsaleh.bestie"
+      "package": "com.mahmoudsaleh.bestie",
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "bundler": "metro",

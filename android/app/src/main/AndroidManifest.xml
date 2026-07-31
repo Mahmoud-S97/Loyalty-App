@@ -8,7 +8,7 @@
   <!-- BESTIE features' permissions -->
   <uses-permission android:name="android.permission.NFC" />
   <uses-feature android:name="android.hardware.nfc" android:required="false" />
-
+  
   <queries>
     <intent>
       <action android:name="android.intent.action.VIEW"/>
@@ -30,7 +30,7 @@
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
-        <data android:scheme="bestieapp"/>
+        <data android:scheme="bestie"/>
         <data android:scheme="exp+bestie"/>
       </intent-filter>
     </activity>

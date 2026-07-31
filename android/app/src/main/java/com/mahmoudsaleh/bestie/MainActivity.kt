@@ -1,4 +1,4 @@
-package com.anonymous.BESTIE
+package com.mahmoudsaleh.bestie
 import expo.modules.splashscreen.SplashScreenManager
 
 import android.os.Build

@@ -39,5 +39,9 @@ yarn-error.*
 
 app-example
 
+# Firebase
+GoogleService-Info.plist
+google-services.json
+
 # App Memo-File
 *memo*
