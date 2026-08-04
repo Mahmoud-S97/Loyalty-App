@@ -13,7 +13,7 @@ import { CurvedTabBarBackground } from './CurvedTabBarBackground';
 import { APP_COLORS } from '@/constants/theme';
 import { LOCAL_IMAGES } from '@/constants/images';
 import AppText from '@/components/ui/content/AppText';
-import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
+import type { BottomTabBarProps } from 'expo-router/build/react-navigation/bottom-tabs/types';
 import { cn } from '@/lib/nativeWindCSS/cn';
 import { useAppTheme } from '@/Hooks/theme/useAppTheme';
 import { useThemeStyles } from '@/Hooks/theme/useThemeStyles';
