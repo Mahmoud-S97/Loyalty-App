@@ -27,6 +27,7 @@
       "favicon": "./src/assets/images/startup/icon.png"
     },
     "plugins": [
+      "./plugins/withNFC",
       "expo-router",
       [
         "expo-font",
