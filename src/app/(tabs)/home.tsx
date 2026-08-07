@@ -1,4 +1,4 @@
-import React, { JSX, useRef } from 'react';
+import React, { JSX, useRef, useState } from 'react';
 import {
   Alert,
   I18nManager,
@@ -28,6 +28,7 @@ import { getTranslated } from '@/lib/localization';
 import { promptAlert } from '@/lib/alerts/promptAlert';
 import { NFCErrorCode } from '@/lib/nfc/nfc.errors';
 import { logger } from '@/lib/logger';
+import StampCollectedModal from '@/components/loyalty/modals/StampCollectedModal';
 
 const HomeScreen = (): JSX.Element => {
   const { SCREEN_WIDTH } = useScreenDimensions();
@@ -37,6 +38,8 @@ const HomeScreen = (): JSX.Element => {
   const isNotificationsButtonPressed = useRef<boolean>(false);
 
   const { scanForShop, isScanning, error } = useNFC();
+  const [isCollected, setIsCollected] = useState<boolean>(false);
+  const [stampsLeft, setStampsLeft] = useState<number>(4);
 
   const lottieCustomStyles = {
     width: SCREEN_WIDTH / 1.4,
@@ -146,6 +149,11 @@ const HomeScreen = (): JSX.Element => {
             iconColor={APP_COLORS.neutral[400]}
           />
         </View>
+        <StampCollectedModal
+          visible={isCollected}
+          stampsLeft={stampsLeft}
+          onClose={() => setIsCollected(false)}
+        />
       </ContainerView>
     </ScreenView>
   );

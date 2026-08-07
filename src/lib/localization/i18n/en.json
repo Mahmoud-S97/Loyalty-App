@@ -98,7 +98,12 @@
           "message": "Failed to scan NFC tag, please try again."
         }
       }
-    }
+    },
+   "messages": {
+    "stamp_collected": "Stamp Collected!",
+    "you_collected_stamp": "You collected {{stampsCollected}} stamp!",
+    "stamps_left_to_get_award": "{{stampsLeft}} more to get your free haircut!"
+   }
   },
   "prepositions": {
     "in": "In",
