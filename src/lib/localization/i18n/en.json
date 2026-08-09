@@ -99,11 +99,13 @@
         }
       }
     },
-   "messages": {
-    "stamp_collected": "Stamp Collected!",
-    "you_collected_stamp": "You collected {{stampsCollected}} stamp!",
-    "stamps_left_to_get_award": "{{stampsLeft}} more to get your free haircut!"
-   }
+    "messages": {
+      "stamp_collected": "Stamp Collected!",
+      "you_collected_stamp": "You collected {{stampsCollected}} stamp!",
+      "stamps_left_to_get_award": "{{stampsLeft}} more to get your free haircut!",
+      "voucher_earned": "Voucher Earned",
+      "voucher_earned_description": "You have earned {{voucherCollected}} Free Haircut voucher which can be redeemed on a future visit."
+    }
   },
   "prepositions": {
     "in": "In",

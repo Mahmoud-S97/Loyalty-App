@@ -29,6 +29,7 @@ import { promptAlert } from '@/lib/alerts/promptAlert';
 import { NFCErrorCode } from '@/lib/nfc/nfc.errors';
 import { logger } from '@/lib/logger';
 import StampCollectedModal from '@/components/loyalty/modals/StampCollectedModal';
+import VoucherCollectedModal from '@/components/loyalty/modals/VoucherCollectedModal';
 
 const HomeScreen = (): JSX.Element => {
   const { SCREEN_WIDTH } = useScreenDimensions();
@@ -38,7 +39,8 @@ const HomeScreen = (): JSX.Element => {
   const isNotificationsButtonPressed = useRef<boolean>(false);
 
   const { scanForShop, isScanning, error } = useNFC();
-  const [isCollected, setIsCollected] = useState<boolean>(false);
+  const [isStampCollected, setIsStampCollected] = useState<boolean>(false);
+  const [isVoucherCollected, setIsVoucherCollected] = useState<boolean>(false);
   const [stampsLeft, setStampsLeft] = useState<number>(4);
 
   const lottieCustomStyles = {
@@ -84,6 +86,7 @@ const HomeScreen = (): JSX.Element => {
       }
 
       promptAlert(errorTitle, errorMessage, alertActions);
+
       return;
     }
 
@@ -150,9 +153,13 @@ const HomeScreen = (): JSX.Element => {
           />
         </View>
         <StampCollectedModal
-          visible={isCollected}
+          visible={isStampCollected}
           stampsLeft={stampsLeft}
-          onClose={() => setIsCollected(false)}
+          onClose={() => setIsStampCollected(false)}
+        />
+        <VoucherCollectedModal
+          visible={isVoucherCollected}
+          onClose={() => setIsVoucherCollected(false)}
         />
       </ContainerView>
     </ScreenView>

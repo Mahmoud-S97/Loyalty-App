@@ -100,10 +100,12 @@
       }
     },
     "messages": {
-    "stamp_collected": "تم جمع الختم!",
-    "you_collected_stamp": "لقد جمعت ختم {{stampsCollected}}!",
-    "stamps_left_to_get_award": "بقي {{stampsLeft}} من الأختام لتحصل على قصّة شعر مجانية!"
-   }
+      "stamp_collected": "تم جمع الختم!",
+      "you_collected_stamp": "لقد جمعت ختم {{stampsCollected}}!",
+      "stamps_left_to_get_award": "بقي {{stampsLeft}} من الأختام لتحصل على قصّة شعر مجانية!",
+      "voucher_earned": "تم الحصول على قسيمة",
+      "voucher_earned_description": "لقد حصلت على {{voucherCollected}} من القسائم لقص الشعر مجاناً، والتي يمكن استخدامها في زيارة قادمة."
+    }
   },
   "prepositions": {
     "in": "في",

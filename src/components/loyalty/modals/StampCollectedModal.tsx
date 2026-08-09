@@ -1,7 +1,6 @@
 import React, { PropsWithChildren, useEffect, useRef } from 'react';
 import { Modal, Text } from 'react-native';
 import LottieView from 'lottie-react-native';
-import { useScreenDimensions } from '@/Hooks/layout/useScreenDimensions';
 import MainButton from '@/components/ui/globals/buttons/MainButton';
 import AppText from '@/components/ui/content/AppText';
 import MainLoyaltyModal from './MainLoyaltyModal';
@@ -25,7 +24,6 @@ const StampCollectedModal = ({
   stampsLeft,
   onClose
 }: PropsWithChildren<StampCollectedModalProps>) => {
-  const { SCREEN_WIDTH } = useScreenDimensions();
   const animationRef = useRef<LottieView>(null);
 
   useEffect(() => {
