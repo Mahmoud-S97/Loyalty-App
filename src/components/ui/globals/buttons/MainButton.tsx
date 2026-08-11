@@ -60,7 +60,7 @@ const MainButton = ({
       testID={testID ?? 'MainButton:Button'}
       style={shadow}
       activeOpacity={0.7}
-      disabled={disabled}
+      disabled={disabled || isLoading}
       onPress={onPress}
       className={cn(
         'flex-row w-full h-[55px] justify-center items-center bg-neutral-100 rounded-full',

@@ -2,7 +2,9 @@
   "welcome": "مرحبًا بك في تطبيق BESTIE للولاء",
   "common": {
     "cancel": "إلغاء",
+    "confirm": "تأكيد",
     "ok": "حسنا",
+    "done": "تم",
     "open_settings": "افتح الإعدادات"
   },
   "auth": {
@@ -104,7 +106,11 @@
       "you_collected_stamp": "لقد جمعت ختم {{stampsCollected}}!",
       "stamps_left_to_get_award": "بقي {{stampsLeft}} من الأختام لتحصل على قصّة شعر مجانية!",
       "voucher_earned": "تم الحصول على قسيمة",
-      "voucher_earned_description": "لقد حصلت على {{voucherCollected}} من القسائم لقص الشعر مجاناً، والتي يمكن استخدامها في زيارة قادمة."
+      "voucher_earned_description": "لقد حصلت على {{voucherCollected}} من القسائم لقص الشعر مجاناً، والتي يمكن استخدامها في زيارة قادمة.",
+      "redeem_voucher": "استرداد القسيمة",
+      "redeem_message": "هل أنت متأكد من رغبتك في استخدام هذه القسيمة؟ سيتعين عليك إبرازها لحلاق المحل كدليل على الاستلام عند الدفع. لا يمكن التراجع عن هذا الإجراء!",
+      "voucher_redeemed": "تم استرداد القسيمة",
+      "voucher_redeemed_description": "تم تحصيل القسيمة، يرجى اظهارها الى حلاق هذا المحل لتحصل على حلاقة مجانا."
     }
   },
   "prepositions": {

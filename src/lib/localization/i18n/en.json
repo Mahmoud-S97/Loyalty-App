@@ -2,7 +2,9 @@
   "welcome": "Welcome to BESTIE Loyalty App",
   "common": {
     "cancel": "Cancel",
+    "confirm": "Confirm",
     "ok": "Ok",
+    "done": "Done",
     "open_settings": "Open Settings"
   },
   "auth": {
@@ -104,7 +106,11 @@
       "you_collected_stamp": "You collected {{stampsCollected}} stamp!",
       "stamps_left_to_get_award": "{{stampsLeft}} more to get your free haircut!",
       "voucher_earned": "Voucher Earned",
-      "voucher_earned_description": "You have earned {{voucherCollected}} Free Haircut voucher which can be redeemed on a future visit."
+      "voucher_earned_description": "You have earned {{voucherCollected}} Free Haircut voucher which can be redeemed on a future visit.",
+      "redeem_voucher": "Redeem Voucher",
+      "redeem_message": "Are you sure you want to redeem this voucher? You have to show this as a proof of collection to the barber of this shop. This action cannot be undone!",
+      "voucher_redeemed": "Voucher Redeemed",
+      "voucher_redeemed_description": "The voucher has been redeemed. Please show it to the barber at this shop to get a free haircut."
     }
   },
   "prepositions": {

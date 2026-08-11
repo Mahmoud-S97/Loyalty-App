@@ -1,5 +1,10 @@
-import { JSX, memo } from 'react';
-import { TouchableOpacity, ImageBackground, View, ImageSourcePropType } from 'react-native';
+import { JSX, memo, useCallback } from 'react';
+import {
+  TouchableOpacity,
+  ImageBackground,
+  View,
+  ImageSourcePropType
+} from 'react-native';
 import AppText from '@/components/ui/content/AppText';
 import { useThemeStyles } from '@/Hooks/theme/useThemeStyles';
 import { useScreenDimensions } from '@/Hooks/layout/useScreenDimensions';
@@ -10,8 +15,9 @@ type VoucherCardProps = {
   className?: string;
   image: ImageSourcePropType | undefined;
   title?: string;
-  description?: string
-}
+  description?: string;
+  onRedeem: (id: string) => void;
+};
 
 const VoucherCard = ({
   id,
@@ -19,12 +25,17 @@ const VoucherCard = ({
   className,
   image,
   title,
-  description
+  description,
+  onRedeem
 }: VoucherCardProps): JSX.Element => {
   const { cardShadow } = useThemeStyles();
   const { SCREEN_WIDTH } = useScreenDimensions();
   const CARD_WIDTH = SCREEN_WIDTH * 0.52;
   const SPACING = 16;
+
+  const onRedeemVoucherPressed = useCallback((): void => {
+    onRedeem(id);
+  }, [id]);
 
   return (
     <TouchableOpacity
@@ -32,6 +43,7 @@ const VoucherCard = ({
       style={[cardShadow, { borderWidth: 0.5, width: CARD_WIDTH }]}
       activeOpacity={0.8}
       className='bg-primary border-neutral-500 dark:border-neutral-700 rounded-xl'
+      onPress={onRedeemVoucherPressed}
     >
       {image && (
         <ImageBackground

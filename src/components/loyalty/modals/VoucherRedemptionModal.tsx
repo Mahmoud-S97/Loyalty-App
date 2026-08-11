@@ -6,7 +6,7 @@ import AppText from '@/components/ui/content/AppText';
 import MainLoyaltyModal from './MainLoyaltyModal';
 import { getTranslated } from '@/lib/localization';
 
-type VoucherCollectedModalProps = {
+type VoucherRedemptionModalProps = {
   visible: boolean;
   animationType?: 'fade' | 'slide' | 'none';
   loop?: boolean;
@@ -14,14 +14,14 @@ type VoucherCollectedModalProps = {
   onClose: () => void;
 };
 
-const VoucherCollectedModal = ({
+const VoucherRedemptionModal = ({
   children,
   visible,
   animationType = 'fade',
-  loop = false,
+  loop = true,
   voucherCollected = 1,
   onClose
-}: PropsWithChildren<VoucherCollectedModalProps>) => {
+}: PropsWithChildren<VoucherRedemptionModalProps>) => {
   return (
     <MainLoyaltyModal
       visible={visible}
@@ -33,22 +33,22 @@ const VoucherCollectedModal = ({
         children
       ) : (
         <>
-          {/* Voucher animation */}
+          {/* Celebration animation */}
           <LottieView
-            source={require('@/assets/lottie/voucher-collection.json')}
+            source={require('@/assets/lottie/award-collection.json')}
             autoPlay
             loop={loop}
             style={{
-              width: 150,
-              height: 150,
+              width: 200,
+              height: 200,
               backgroundColor: 'transparent',
-              transform: [{ scale: 1.5 }]
+              transform: [{ scale: 1.3 }]
             }}
           />
 
           {/* Title */}
-          <AppText className='mt-4 text-center text-2xl' weight='bold'>
-            <Text>{`${getTranslated('app.messages.voucher_earned')}  🎉`}</Text>
+          <AppText className='mt-6 text-center text-2xl' weight='bold'>
+            <Text>{`${getTranslated('app.messages.voucher_redeemed')}  🎉`}</Text>
           </AppText>
 
           {/* Award message */}
@@ -57,12 +57,12 @@ const VoucherCollectedModal = ({
             weight='semiBold'
             translationParams={{ voucherCollected: String(voucherCollected) }}
           >
-            app.messages.voucher_earned_description
+            app.messages.voucher_redeemed_description
           </AppText>
 
           {/* Close */}
           <MainButton
-            title='common.ok'
+            title='common.done'
             className='bg-primary min-w-[140px] items-center'
             onPress={onClose}
           />
@@ -72,4 +72,4 @@ const VoucherCollectedModal = ({
   );
 };
 
-export default VoucherCollectedModal;
+export default VoucherRedemptionModal;

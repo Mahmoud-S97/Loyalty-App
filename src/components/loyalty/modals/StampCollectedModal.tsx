@@ -44,14 +44,15 @@ const StampCollectedModal = ({
         children
       ) : (
         <>
-          {/* Celebration animation */}
+          {/* Check animation */}
           <LottieView
             ref={animationRef}
             source={require('@/assets/lottie/stamp-collection.json')}
             loop={loop}
             style={{
               width: 150,
-              height: 150
+              height: 150,
+              backgroundColor: 'transparent'
             }}
           />
 
