@@ -62,13 +62,14 @@
       "expo-status-bar",
       "@react-native-firebase/app",
       [
-      "expo-build-properties",
-      {
-        "ios": {
-          "useFrameworks": "static"
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
+          }
         }
-      }
-    ]
+      ],
+      "@react-native-firebase/auth"
     ],
     "experiments": {
       "typedRoutes": true,

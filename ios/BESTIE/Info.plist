@@ -37,6 +37,12 @@
 				<string>exp+bestie</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>app-1-1045921270708-ios-ee457d83aa20f2f82300e1</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
