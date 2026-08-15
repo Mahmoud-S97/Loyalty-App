@@ -5,7 +5,8 @@
     "confirm": "Confirm",
     "ok": "Ok",
     "done": "Done",
-    "open_settings": "Open Settings"
+    "open_settings": "Open Settings",
+    "loading": "Loading..."
   },
   "auth": {
     "login": "Login",
