@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { KeyboardAvoidingView, TouchableOpacity, View } from 'react-native';
 import { router } from 'expo-router';
 import ContainerView from '@/components/layout/screens/ContainerView';
@@ -8,23 +8,39 @@ import { LOCAL_ICONS } from '@/constants/icons';
 import MainButton from '@/components/ui/globals/buttons/MainButton';
 import MainInputField from '@/components/ui/globals/inputFields/MainInputField';
 import GoBackButton from '@/components/ui/globals/buttons/GoBackButton';
+import { useAuth } from '@/Hooks/auth/useAuth';
 
 const SignUpScreen = () => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const { isLoading, signUp } = useAuth();
+
+  const [signUpFields, setSignUpFields] = useState<Record<string, string>>({
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
   const [showPassword, setShowPassword] = useState<boolean>(false);
-
-  // Temporarly, validation will be handled later on
-  const setEmailHandler = (value: string): void => setEmail(value);
-
-  const setPasswordHandler = (value: string): void => setPassword(value);
-
-  const setConfirmPasswordHandler = (value: string): void =>
-    setConfirmPassword(value);
 
   const toggleShowPassword = () => {
     setShowPassword((prevValue) => !prevValue);
+  };
+
+  const setSignUpFieldHandler = useCallback(
+    (fieldName: string, value: string) => {
+      setSignUpFields((prevField) => ({ ...prevField, [fieldName]: value }));
+    },
+    [signUpFields]
+  );
+
+  const signUpHandler = async (): Promise<void> => {
+    const user = await signUp(
+      signUpFields.email,
+      signUpFields.password,
+      signUpFields.confirmPassword
+    );
+    if (user?.uid) {
+      router.replace('/login');
+      return;
+    }
   };
 
   return (
@@ -50,7 +66,8 @@ const SignUpScreen = () => {
             <MainInputField
               placeholder='example@gmail.com'
               icon='email'
-              onChangeText={setEmailHandler}
+              value={signUpFields.email}
+              onChangeText={(value) => setSignUpFieldHandler('email', value)}
             />
             <MainInputField
               placeholder='auth.password'
@@ -59,7 +76,8 @@ const SignUpScreen = () => {
               secureTextEntry={!showPassword}
               isPasswordField={true}
               toggleShowPassword={toggleShowPassword}
-              onChangeText={setPasswordHandler}
+              value={signUpFields.password}
+              onChangeText={(value) => setSignUpFieldHandler('password', value)}
             />
             <MainInputField
               placeholder='auth.confirmPassword'
@@ -68,13 +86,17 @@ const SignUpScreen = () => {
               secureTextEntry={!showPassword}
               isPasswordField={true}
               toggleShowPassword={toggleShowPassword}
-              onChangeText={setConfirmPasswordHandler}
+              value={signUpFields.confirmPassword}
+              onChangeText={(value) =>
+                setSignUpFieldHandler('confirmPassword', value)
+              }
             />
             <MainButton
               testID='SignUpScreen:SignUpBtn'
               className='bg-primary dark:bg-brand-800'
               title='auth.signUp'
-              onPress={() => router.navigate('/home')}
+              isLoading={isLoading}
+              onPress={signUpHandler}
             />
             <View className='flex-row justify-between items-center my-5'>
               <View className='w-[44%] h-[1px] bg-neutral-500' />

@@ -1,6 +1,5 @@
-import { Alert, I18nManager, Platform } from 'react-native';
+import { I18nManager, Platform } from 'react-native';
 import i18n from '@/lib/localization/i18n';
-import { getTranslated } from '@/lib/localization';
 
 export type AppFontWeight = 'regular' | 'medium' | 'semiBold' | 'bold';
 

@@ -1,5 +1,5 @@
-import { Alert } from "react-native";
-import { getTranslated } from "../localization";
+import { Alert } from 'react-native';
+import i18next from 'i18next';
 
 export const promptAlert = (
   title: string = '',
@@ -12,7 +12,7 @@ export const promptAlert = (
   } else {
     alertActions = [
       {
-        text: getTranslated('common.ok'),
+        text: i18next.t('common.ok'),
         style: 'default'
       }
     ];

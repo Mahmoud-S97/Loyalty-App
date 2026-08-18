@@ -10,13 +10,41 @@ import { APP_COLORS } from '@/constants/theme';
 import { ACCOUNT_DETAILS } from '@/constants';
 import { useAppTheme } from '@/Hooks/theme/useAppTheme';
 import AppIcon from '@/components/ui/globals/icons/AppIcon';
+import { promptAlert } from '@/lib/alerts/promptAlert';
+import { getTranslated } from '@/lib/localization';
+import { is_RTL } from '@/utils';
+import { authService } from '@/services/firebase/auth.service';
 
 const AccountScreen = (): JSX.Element => {
   const { currentThemeColor } = useAppTheme();
 
   const handleRowNavigation = (route: string): void => {
+    if (route === '/logout') {
+      promptAlert(
+        '',
+        `${getTranslated('app.messages.user_logout_confirmation')} 😢`,
+        [
+          {
+            style: 'destructive',
+            text: getTranslated('common.yes'),
+            onPress: userLogoutHandler
+          },
+          {
+            style: 'default',
+            text: getTranslated('common.no')
+          }
+        ]
+      );
+      return;
+    }
     if (route !== '/profile' && route !== '/settings') return; // Currently supports /Profile & /Settings screens only!
     router.push(route as RelativePathString);
+  };
+
+  const userLogoutHandler = async (): Promise<void> => {
+    await authService.logout();
+    router.replace('/login');
+    return;
   };
 
   return (
@@ -46,7 +74,10 @@ const AccountScreen = (): JSX.Element => {
         </AppText>
         {ACCOUNT_DETAILS.map((item: any, index: number) => (
           <View key={index} className='flex-1'>
-            <AppText className='mt-10 mb-4 text-lg px-4 text-left' weight='medium'>
+            <AppText
+              className='mt-10 mb-4 text-lg px-4 text-left'
+              weight='medium'
+            >
               {item.heading}
             </AppText>
             <View className='w-full bg-neutral-100 dark:bg-secondary gap-2'>
@@ -60,16 +91,24 @@ const AccountScreen = (): JSX.Element => {
                 >
                   <View className='flex-row gap-6 items-center'>
                     <AppIcon
-                    type='Ionicons'
+                      type='Ionicons'
                       name={row.mainIcon}
                       size={24}
-                      color={currentThemeColor}
+                      color={
+                        row.route === '/logout'
+                          ? APP_COLORS.danger
+                          : currentThemeColor
+                      }
                     />
-                    <AppText className='text-lg'>{row.label}</AppText>
+                    <AppText
+                      className={`text-lg ${row.route === '/logout' ? 'text-danger' : ''}`}
+                    >
+                      {row.label}
+                    </AppText>
                   </View>
                   <AppIcon
-                  type='Ionicons'
-                    name={row.arrowIcon}
+                    type='Ionicons'
+                    name={is_RTL() ? 'chevron-back' : 'chevron-forward'}
                     size={24}
                     color={currentThemeColor}
                   />

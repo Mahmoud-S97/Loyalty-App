@@ -4,6 +4,8 @@
     "cancel": "Cancel",
     "confirm": "Confirm",
     "ok": "Ok",
+    "yes": "Yes",
+    "no": "No",
     "done": "Done",
     "open_settings": "Open Settings",
     "loading": "Loading..."
@@ -27,7 +29,49 @@
     "forgotPassword_entries_with_welcoming_msg": "Enter your email address to receive a reset link and regain access to your account.",
     "resetPassword_entries_with_welcoming_msg": "Set strong new password to enhance security and protect your account.",
     "submit": "Submit",
-    "reset": "Reset"
+    "reset": "Reset",
+    "errors": {
+      "empty_email": {
+        "title": "Email required",
+        "message": "Please enter your email address."
+      },
+      "empty_password": {
+        "title": "Password required",
+        "message": "Please enter your password."
+      },
+      "invalid_credentials": {
+        "title": "Sign-in failed",
+        "message": "The email or password is incorrect. Please check your details and try again."
+      },
+      "user_disabled": {
+        "title": "Account disabled",
+        "message": "This account has been disabled. Please contact support for assistance."
+      },
+      "too_many_requests": {
+        "title": "Too many attempts",
+        "message": "Too many attempts have been made. Please wait a moment and try again."
+      },
+      "network_request_failed": {
+        "title": "Connection error",
+        "message": "We couldn't connect to the server. Please check your internet connection and try again."
+      },
+      "email_already_in_use": {
+        "title": "Email already registered",
+        "message": "An account with this email already exists. Please sign in instead or try another email."
+      },
+      "invalid_email": {
+        "title": "Invalid email",
+        "message": "Please enter a valid email address."
+      },
+      "weak_password": {
+        "title": "Weak password",
+        "message": "Your password is too weak. Please choose a stronger password."
+      },
+      "passwords_dont_match": {
+        "title": "Passwords don't match",
+        "message": "The passwords you entered do not match. Please try again."
+      }
+    }
   },
   "app": {
     "wallet": "Wallet",
@@ -111,7 +155,8 @@
       "redeem_voucher": "Redeem Voucher",
       "redeem_message": "Are you sure you want to redeem this voucher? You have to show this as a proof of collection to the barber of this shop. This action cannot be undone!",
       "voucher_redeemed": "Voucher Redeemed",
-      "voucher_redeemed_description": "The voucher has been redeemed. Please show it to the barber at this shop to get a free haircut."
+      "voucher_redeemed_description": "The voucher has been redeemed. Please show it to the barber at this shop to get a free haircut.",
+      "user_logout_confirmation": "Are you sure you want to logout?"
     }
   },
   "prepositions": {

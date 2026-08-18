@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { KeyboardAvoidingView, TouchableOpacity, View } from 'react-native';
 import { router } from 'expo-router';
 import ContainerView from '@/components/layout/screens/ContainerView';
@@ -8,19 +8,34 @@ import { LOCAL_ICONS } from '@/constants/icons';
 import MainButton from '@/components/ui/globals/buttons/MainButton';
 import MainInputField from '@/components/ui/globals/inputFields/MainInputField';
 import GoBackButton from '@/components/ui/globals/buttons/GoBackButton';
+import { useAuth } from '@/Hooks/auth/useAuth';
 
 const LoginScreen = () => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const { isLoading, login } = useAuth();
+
+  const [loginFields, setLoginFields] = useState<Record<string, string>>({
+    email: '',
+    password: ''
+  });
   const [showPassword, setShowPassword] = useState<boolean>(false);
-
-  // Temporarly, validation will be handled later on
-  const setEmailHandler = (value: string): void => setEmail(value);
-
-  const setPasswordHandler = (value: string): void => setPassword(value);
 
   const toggleShowPassword = () => {
     setShowPassword((prevValue) => !prevValue);
+  };
+
+  const setLoginFieldHandler = useCallback(
+    (fieldName: string, value: string) => {
+      setLoginFields((prevField) => ({ ...prevField, [fieldName]: value }));
+    },
+    [loginFields]
+  );
+
+  const loginUpHandler = async (): Promise<void> => {
+    const user = await login(loginFields.email, loginFields.password);
+    if (user?.uid) {
+      router.replace('/home');
+      return;
+    }
   };
 
   return (
@@ -35,7 +50,10 @@ const LoginScreen = () => {
             <AppText className='text-3xl text-center' weight='bold'>
               auth.login
             </AppText>
-            <AppText className='text-sm text-center text-neutral-800 dark:text-neutral-500 mt-4' weight='semiBold'>
+            <AppText
+              className='text-sm text-center text-neutral-800 dark:text-neutral-500 mt-4'
+              weight='semiBold'
+            >
               auth.login_entries_with_welcoming_msg
             </AppText>
           </View>
@@ -43,8 +61,8 @@ const LoginScreen = () => {
             <MainInputField
               placeholder='example@gmail.com'
               icon='email'
-              value={email}
-              onChangeText={setEmailHandler}
+              value={loginFields.email}
+              onChangeText={(value) => setLoginFieldHandler('email', value)}
             />
             <MainInputField
               placeholder='auth.password'
@@ -53,8 +71,8 @@ const LoginScreen = () => {
               secureTextEntry={!showPassword}
               isPasswordField={true}
               toggleShowPassword={toggleShowPassword}
-              value={password}
-              onChangeText={setPasswordHandler}
+              value={loginFields.password}
+              onChangeText={(value) => setLoginFieldHandler('password', value)}
             />
             <TouchableOpacity
               testID='LoginScreen:ForgotPasswordBtn'
@@ -70,7 +88,8 @@ const LoginScreen = () => {
               testID='LoginScreen:LoginBtn'
               className='bg-primary dark:bg-brand-800'
               title='auth.login'
-              onPress={() => router.navigate('/home')}
+              isLoading={isLoading}
+              onPress={loginUpHandler}
             />
             <View className='flex-row justify-between items-center my-5'>
               <View className='w-[44%] h-[1px] bg-neutral-500' />
@@ -95,7 +114,9 @@ const LoginScreen = () => {
               <AppText className='me-2 text-neutral-800 dark:text-neutral-500'>
                 auth.have_not_an_account
               </AppText>
-              <AppText className='text-primary' weight='semiBold'>auth.signUp</AppText>
+              <AppText className='text-primary' weight='semiBold'>
+                auth.signUp
+              </AppText>
             </TouchableOpacity>
           </View>
         </ContainerView>
