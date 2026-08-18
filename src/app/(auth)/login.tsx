@@ -59,12 +59,14 @@ const LoginScreen = () => {
           </View>
           <View className='flex w-full p-2'>
             <MainInputField
+              testID='LoginScreen:EmailInput'
               placeholder='example@gmail.com'
               icon='email'
               value={loginFields.email}
               onChangeText={(value) => setLoginFieldHandler('email', value)}
             />
             <MainInputField
+              testID='LoginScreen:PasswordInput'
               placeholder='auth.password'
               icon='lock'
               className='mt-7'

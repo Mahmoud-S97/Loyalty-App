@@ -64,12 +64,14 @@ const SignUpScreen = () => {
           </View>
           <View className='flex w-full p-2'>
             <MainInputField
+              testID='SignUpScreen:EmailInput'
               placeholder='example@gmail.com'
               icon='email'
               value={signUpFields.email}
               onChangeText={(value) => setSignUpFieldHandler('email', value)}
             />
             <MainInputField
+              testID='SignUpScreen:PasswordInput'
               placeholder='auth.password'
               icon='lock'
               className='my-7'
@@ -80,6 +82,7 @@ const SignUpScreen = () => {
               onChangeText={(value) => setSignUpFieldHandler('password', value)}
             />
             <MainInputField
+              testID='SignUpScreen:ConfirmPasswordInput'
               placeholder='auth.confirmPassword'
               icon='lock'
               className='mb-7'

@@ -1,51 +1,110 @@
-import { fireEvent, render } from '@testing-library/react-native';
-import SignUpScreen from "../sign-up";
+import React from 'react';
+import { fireEvent, render, act } from '@testing-library/react-native';
 import { router } from 'expo-router';
 
-// Mock the rendered components which have their own unit-tests
-jest.mock('@/components/ui/globals/buttons/MainButton');
-jest.mock('@/components/ui/globals/inputFields/MainInputField');
-jest.mock('@/components/ui/content/AppText');
+import SignUpScreen from '@/app/(auth)/sign-up';
+import { useAuth } from '@/Hooks/auth/useAuth';
 
-// Mock the rendered screen-wrappers which have their own unit-tests
-jest.mock('@/components/layout/screens/ScrollingView', () => 'ScrollingView');
-jest.mock('@/components/layout/screens/ScreenView', () => 'ScreenView');
-jest.mock('@/components/layout/screens/ContainerView', () => 'ContainerView');
+jest.mock('@/Hooks/auth/useAuth');
+
+jest.mock('expo-router', () => ({
+  router: {
+    replace: jest.fn(),
+    navigate: jest.fn()
+  }
+}));
+
+const mockedUseAuth = jest.mocked(useAuth);
+const mockedRouterReplace = jest.mocked(router.replace);
 
 describe('<SignUpScreen />', () => {
+  const signUpMock = jest.fn();
 
-    beforeEach(() => {
-        jest.clearAllMocks();
+  beforeEach(() => {
+    jest.clearAllMocks();
+
+    signUpMock.mockResolvedValue({
+      uid: 'test-user-id'
     });
 
-    it('renders SignUpScreen correctly', () => {
+    mockedUseAuth.mockReturnValue({
+      isLoading: false,
+      user: null,
+      isAuthenticated: false,
+      login: jest.fn(),
+      signUp: signUpMock
+    });
+  });
 
-        const { getByTestId } = render(<SignUpScreen />);
+  it('renders SignUp screen', () => {
+    const { getByTestId } = render(<SignUpScreen />);
 
-        expect(getByTestId('SignUpScreen:KeyboardAvoidingView')).toBeTruthy();
+    expect(getByTestId('SignUpScreen:KeyboardAvoidingView')).toBeTruthy();
+
+    expect(getByTestId('SignUpScreen:SignUpBtn')).toBeTruthy();
+  });
+
+  it('signs up when SignUp button is clicked', async () => {
+    const { getByTestId } = render(<SignUpScreen />);
+
+    fireEvent.changeText(
+      getByTestId('SignUpScreen:EmailInput'),
+      'test@example.com'
+    );
+
+    fireEvent.changeText(
+      getByTestId('SignUpScreen:PasswordInput'),
+      'password123'
+    );
+
+    fireEvent.changeText(
+      getByTestId('SignUpScreen:ConfirmPasswordInput'),
+      'password123'
+    );
+
+    await act(async () => {
+      fireEvent.press(getByTestId('SignUpScreen:SignUpBtn'));
     });
 
-    it('signs up when SignUp button is clicked', async () => {
+    expect(signUpMock).toHaveBeenCalledTimes(1);
 
-        const { getByTestId } = render(<SignUpScreen />);
+    expect(signUpMock).toHaveBeenCalledWith(
+      'test@example.com',
+      'password123',
+      'password123'
+    );
+  });
 
-        const loginButton = getByTestId('SignUpScreen:SignUpBtn');
+  it('navigates to Login screen after successful sign up', async () => {
+    const { getByTestId } = render(<SignUpScreen />);
 
-        fireEvent.press(loginButton);
+    fireEvent.changeText(
+      getByTestId('SignUpScreen:EmailInput'),
+      'test@example.com'
+    );
 
-        expect(router.navigate).toHaveBeenCalledWith('/home');
-        expect(router.navigate).toHaveBeenCalledTimes(1);
+    fireEvent.changeText(
+      getByTestId('SignUpScreen:PasswordInput'),
+      'password123'
+    );
+
+    fireEvent.changeText(
+      getByTestId('SignUpScreen:ConfirmPasswordInput'),
+      'password123'
+    );
+
+    await act(async () => {
+      fireEvent.press(getByTestId('SignUpScreen:SignUpBtn'));
     });
 
-    it('navigates to Login screen', async () => {
+    expect(mockedRouterReplace).toHaveBeenCalledWith('/login');
+  });
 
-        const { getByTestId } = render(<SignUpScreen />);
+  it('navigates to Login screen when Login button is clicked', () => {
+    const { getByTestId } = render(<SignUpScreen />);
 
-        const loginButton = getByTestId('SignUpScreen:LoginBtn');
+    fireEvent.press(getByTestId('SignUpScreen:LoginBtn'));
 
-        fireEvent.press(loginButton);
-
-        expect(router.replace).toHaveBeenCalledWith('/login');
-        expect(router.replace).toHaveBeenCalledTimes(1);
-    });
-})
+    expect(mockedRouterReplace).toHaveBeenCalledWith('/login');
+  });
+});

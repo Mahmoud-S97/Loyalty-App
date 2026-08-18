@@ -6,6 +6,16 @@ jest.mock('@react-native-async-storage/async-storage', () => mockAsyncStorage);
 
 jest.mock('react-native-nfc-manager');
 
+jest.mock('@react-native-firebase/auth', () => ({
+  getAuth: jest.fn(() => ({})),
+  signInWithEmailAndPassword: jest.fn(),
+  createUserWithEmailAndPassword: jest.fn(),
+  onAuthStateChanged: jest.fn(() => jest.fn()),
+  signOut: jest.fn(),
+  sendPasswordResetEmail: jest.fn(),
+  sendEmailVerification: jest.fn()
+}));
+
 const mockNavigate = jest.fn();
 const mockPush = jest.fn();
 const mockBack = jest.fn();

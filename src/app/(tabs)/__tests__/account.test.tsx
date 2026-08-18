@@ -3,6 +3,7 @@ import { render, fireEvent } from '@testing-library/react-native';
 import AccountScreen from '../account';
 import { router } from 'expo-router';
 import { ACCOUNT_DETAILS } from '@/constants';
+import { is_RTL } from '@/utils';
 
 // Mock child components that already have unit tests
 jest.mock('@/components/ui/content/AppText');
@@ -102,7 +103,9 @@ describe('<AccountScreen />', () => {
 
     expect(icons[0].props.type).toBe('Ionicons');
 
-    expect(icons[1].props.name).toBe(firstRow.arrowIcon);
+    expect(icons[1].props.name).toBe(
+      is_RTL() ? 'chevron-back' : 'chevron-forward'
+    );
   });
 
   it('navigates to profile screen when profile row is pressed', () => {
