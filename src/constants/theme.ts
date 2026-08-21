@@ -4,7 +4,7 @@ export const APP_COLORS = {
   primary: "#621ce5",
   secondary: "#232323",
   warning: '#f6b93b',
-  danger: '#e84118',
+  danger: '#b73616ff',
   neutral: {
     50: "#ffffff",
     100: "#fafafa",

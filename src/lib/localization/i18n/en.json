@@ -28,6 +28,13 @@
     "signUp_entries_with_welcoming_msg": "Create a new account to get started and enjoy seamless access to our loyalty features.",
     "forgotPassword_entries_with_welcoming_msg": "Enter your email address to receive a reset link and regain access to your account.",
     "resetPassword_entries_with_welcoming_msg": "Set strong new password to enhance security and protect your account.",
+    "verifyEmail": "Verify Your Email",
+    "ive_verified_my_email": "I've verified my email",
+    "verifyEmail_entries_with_welcoming_msg": "We've sent a verification link to your email address. Please check your inbox and click the link to verify your account.",
+    "resendVerificationEmail": "Resend Verification Email",
+    "resendVerificationEmailIn": "Resend Verification Email in {{countdown}}s",
+    "didNotReceiveVerificationEmail": "Didn't receive the email? Check your spam folder or resend it.",
+    "use_another_email": "Use another email",
     "submit": "Submit",
     "reset": "Reset",
     "errors": {
@@ -62,6 +69,10 @@
       "invalid_email": {
         "title": "Invalid email",
         "message": "Please enter a valid email address."
+      },
+      "email_not_verified": {
+        "title": "Email Not Verified",
+        "message": "Please verify your email address before signing in. Check your inbox for the verification email."
       },
       "weak_password": {
         "title": "Weak password",

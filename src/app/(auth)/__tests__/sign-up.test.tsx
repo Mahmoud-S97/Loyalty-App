@@ -4,6 +4,7 @@ import { router } from 'expo-router';
 
 import SignUpScreen from '@/app/(auth)/sign-up';
 import { useAuth } from '@/Hooks/auth/useAuth';
+import type { User } from '@react-native-firebase/auth';
 
 jest.mock('@/Hooks/auth/useAuth');
 
@@ -13,9 +14,15 @@ jest.mock('expo-router', () => ({
     navigate: jest.fn()
   }
 }));
+const checkEmailVerificationMock = jest.fn();
+const resendVerificationEmailMock = jest.fn();
 
-const mockedUseAuth = jest.mocked(useAuth);
+const mockedUseAuth = useAuth as jest.MockedFunction<typeof useAuth>;
 const mockedRouterReplace = jest.mocked(router.replace);
+
+const mockUser = {
+      email: 'test@example.com'
+    } as User;
 
 describe('<SignUpScreen />', () => {
   const signUpMock = jest.fn();
@@ -28,11 +35,14 @@ describe('<SignUpScreen />', () => {
     });
 
     mockedUseAuth.mockReturnValue({
+      user: mockUser,
       isLoading: false,
-      user: null,
-      isAuthenticated: false,
+      isAuthenticated: true,
+      isEmailVerified: false,
+      checkEmailVerification: checkEmailVerificationMock,
+      resendVerificationEmail: resendVerificationEmailMock,
       login: jest.fn(),
-      signUp: signUpMock
+      signUp: jest.fn()
     });
   });
 
@@ -97,7 +107,7 @@ describe('<SignUpScreen />', () => {
       fireEvent.press(getByTestId('SignUpScreen:SignUpBtn'));
     });
 
-    expect(mockedRouterReplace).toHaveBeenCalledWith('/login');
+    expect(mockedRouterReplace).toHaveBeenCalledWith('/verify-email');
   });
 
   it('navigates to Login screen when Login button is clicked', () => {

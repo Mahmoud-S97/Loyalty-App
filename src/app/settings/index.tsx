@@ -20,6 +20,7 @@ import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { useLocalStorage } from '@/Hooks/storage/useLocalStorage';
 import i18n from '@/lib/localization/i18n';
 import LanguageSelector from '@/components/ui/preferences/language/LanguageSelector';
+import { is_RTL } from '@/utils';
 
 type SettingsAction = 'language' | 'appearance';
 
@@ -102,7 +103,7 @@ const SettingsScreen = (): JSX.Element => {
                 ) : (
                   <AppIcon
                     type='Ionicons'
-                    name={row.arrowIcon}
+                    name={is_RTL() ? 'chevron-back' : 'chevron-forward'}
                     size={24}
                     color={currentThemeColor}
                   />

@@ -4,10 +4,14 @@ import { useAuth } from '@/Hooks/auth/useAuth';
 import Spinner from '@/components/ui/globals/Spinner';
 
 const Index = () => {
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isEmailVerified, isLoading } = useAuth();
 
   if (isLoading) {
     return <Spinner />;
+  }
+
+  if(isAuthenticated && !isEmailVerified) {
+    return <Redirect href="/(auth)/verify-email" />
   }
 
   if (isAuthenticated) {

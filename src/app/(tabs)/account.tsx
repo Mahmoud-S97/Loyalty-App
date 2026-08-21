@@ -14,9 +14,11 @@ import { promptAlert } from '@/lib/alerts/promptAlert';
 import { getTranslated } from '@/lib/localization';
 import { is_RTL } from '@/utils';
 import { authService } from '@/services/firebase/auth.service';
+import { useAuth } from '@/Hooks/auth/useAuth';
 
 const AccountScreen = (): JSX.Element => {
   const { currentThemeColor } = useAppTheme();
+  const { user } = useAuth();
 
   const handleRowNavigation = (route: string): void => {
     if (route === '/logout') {
@@ -63,14 +65,14 @@ const AccountScreen = (): JSX.Element => {
           className='text-xl mt-6 text-center self-center px-4'
           weight='semiBold'
         >
-          Mahmoud Al-Saleh - محمود الصالح
+          {user?.email?.split('@')[0]}
         </AppText>
         <AppText
           withTranslation={false}
           numberOfLines={2}
           className='text-center self-center my-4 text-neutral-800'
         >
-          example@gmail.com
+          {user?.email}
         </AppText>
         {ACCOUNT_DETAILS.map((item: any, index: number) => (
           <View key={index} className='flex-1'>
@@ -101,7 +103,7 @@ const AccountScreen = (): JSX.Element => {
                       }
                     />
                     <AppText
-                      className={`text-lg ${row.route === '/logout' ? 'text-danger' : ''}`}
+                      className={`text-lg ${row.route === '/logout' ? 'text-danger dark:text-danger' : ''}`}
                     >
                       {row.label}
                     </AppText>

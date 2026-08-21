@@ -38,8 +38,7 @@ const SignUpScreen = () => {
       signUpFields.confirmPassword
     );
     if (user?.uid) {
-      router.replace('/login');
-      return;
+      router.replace('/verify-email');
     }
   };
 

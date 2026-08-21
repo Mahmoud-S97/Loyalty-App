@@ -6,6 +6,7 @@ export const AUTH_ERROR_CODES = {
   network_request_failed: 'auth/network-request-failed',
   email_already_in_use: 'auth/email-already-in-use',
   invalid_email: 'auth/invalid-email',
+  email_not_verified: 'auth/email-not-verified',
   weak_password: 'auth/weak-password',
   // Custom Error Codes
   empty_email: 'validation/empty-email',

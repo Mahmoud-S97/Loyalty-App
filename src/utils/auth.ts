@@ -75,6 +75,10 @@ export const handleAuthErrorMessage = (errorCode: string): void => {
       title = 'auth.errors.empty_password.title';
       message = 'auth.errors.empty_password.message';
       break;
+    case AUTH_ERROR_CODES.email_not_verified:
+      title = 'auth.errors.email_not_verified.title';
+      message = 'auth.errors.email_not_verified.message';
+      break;
     case AUTH_ERROR_CODES.weak_password:
       title = 'auth.errors.weak_password.title';
       message = 'auth.errors.weak_password.message';

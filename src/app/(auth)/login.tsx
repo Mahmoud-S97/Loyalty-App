@@ -11,7 +11,7 @@ import GoBackButton from '@/components/ui/globals/buttons/GoBackButton';
 import { useAuth } from '@/Hooks/auth/useAuth';
 
 const LoginScreen = () => {
-  const { isLoading, login } = useAuth();
+  const { isLoading, login, isEmailVerified } = useAuth();
 
   const [loginFields, setLoginFields] = useState<Record<string, string>>({
     email: '',
@@ -34,7 +34,6 @@ const LoginScreen = () => {
     const user = await login(loginFields.email, loginFields.password);
     if (user?.uid) {
       router.replace('/home');
-      return;
     }
   };
 
