@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import ScrollingView from '@/components/layout/screens/ScrollingView';
 import ContainerView from '@/components/layout/screens/ContainerView';
 import AppText from '@/components/ui/content/AppText';
 import MainButton from '@/components/ui/globals/buttons/MainButton';
-import { useAuth } from '@/Hooks/auth/useAuth';
-import { authService } from '@/services/firebase/auth.service';
 import AppIcon from '@/components/ui/globals/icons/AppIcon';
 import { useAppTheme } from '@/Hooks/theme/useAppTheme';
 import { getTranslated } from '@/lib/localization';
+import { useAuth } from '@/Hooks/auth/useAuth';
 
-const VerifyEmailScreen = () => {
+const PasswordResetSentScreen = () => {
   const { currentThemeColor } = useAppTheme();
-  const { user, isLoading, resendVerificationEmail, checkEmailVerification } =
-    useAuth();
+
+  const { sendPasswordResetEmail } = useAuth();
+
+  const { email } = useLocalSearchParams<{ email?: string }>();
   const [countdown, setCountdown] = useState<number>(30);
 
   useEffect(() => {
-
     if (countdown <= 0) return;
 
     const timer = setInterval(() => {
@@ -28,21 +28,9 @@ const VerifyEmailScreen = () => {
     return () => clearInterval(timer);
   }, [countdown]);
 
-  const checkVerificationHandler = async (): Promise<void> => {
-    const isVerified = await checkEmailVerification();
-
-    if (!isVerified) return;
-    router.replace('/home');
-  };
-
-  const resendVerificationHandler = async (): Promise<void> => {
-    await resendVerificationEmail();
-     setCountdown(30);
-  };
-
-  const handleUseAnotherEmail = async () => {
-    await authService.logout();
-    router.replace('/sign-up');
+  const resendPasswordResetEmailHandler = async (): Promise<void> => {
+    await sendPasswordResetEmail(email || '');
+    setCountdown(30);
   };
 
   return (
@@ -56,77 +44,72 @@ const VerifyEmailScreen = () => {
             color={currentThemeColor}
             size={40}
           />
+
           <AppText className='text-3xl text-center' weight='bold'>
-            auth.verifyEmail
+            auth.passwordResetSent
           </AppText>
+
           <AppText
             className='text-sm text-center text-neutral-800 dark:text-neutral-500 mt-4'
             weight='semiBold'
           >
-            auth.verifyEmail_entries_with_welcoming_msg
+            auth.passwordResetSent_entries_with_welcoming_msg
           </AppText>
-          {user?.email && (
+          {email && (
             <AppText
               className='text-base text-center text-primary mt-4'
               weight='bold'
             >
-              {user.email}
+              {email.toLowerCase()}
             </AppText>
           )}
         </View>
+
         <View className='flex w-full p-2'>
+          <View className='items-center px-4'>
+            <AppText
+              className='text-sm text-center text-neutral-700 dark:text-neutral-400'
+              weight='medium'
+            >
+              auth.passwordResetSent_checkYourInbox
+            </AppText>
+          </View>
+
           <MainButton
-            testID='VerifyEmailScreen:CheckVerificationBtn'
-            className='bg-primary dark:bg-brand-800'
-            title='auth.ive_verified_my_email'
-            isLoading={isLoading}
-            onPress={checkVerificationHandler}
+            testID='PasswordResetSentScreen:BackToLoginBtn'
+            className='bg-primary dark:bg-brand-800 mt-8'
+            title='auth.backToLogin'
+            onPress={() => router.replace('/login')}
           />
           {countdown > 0 ? (
             <AppText
               withTranslation={false}
-              className='text-sm text-neutral-600 dark:text-neutral-400 text-center mt-5'
+              className='text-sm text-neutral-600 dark:text-neutral-400 text-center mt-6'
               weight='medium'
             >
-              {getTranslated('auth.resendVerificationEmailIn', { countdown: String(countdown) })}
+              {getTranslated('auth.passwordResetEmailIn', {
+                countdown: String(countdown)
+              })}
             </AppText>
           ) : (
             <TouchableOpacity
               testID='VerifyEmailScreen:ResendVerificationBtn'
               activeOpacity={0.7}
-              className='mt-5 py-2 items-center justify-center'
-              onPress={resendVerificationHandler}
+              className='mt-6 py-2 items-center justify-center'
+              onPress={resendPasswordResetEmailHandler}
             >
               <AppText
                 className='text-sm text-primary dark:text-brand-400'
                 weight='semiBold'
               >
-                auth.resendVerificationEmail
+                auth.passwordResetEmail
               </AppText>
             </TouchableOpacity>
           )}
-          <TouchableOpacity
-            testID='VerifyEmailScreen:UseAnotherEmailBtn'
-            activeOpacity={0.7}
-            className='mt-6 items-center justify-center py-2'
-            onPress={handleUseAnotherEmail}
-          >
-            <AppText
-              className='text-sm text-neutral-800 dark:text-neutral-400'
-              weight='semiBold'
-            >
-              auth.use_another_email
-            </AppText>
-          </TouchableOpacity>
-          <View className='items-center mt-8'>
-            <AppText className='text-sm text-center text-neutral-700 dark:text-neutral-500'>
-              auth.didNotReceiveVerificationEmail
-            </AppText>
-          </View>
         </View>
       </ContainerView>
     </ScrollingView>
   );
 };
 
-export default VerifyEmailScreen;
+export default PasswordResetSentScreen;

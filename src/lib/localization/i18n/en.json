@@ -35,6 +35,12 @@
     "resendVerificationEmailIn": "Resend Verification Email in {{countdown}}s",
     "didNotReceiveVerificationEmail": "Didn't receive the email? Check your spam folder or resend it.",
     "use_another_email": "Use another email",
+    "passwordResetSent": "Check your email",
+    "passwordResetSent_entries_with_welcoming_msg": "We've sent you a link to reset your password.",
+    "passwordResetSent_checkYourInbox": "Please check your inbox and follow the link to reset your password. If you don't see it, check your spam or junk folder.",
+    "passwordResetEmail": "Resend password reset email",
+    "passwordResetEmailIn": "Resend password reset email in {{countdown}}s",
+    "backToLogin": "Back to Login",
     "submit": "Submit",
     "reset": "Reset",
     "errors": {

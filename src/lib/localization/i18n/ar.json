@@ -35,6 +35,12 @@
     "resendVerificationEmailIn": "إعادة إرسال رسالة التحقق خلال {{countdown}} ثانية",
     "didNotReceiveVerificationEmail": "لم تصلك الرسالة؟ تحقق من مجلد البريد العشوائي أو أعد إرسالها.",
     "use_another_email": "استخدام بريد إلكتروني آخر",
+    "passwordResetSent": "تحقق من بريدك الإلكتروني",
+    "passwordResetSent_entries_with_welcoming_msg": "لقد أرسلنا إليك رابطًا لإعادة تعيين كلمة المرور الخاصة بك.",
+    "passwordResetSent_checkYourInbox": "يرجى التحقق من صندوق الوارد واتباع الرابط لإعادة تعيين كلمة المرور. إذا لم تجده، فتحقق من مجلد البريد العشوائي أو غير المرغوب فيه.",
+    "passwordResetEmail": "إعادة إرسال بريد إعادة تعيين كلمة المرور",
+    "passwordResetEmailIn": "إعادة إرسال بريد إعادة تعيين كلمة المرور خلال {{countdown}} ثانية",
+    "backToLogin": "العودة إلى تسجيل الدخول",
     "submit": "إرسال",
     "reset": "إعادة تعيين",
     "errors": {

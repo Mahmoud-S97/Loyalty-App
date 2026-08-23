@@ -10,6 +10,7 @@ import {
 import { AUTH_ERROR_CODES } from '@/constants';
 import {
   handleAuthErrorMessage,
+  isEmailValidated,
   isLoginValidated,
   isSignUpValidated
 } from '@/utils/auth';
@@ -101,6 +102,7 @@ export const useAuth = () => {
 
         await new Promise((resolve) => setTimeout(resolve, 1000));
       }
+      return false;
     } catch (error: any) {
       const errorCode = error.code || AUTH_ERROR_CODES.something_went_wrong;
       handleAuthErrorMessage(errorCode);
@@ -108,8 +110,6 @@ export const useAuth = () => {
     } finally {
       setIsLoading(false);
     }
-
-    return false;
   };
 
   const resendVerificationEmail = async (): Promise<void> => {
@@ -128,6 +128,27 @@ export const useAuth = () => {
     }
   };
 
+  const sendPasswordResetEmail = async (email: string): Promise<boolean> => {
+    const isValidEmail = isEmailValidated(email);
+    if (!isValidEmail) return false;
+
+    try {
+      setIsLoading(true);
+      await authService.sendPasswordResetEmail(email.toLowerCase());
+      return true;
+    } catch (error: any) {
+      logger.log(
+      'Error in Firebase password reset: ',
+      error
+    );
+      const errorCode = error.code || AUTH_ERROR_CODES.something_went_wrong;
+      handleAuthErrorMessage(errorCode);
+      return false;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return {
     isLoading,
     user,
@@ -135,6 +156,7 @@ export const useAuth = () => {
     isEmailVerified: !!user?.emailVerified,
     resendVerificationEmail,
     checkEmailVerification,
+    sendPasswordResetEmail,
     login,
     signUp
   };

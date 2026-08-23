@@ -29,7 +29,7 @@ describe('<ForgotPasswordScreen />', () => {
 
         const {getByTestId} = render(<ForgotPasswordScreen />);
 
-        const submitForgotPasswordBtn = getByTestId('ForogtPasswordScreen:SubmitBtn');
+        const submitForgotPasswordBtn = getByTestId('ForgotPasswordScreen:SubmitBtn');
 
         fireEvent.press(submitForgotPasswordBtn);
 

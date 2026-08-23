@@ -32,20 +32,24 @@ jest.mock('@/lib/localization', () => ({
 }));
 
 const mockedUseAuth = useAuth as jest.MockedFunction<typeof useAuth>;
+
 const mockedUseAppTheme = useAppTheme as jest.MockedFunction<
   typeof useAppTheme
 >;
 
 const checkEmailVerificationMock = jest.fn();
+
 const resendVerificationEmailMock = jest.fn();
+
+const sendPasswordResetEmailMock = jest.fn();
 
 const logoutMock = jest
   .spyOn(authService, 'logout')
   .mockResolvedValue(undefined);
 
-  const mockUser = {
-      email: 'test@example.com'
-    } as User;
+const mockUser = {
+  email: 'test@example.com'
+} as User;
 
 describe('<VerifyEmailScreen />', () => {
   beforeEach(() => {
@@ -62,8 +66,11 @@ describe('<VerifyEmailScreen />', () => {
       isLoading: false,
       isAuthenticated: true,
       isEmailVerified: false,
+
       checkEmailVerification: checkEmailVerificationMock,
       resendVerificationEmail: resendVerificationEmailMock,
+      sendPasswordResetEmail: sendPasswordResetEmailMock,
+
       login: jest.fn(),
       signUp: jest.fn()
     });
@@ -77,9 +84,11 @@ describe('<VerifyEmailScreen />', () => {
     const { getByTestId, getByText } = render(<VerifyEmailScreen />);
 
     expect(getByTestId('VerifyEmailScreen:CheckVerificationBtn')).toBeTruthy();
+
     expect(getByTestId('VerifyEmailScreen:UseAnotherEmailBtn')).toBeTruthy();
 
     expect(getByText('test@example.com')).toBeTruthy();
+
     expect(getByText('Resend verification email in 30s')).toBeTruthy();
   });
 
@@ -97,7 +106,9 @@ describe('<VerifyEmailScreen />', () => {
     });
 
     expect(checkEmailVerificationMock).toHaveBeenCalledTimes(1);
+
     expect(router.replace).toHaveBeenCalledWith('/home');
+
     expect(router.replace).toHaveBeenCalledTimes(1);
   });
 
@@ -115,6 +126,7 @@ describe('<VerifyEmailScreen />', () => {
     });
 
     expect(checkEmailVerificationMock).toHaveBeenCalledTimes(1);
+
     expect(router.replace).not.toHaveBeenCalled();
   });
 
@@ -168,7 +180,10 @@ describe('<VerifyEmailScreen />', () => {
     });
 
     expect(logoutMock).toHaveBeenCalledTimes(1);
+
     expect(router.replace).toHaveBeenCalledWith('/sign-up');
+
+    expect(router.replace).toHaveBeenCalledTimes(1);
   });
 
   it('counts down from 30 seconds correctly', () => {

@@ -22,6 +22,17 @@ export const isLoginValidated = (email: string, password: string): boolean => {
   return true;
 };
 
+export const isEmailValidated = (email: string) => {
+  if(!email.trim()) {
+    handleAuthErrorMessage(AUTH_ERROR_CODES.empty_email);
+    return false;
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+    handleAuthErrorMessage(AUTH_ERROR_CODES.invalid_email);
+    return false
+  }
+  return true;
+}
+
 // Check login validation from the client-side
 export const isSignUpValidated = (
   email: string,
