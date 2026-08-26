@@ -9,8 +9,11 @@ import MainInputField from '@/components/ui/globals/inputFields/MainInputField';
 import GenderList from '@/components/loyalty/gender/GenderList';
 import MainButton from '@/components/ui/globals/buttons/MainButton';
 import { APP_COLORS } from '@/constants/theme';
+import { useUser } from '@/Hooks/user/useUser';
+import Spinner from '@/components/ui/globals/Spinner';
 
 const ProfileScreen = (): JSX.Element => {
+  const { userProfile, isProfileLoading } = useUser();
   return (
     <ScrollingView>
       <ContainerView className='items-start'>
@@ -32,20 +35,20 @@ const ProfileScreen = (): JSX.Element => {
           className='text-xl mt-6 text-center self-center px-4'
           weight='semiBold'
         >
-          Mahmoud Al-Saleh
+          {userProfile?.fullName}
         </AppText>
         <AppText
           withTranslation={false}
           numberOfLines={2}
           className='text-center self-center my-4 text-neutral-800'
         >
-          example@gmail.com
+          {userProfile?.email}
         </AppText>
         <View className='w-full flex flex-col items-start justify-center mb-8'>
           <AppText>auth.name</AppText>
           <MainInputField
             testID='ProfileScreen:MainInputField'
-            value='Mahmoud Saleh'
+            value={userProfile?.fullName}
             className='w-full px-0 rounded-none border-b border-neutral-500 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900'
             textInputClassName='ms-0 bg-neutral-100 dark:bg-neutral-900'
             withShadow={false}
@@ -57,7 +60,7 @@ const ProfileScreen = (): JSX.Element => {
           <AppText>auth.email</AppText>
           <MainInputField
             testID='ProfileScreen:MainInputField'
-            value='example@gmail.com'
+            value={userProfile?.email}
             className='w-full px-0 rounded-none border-b border-neutral-500 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900'
             textInputClassName='ms-0 bg-neutral-100 dark:bg-neutral-900'
             withShadow={false}
@@ -69,7 +72,7 @@ const ProfileScreen = (): JSX.Element => {
           <AppText>app.date_of_birth</AppText>
           <MainInputField
             testID='ProfileScreen:MainInputField'
-            value='1997/03/11'
+            value={userProfile?.dateOfBirth}
             className='w-full px-0 rounded-none border-b border-neutral-500 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900'
             textInputClassName='ms-0 bg-neutral-100 dark:bg-neutral-900'
             withShadow={false}
@@ -88,6 +91,7 @@ const ProfileScreen = (): JSX.Element => {
           iconColor={APP_COLORS.neutral[400]}
         />
       </ContainerView>
+      {isProfileLoading && <Spinner />}
     </ScrollingView>
   );
 };

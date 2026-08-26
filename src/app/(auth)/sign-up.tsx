@@ -9,9 +9,11 @@ import MainButton from '@/components/ui/globals/buttons/MainButton';
 import MainInputField from '@/components/ui/globals/inputFields/MainInputField';
 import GoBackButton from '@/components/ui/globals/buttons/GoBackButton';
 import { useAuth } from '@/Hooks/auth/useAuth';
+import { useUser } from '@/Hooks/user/useUser';
 
 const SignUpScreen = () => {
   const { isLoading, signUp } = useAuth();
+  const { createUserProfile } = useUser();
 
   const [signUpFields, setSignUpFields] = useState<Record<string, string>>({
     email: '',
@@ -38,6 +40,13 @@ const SignUpScreen = () => {
       signUpFields.confirmPassword
     );
     if (user?.uid) {
+      await createUserProfile(user.uid, {
+        email: user.email,
+        fullName: 'Mahmoud Saleh',
+        gender: 'male',
+        dateOfBirth: '1997-03-11',
+        photoURL: null
+      });
       router.replace('/verify-email');
     }
   };

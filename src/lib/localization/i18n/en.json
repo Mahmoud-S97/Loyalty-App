@@ -90,6 +90,46 @@
       }
     }
   },
+  "firestore": {
+    "errors": {
+      "permission_denied": {
+        "title": "Access Denied",
+        "message": "You don't have permission to access this information."
+      },
+      "unauthenticated": {
+        "title": "Authentication Required",
+        "message": "Please sign in again to continue."
+      },
+      "not_found": {
+        "title": "Profile Not Found",
+        "message": "We couldn't find your profile. Please try again."
+      },
+      "invalid_argument": {
+        "title": "Invalid Information",
+        "message": "Some of the information provided is invalid. Please check it and try again."
+      },
+      "failed_precondition": {
+        "title": "Unable to Complete Request",
+        "message": "We couldn't complete this request right now. Please try again."
+      },
+      "unavailable": {
+        "title": "Service Unavailable",
+        "message": "We're having trouble connecting to the service. Please check your connection and try again."
+      },
+      "resource_exhausted": {
+        "title": "Please Try Again Later",
+        "message": "We've reached a temporary limit. Please try again later."
+      },
+      "aborted": {
+        "title": "Request Interrupted",
+        "message": "The request was interrupted. Please try again."
+      },
+      "internal": {
+        "title": "Something Went Wrong",
+        "message": "Something went wrong while processing your request. Please try again."
+      }
+    }
+  },
   "app": {
     "wallet": "Wallet",
     "account": "Account",
@@ -189,6 +229,14 @@
     "lang": {
       "english": "English",
       "arabic": "العربية"
+    }
+  },
+  "global": {
+    "errors": {
+      "something_went_wrong": {
+        "title": "Something Went Wrong",
+        "message": "We couldn't complete your request. Please try again."
+      }
     }
   }
 }

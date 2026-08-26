@@ -23,15 +23,15 @@ export const isLoginValidated = (email: string, password: string): boolean => {
 };
 
 export const isEmailValidated = (email: string) => {
-  if(!email.trim()) {
+  if (!email.trim()) {
     handleAuthErrorMessage(AUTH_ERROR_CODES.empty_email);
     return false;
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
     handleAuthErrorMessage(AUTH_ERROR_CODES.invalid_email);
-    return false
+    return false;
   }
   return true;
-}
+};
 
 // Check login validation from the client-side
 export const isSignUpValidated = (
@@ -111,8 +111,8 @@ export const handleAuthErrorMessage = (errorCode: string): void => {
       message = 'auth.errors.user_disabled.message';
       break;
     default:
-      title = 'auth.errors.something_went_wrong.title';
-      message = 'auth.errors.something_went_wrong.message';
+      title = 'global.errors.something_went_wrong.title';
+      message = 'global.errors.something_went_wrong.message';
   }
 
   if (title && message) {

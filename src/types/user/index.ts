@@ -1,10 +1,11 @@
-export type Gender = "male" | "female" | "other" | "prefer_not_to_say";
-export interface UserDto {
+export type Gender = 'male' | 'female' | 'other' | 'prefer_not_to_say';
+export interface UserProfile {
   uid: string;
+  fullName: string;
   email: string;
-  displayName: string;
-  avatar?: string;
-  birthDate?: string;
-  gender?: Gender;
-  createdAt: string;
+  gender: Gender;
+  dateOfBirth: string;
+  photoURL: string | null;
+  createdAt?: unknown;
+  updatedAt?: unknown;
 }

@@ -1,4 +1,4 @@
-import React, { JSX } from 'react';
+import React, { JSX, useRef } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { RelativePathString, router } from 'expo-router';
 import ContainerView from '@/components/layout/screens/ContainerView';
@@ -14,11 +14,14 @@ import { promptAlert } from '@/lib/alerts/promptAlert';
 import { getTranslated } from '@/lib/localization';
 import { is_RTL } from '@/utils';
 import { authService } from '@/services/firebase/auth.service';
-import { useAuth } from '@/Hooks/auth/useAuth';
+import { useUser } from '@/Hooks/user/useUser';
+import Spinner from '@/components/ui/globals/Spinner';
 
 const AccountScreen = (): JSX.Element => {
   const { currentThemeColor } = useAppTheme();
-  const { user } = useAuth();
+  const { userProfile, isProfileLoading } = useUser();
+
+  const isPressed = useRef<boolean>(false);
 
   const handleRowNavigation = (route: string): void => {
     if (route === '/logout') {
@@ -40,87 +43,92 @@ const AccountScreen = (): JSX.Element => {
       return;
     }
     if (route !== '/profile' && route !== '/settings') return; // Currently supports /Profile & /Settings screens only!
+    if (isPressed.current) return;
+    isPressed.current = true;
     router.push(route as RelativePathString);
+    setTimeout(() => (isPressed.current = false), 700);
   };
 
   const userLogoutHandler = async (): Promise<void> => {
     await authService.logout();
     router.replace('/login');
-    return;
   };
 
   return (
-    <ScrollingView className='bg-neutral-300'>
-      <ContainerView className='items-start px-0'>
-        <View className='w-24 h-24 rounded-full overflow-hidden self-center'>
-          <Image
-            source={LOCAL_IMAGES.LOGO}
-            className='w-full h-full'
-            resizeMode='contain'
-          />
-        </View>
-        <AppText
-          withTranslation={false}
-          numberOfLines={2}
-          className='text-xl mt-6 text-center self-center px-4'
-          weight='semiBold'
-        >
-          {user?.email?.split('@')[0]}
-        </AppText>
-        <AppText
-          withTranslation={false}
-          numberOfLines={2}
-          className='text-center self-center my-4 text-neutral-800'
-        >
-          {user?.email}
-        </AppText>
-        {ACCOUNT_DETAILS.map((item: any, index: number) => (
-          <View key={index} className='flex-1'>
-            <AppText
-              className='mt-10 mb-4 text-lg px-4 text-left'
-              weight='medium'
-            >
-              {item.heading}
-            </AppText>
-            <View className='w-full bg-neutral-100 dark:bg-secondary gap-2'>
-              {item.rows.map((row: any, index: number) => (
-                <TouchableOpacity
-                  testID={`AccountScreen:TouchableOpacity:Row:${row.route}`}
-                  key={index}
-                  activeOpacity={0.7}
-                  className='flex-row w-full h-14 py-1 px-4 items-center justify-between'
-                  onPress={() => handleRowNavigation(row.route)}
-                >
-                  <View className='flex-row gap-6 items-center'>
+    <>
+      <ScrollingView className='bg-neutral-300 min-h-full'>
+        <ContainerView className='items-start px-0'>
+          <View className='w-24 h-24 rounded-full overflow-hidden self-center'>
+            <Image
+              source={LOCAL_IMAGES.LOGO}
+              className='w-full h-full'
+              resizeMode='contain'
+            />
+          </View>
+          <AppText
+            withTranslation={false}
+            numberOfLines={2}
+            className='text-xl mt-6 text-center self-center px-4'
+            weight='semiBold'
+          >
+            {userProfile?.fullName}
+          </AppText>
+          <AppText
+            withTranslation={false}
+            numberOfLines={2}
+            className='text-center self-center my-4 text-neutral-800'
+          >
+            {userProfile?.email}
+          </AppText>
+          {ACCOUNT_DETAILS.map((item: any, index: number) => (
+            <View key={index} className='flex-1'>
+              <AppText
+                className='mt-10 mb-4 text-lg px-4 text-left'
+                weight='medium'
+              >
+                {item.heading}
+              </AppText>
+              <View className='w-full bg-neutral-100 dark:bg-secondary gap-2'>
+                {item.rows.map((row: any, index: number) => (
+                  <TouchableOpacity
+                    testID={`AccountScreen:TouchableOpacity:Row:${row.route}`}
+                    key={index}
+                    activeOpacity={0.7}
+                    className='flex-row w-full h-14 py-1 px-4 items-center justify-between'
+                    onPress={() => handleRowNavigation(row.route)}
+                  >
+                    <View className='flex-row gap-6 items-center'>
+                      <AppIcon
+                        type='Ionicons'
+                        name={row.mainIcon}
+                        size={24}
+                        color={
+                          row.route === '/logout'
+                            ? APP_COLORS.danger
+                            : currentThemeColor
+                        }
+                      />
+                      <AppText
+                        className={`text-lg ${row.route === '/logout' ? 'text-danger dark:text-danger' : ''}`}
+                      >
+                        {row.label}
+                      </AppText>
+                    </View>
                     <AppIcon
                       type='Ionicons'
-                      name={row.mainIcon}
+                      name={is_RTL() ? 'chevron-back' : 'chevron-forward'}
                       size={24}
-                      color={
-                        row.route === '/logout'
-                          ? APP_COLORS.danger
-                          : currentThemeColor
-                      }
+                      color={currentThemeColor}
                     />
-                    <AppText
-                      className={`text-lg ${row.route === '/logout' ? 'text-danger dark:text-danger' : ''}`}
-                    >
-                      {row.label}
-                    </AppText>
-                  </View>
-                  <AppIcon
-                    type='Ionicons'
-                    name={is_RTL() ? 'chevron-back' : 'chevron-forward'}
-                    size={24}
-                    color={currentThemeColor}
-                  />
-                </TouchableOpacity>
-              ))}
+                  </TouchableOpacity>
+                ))}
+              </View>
             </View>
-          </View>
-        ))}
-      </ContainerView>
-    </ScrollingView>
+          ))}
+        </ContainerView>
+      </ScrollingView>
+      {isProfileLoading && <Spinner />}
+    </>
   );
 };
 
