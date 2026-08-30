@@ -57,7 +57,7 @@ const AccountScreen = (): JSX.Element => {
   return (
     <>
       <ScrollingView className='bg-neutral-300 min-h-full'>
-        <ContainerView className='items-start px-0'>
+        <ContainerView className='items-start px-0 pb-40'>
           <View className='w-24 h-24 rounded-full overflow-hidden self-center'>
             <Image
               source={LOCAL_IMAGES.LOGO}

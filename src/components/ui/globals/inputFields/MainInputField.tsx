@@ -27,6 +27,7 @@ type InputFieldProps = {
   multiline?: boolean;
   scrollEnabled?: boolean;
   value?: string;
+  onPress?: () => void;
   onChangeText?: (value: any) => void;
   toggleShowPassword?: () => void;
   weight?: AppFontWeight
@@ -50,6 +51,7 @@ const MainInputField = ({
   multiline,
   scrollEnabled,
   value,
+  onPress,
   onChangeText,
   toggleShowPassword,
   weight = 'medium'
@@ -89,12 +91,13 @@ const MainInputField = ({
         }
         placeholder={getTranslated(placeholder ?? '')}
         secureTextEntry={secureTextEntry}
-        editable={editable}
+        editable={editable} 
         value={value}
         onChangeText={onChangeText}
-        maxLength={maxLength ?? 50}
+        maxLength={maxLength ?? 90}
         multiline={multiline ?? false}
         scrollEnabled={scrollEnabled ?? true}
+        onPress={onPress}
         style={{
           writingDirection: is_RTL() ? 'rtl' : 'ltr',
           textAlign: is_RTL() ? 'right' : 'left',

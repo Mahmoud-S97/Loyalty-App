@@ -40,11 +40,14 @@ const SignUpScreen = () => {
       signUpFields.confirmPassword
     );
     if (user?.uid) {
+      const splittedName = user.email.split('@')[0] ?? '';
+      const fullName =
+        splittedName.charAt(0).toUpperCase() + splittedName.slice(1);
       await createUserProfile(user.uid, {
         email: user.email,
-        fullName: 'Mahmoud Saleh',
-        gender: 'male',
-        dateOfBirth: '1997-03-11',
+        fullName,
+        gender: '',
+        dateOfBirth: '',
         photoURL: null
       });
       router.replace('/verify-email');

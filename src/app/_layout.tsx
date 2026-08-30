@@ -65,11 +65,13 @@ export default function RootLayout(): JSX.Element {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
+      <AppThemeProvider>
       <BottomSheetModalProvider>
-        <AppThemeProvider>
+        
           <RenderApp />
-        </AppThemeProvider>
+        
       </BottomSheetModalProvider>
+      </AppThemeProvider>
     </GestureHandlerRootView>
   );
 }

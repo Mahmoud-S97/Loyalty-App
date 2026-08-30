@@ -1,9 +1,9 @@
-export type Gender = 'male' | 'female' | 'other' | 'prefer_not_to_say';
+export type Gender = 'male' | 'female' | 'other' | 'rather_not_say';
 export interface UserProfile {
   uid: string;
   fullName: string;
   email: string;
-  gender: Gender;
+  gender: Gender | string;
   dateOfBirth: string;
   photoURL: string | null;
   createdAt?: unknown;
