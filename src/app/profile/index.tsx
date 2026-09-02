@@ -99,8 +99,10 @@ const ProfileScreen = (): JSX.Element => {
   const updateProfileHandler = async (): Promise<void> => {
     if (!user?.uid || !userData) return;
 
+    const cleanedFullName = userData.fullName.trim().replace(/\s+/g, ' ');
+
     await updateUserProfile(user.uid, {
-      fullName: userData.fullName,
+      fullName: cleanedFullName,
       dateOfBirth: userData.dateOfBirth,
       gender: userData.gender,
       photoURL: userData.photoURL
@@ -285,7 +287,7 @@ const ProfileScreen = (): JSX.Element => {
         <AppText
           withTranslation={false}
           numberOfLines={2}
-          className='text-center self-center my-4 text-neutral-800'
+          className='text-center self-center mb-6 text-neutral-800'
         >
           {userData?.email}
         </AppText>

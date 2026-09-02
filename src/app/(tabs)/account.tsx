@@ -90,7 +90,7 @@ const AccountScreen = (): JSX.Element => {
           <AppText
             withTranslation={false}
             numberOfLines={2}
-            className='text-center self-center my-4 text-neutral-800'
+            className='text-center self-center mb-4 text-neutral-800'
           >
             {userProfile?.email}
           </AppText>
