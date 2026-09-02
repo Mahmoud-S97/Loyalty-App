@@ -56,6 +56,12 @@
           }
         }
       ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "BESTIE needs access to your photos so you can choose a profile picture."
+        }
+      ],
       "expo-localization",
       "expo-web-browser",
       "expo-image",

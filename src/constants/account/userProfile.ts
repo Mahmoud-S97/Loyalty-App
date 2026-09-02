@@ -11,3 +11,11 @@ export const FIRESTORE_ERROR_CODES = {
   internal: 'firestore/internal',
   something_went_wrong: "firestore/something-went-wrong"
 } as const;
+
+export const MEDIA_PERMISSION_ERROR_CODES = {
+  request_camera: 'request_camera',
+  request_library: 'request_library',
+  camera_denied: 'camera_denied',
+  media_library_denied: 'media_library_denied',
+  something_went_wrong: 'something_went_wrong'
+} as const;

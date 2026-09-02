@@ -58,13 +58,27 @@ const AccountScreen = (): JSX.Element => {
     <>
       <ScrollingView className='bg-neutral-300 min-h-full'>
         <ContainerView className='items-start px-0 pb-40'>
-          <View className='w-24 h-24 rounded-full overflow-hidden self-center'>
-            <Image
-              source={LOCAL_IMAGES.LOGO}
-              className='w-full h-full'
-              resizeMode='contain'
-            />
-          </View>
+          <View className='flex w-24 h-24 items-center justify-center relative self-center'>
+          {userProfile?.photoURL ? (
+            <View className='flex w-full h-full rounded-full items-center justify-center overflow-hidden'>
+              <Image
+                testID='ProfileScreen:Image:Logo'
+                source={{ uri: userProfile?.photoURL }}
+                className='w-full h-full'
+                resizeMode='contain'
+              />
+            </View>
+          ) : (
+            <View className='flex w-full h-full rounded-full items-center justify-center bg-accent'>
+              <AppText
+                className='text-3xl text-neutral-900 dark:text-neutral-800'
+                weight='semiBold'
+              >
+                {userProfile?.fullName.charAt(0)}
+              </AppText>
+            </View>
+          )}
+        </View>
           <AppText
             withTranslation={false}
             numberOfLines={2}

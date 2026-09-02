@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import {
   Ionicons,
   MaterialIcons,
+  MaterialCommunityIcons,
   FontAwesome,
   FontAwesome5,
   Feather,
@@ -17,6 +18,7 @@ import { cn } from '@/lib/nativeWindCSS/cn';
 const ICONS = {
   Ionicons,
   MaterialIcons,
+  MaterialCommunityIcons,
   FontAwesome,
   FontAwesome5,
   Feather,

@@ -1,4 +1,7 @@
-import { FIRESTORE_ERROR_CODES } from '@/constants/account/userProfile';
+import {
+  FIRESTORE_ERROR_CODES,
+  MEDIA_PERMISSION_ERROR_CODES
+} from '@/constants/account/userProfile';
 import { promptAlert } from '@/lib/alerts/promptAlert';
 import { getTranslated } from '@/lib/localization';
 
@@ -48,6 +51,39 @@ export const handleFirestoreErrorMessage = (errorCode: string): void => {
       message = 'global.errors.something_went_wrong.message';
   }
 
+  if (title && message) {
+    promptAlert(getTranslated(title), getTranslated(message));
+  }
+};
+
+export const handleMediaPermissionErrorMessage = (errorCode: string): void => {
+  let title = '';
+  let message = '';
+
+  switch (errorCode) {
+    case MEDIA_PERMISSION_ERROR_CODES.request_camera:
+      title = 'app.permissions.camera.title';
+      message = 'app.permissions.camera.message';
+      break;
+      case MEDIA_PERMISSION_ERROR_CODES.request_library:
+      title = 'app.permissions.media_library.title';
+      message = 'app.permissions.media_library.message';
+      break;
+    case MEDIA_PERMISSION_ERROR_CODES.camera_denied:
+      title = 'app.permissions.camera_denied.title';
+      message = 'app.permissions.camera_denied.message';
+      break;
+
+    case MEDIA_PERMISSION_ERROR_CODES.media_library_denied:
+      title = 'app.permissions.media_library_denied.title';
+      message = 'app.permissions.media_library_denied.message';
+      break;
+
+    default:
+      title = 'global.errors.something_went_wrong.title';
+      message = 'global.errors.something_went_wrong.message';
+      break;
+  }
   if (title && message) {
     promptAlert(getTranslated(title), getTranslated(message));
   }

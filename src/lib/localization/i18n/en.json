@@ -213,7 +213,32 @@
       "redeem_message": "Are you sure you want to redeem this voucher? You have to show this as a proof of collection to the barber of this shop. This action cannot be undone!",
       "voucher_redeemed": "Voucher Redeemed",
       "voucher_redeemed_description": "The voucher has been redeemed. Please show it to the barber at this shop to get a free haircut.",
-      "user_logout_confirmation": "Are you sure you want to logout?"
+      "user_logout_confirmation": "Are you sure you want to logout?",
+      "profile_photo": {
+        "title": "Profile Photo",
+        "description": "Choose how you'd like to set your profile photo.",
+        "take_photo": "Take Photo",
+        "choose_from_library": "Choose from Library",
+        "remove_photo": "Remove Photo"
+      }
+    },
+    "permissions": {
+      "camera": {
+        "title": "Camera Access Required",
+        "message": "BESTIE needs access to your camera to take a profile photo. Please allow camera access when prompted."
+      },
+      "camera_denied": {
+        "title": "Camera Access Denied",
+        "message": "Camera access has been denied. Please enable camera access from your device settings to take a profile photo."
+      },
+      "media_library": {
+        "title": "Photo Access Required",
+        "message": "BESTIE needs access to your photos to choose a profile photo. Please allow photo access when prompted."
+      },
+      "media_library_denied": {
+        "title": "Photo Access Denied",
+        "message": "Photo access has been denied. Please enable photo access from your device settings to choose a profile photo."
+      }
     }
   },
   "prepositions": {
