@@ -1,6 +1,6 @@
-import React, { JSX, useRef } from 'react';
+import React, { JSX, useCallback, useRef } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
-import { RelativePathString, router } from 'expo-router';
+import { RelativePathString, router, useFocusEffect } from 'expo-router';
 import ContainerView from '@/components/layout/screens/ContainerView';
 import ScrollingView from '@/components/layout/screens/ScrollingView';
 import { LOCAL_IMAGES } from '@/constants/images';
@@ -14,16 +14,27 @@ import { promptAlert } from '@/lib/alerts/promptAlert';
 import { getTranslated } from '@/lib/localization';
 import { is_RTL } from '@/utils';
 import { authService } from '@/services/firebase/auth.service';
+import { useAuth } from '@/Hooks/auth/useAuth';
 import { useUser } from '@/Hooks/user/useUser';
 import Spinner from '@/components/ui/globals/Spinner';
 
 const AccountScreen = (): JSX.Element => {
   const { currentThemeColor } = useAppTheme();
-  const { userProfile, isProfileLoading } = useUser();
+  const { user } = useAuth();
+  const { userProfile, isProfileLoading, getUserProfile } = useUser();
 
   const isPressed = useRef<boolean>(false);
 
+  useFocusEffect(
+    useCallback(() => {
+      if (!user?.uid) return;
+
+      getUserProfile(user.uid);
+    }, [user?.uid])
+  );
+
   const handleRowNavigation = (route: string): void => {
+    if (route === '/activity') return; // Activity screen is coming soon!
     if (route === '/logout') {
       promptAlert(
         '',
@@ -42,7 +53,6 @@ const AccountScreen = (): JSX.Element => {
       );
       return;
     }
-    if (route !== '/profile' && route !== '/settings') return; // Currently supports /Profile & /Settings screens only!
     if (isPressed.current) return;
     isPressed.current = true;
     router.push(route as RelativePathString);
@@ -59,26 +69,26 @@ const AccountScreen = (): JSX.Element => {
       <ScrollingView className='bg-neutral-300 min-h-full'>
         <ContainerView className='items-start px-0 pb-40'>
           <View className='flex w-24 h-24 items-center justify-center relative self-center'>
-          {userProfile?.photoURL ? (
-            <View className='flex w-full h-full rounded-full items-center justify-center overflow-hidden'>
-              <Image
-                testID='ProfileScreen:Image:Logo'
-                source={{ uri: userProfile?.photoURL }}
-                className='w-full h-full'
-                resizeMode='contain'
-              />
-            </View>
-          ) : (
-            <View className='flex w-full h-full rounded-full items-center justify-center bg-accent'>
-              <AppText
-                className='text-3xl text-neutral-900 dark:text-neutral-800'
-                weight='semiBold'
-              >
-                {userProfile?.fullName.charAt(0)}
-              </AppText>
-            </View>
-          )}
-        </View>
+            {userProfile?.photoURL ? (
+              <View className='flex w-full h-full rounded-full items-center justify-center overflow-hidden'>
+                <Image
+                  testID='ProfileScreen:Image:Logo'
+                  source={{ uri: userProfile?.photoURL }}
+                  className='w-full h-full'
+                  resizeMode='contain'
+                />
+              </View>
+            ) : (
+              <View className='flex w-full h-full rounded-full items-center justify-center bg-accent'>
+                <AppText
+                  className='text-3xl text-neutral-900 dark:text-neutral-800'
+                  weight='semiBold'
+                >
+                  {userProfile?.fullName.charAt(0)}
+                </AppText>
+              </View>
+            )}
+          </View>
           <AppText
             withTranslation={false}
             numberOfLines={2}
