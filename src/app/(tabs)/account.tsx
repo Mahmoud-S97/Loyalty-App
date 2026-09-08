@@ -73,7 +73,7 @@ const AccountScreen = (): JSX.Element => {
               <View className='flex w-full h-full rounded-full items-center justify-center overflow-hidden'>
                 <Image
                   testID='ProfileScreen:Image:Logo'
-                  source={{ uri: userProfile?.photoURL }}
+                  source={{ uri: userProfile?.photoURL}}
                   className='w-full h-full'
                   resizeMode='contain'
                 />

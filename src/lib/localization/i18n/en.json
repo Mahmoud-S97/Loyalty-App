@@ -3,6 +3,7 @@
   "common": {
     "cancel": "Cancel",
     "confirm": "Confirm",
+    "remove": "Remove",
     "ok": "Ok",
     "yes": "Yes",
     "no": "No",
@@ -130,6 +131,34 @@
       }
     }
   },
+  "storage": {
+    "errors": {
+      "unauthenticated": {
+        "title": "Authentication Required",
+        "message": "Your session has expired. Please sign in again and try again."
+      },
+      "unauthorized": {
+        "title": "Access Denied",
+        "message": "You don't have permission to upload this profile photo."
+      },
+      "object_not_found": {
+        "title": "Photo Not Found",
+        "message": "We couldn't find your profile photo. Please try uploading it again."
+      },
+      "quota_exceeded": {
+        "title": "Storage Limit Reached",
+        "message": "We're unable to upload your photo right now. Please try again later."
+      },
+      "retry_limit_exceeded": {
+        "title": "Upload Failed",
+        "message": "We couldn't complete the photo upload. Please check your internet connection and try again."
+      },
+      "file_too_large": {
+        "title": "Photo Too Large",
+        "message": "Your profile photo is too large. Please choose a smaller image and try again."
+      }
+    }
+  },
   "app": {
     "wallet": "Wallet",
     "account": "Account",
@@ -219,7 +248,9 @@
         "description": "Choose how you'd like to set your profile photo.",
         "take_photo": "Take Photo",
         "choose_from_library": "Choose from Library",
-        "remove_photo": "Remove Photo"
+        "remove_photo": "Remove Photo",
+        "ask_remove_photo": "Remove Photo?",
+        "remove_photo_confirmation": "Are you sure you want to remove your profile photo?"
       }
     },
     "permissions": {

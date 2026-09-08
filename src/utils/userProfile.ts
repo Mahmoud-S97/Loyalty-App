@@ -1,6 +1,7 @@
 import {
   FIRESTORE_ERROR_CODES,
-  MEDIA_PERMISSION_ERROR_CODES
+  MEDIA_PERMISSION_ERROR_CODES,
+  STORAGE_ERROR_CODES
 } from '@/constants/account/userProfile';
 import { promptAlert } from '@/lib/alerts/promptAlert';
 import { getTranslated } from '@/lib/localization';
@@ -65,7 +66,7 @@ export const handleMediaPermissionErrorMessage = (errorCode: string): void => {
       title = 'app.permissions.camera.title';
       message = 'app.permissions.camera.message';
       break;
-      case MEDIA_PERMISSION_ERROR_CODES.request_library:
+    case MEDIA_PERMISSION_ERROR_CODES.request_library:
       title = 'app.permissions.media_library.title';
       message = 'app.permissions.media_library.message';
       break;
@@ -73,17 +74,59 @@ export const handleMediaPermissionErrorMessage = (errorCode: string): void => {
       title = 'app.permissions.camera_denied.title';
       message = 'app.permissions.camera_denied.message';
       break;
-
     case MEDIA_PERMISSION_ERROR_CODES.media_library_denied:
       title = 'app.permissions.media_library_denied.title';
       message = 'app.permissions.media_library_denied.message';
       break;
-
     default:
       title = 'global.errors.something_went_wrong.title';
       message = 'global.errors.something_went_wrong.message';
       break;
   }
+
+  if (title && message) {
+    promptAlert(getTranslated(title), getTranslated(message));
+  }
+};
+
+export const handleStorageErrorMessage = (errorCode: string): void => {
+  let title = '';
+  let message = '';
+
+  switch (errorCode) {
+    case STORAGE_ERROR_CODES.unauthenticated:
+      title = 'storage.errors.unauthenticated.title';
+      message = 'storage.errors.unauthenticated.message';
+      break;
+    case STORAGE_ERROR_CODES.unauthorized:
+      title = 'storage.errors.unauthorized.title';
+      message = 'storage.errors.unauthorized.message';
+      break;
+    case STORAGE_ERROR_CODES.object_not_found:
+      title = 'storage.errors.object_not_found.title';
+      message = 'storage.errors.object_not_found.message';
+      break;
+    case STORAGE_ERROR_CODES.quota_exceeded:
+      title = 'storage.errors.quota_exceeded.title';
+      message = 'storage.errors.quota_exceeded.message';
+      break;
+    case STORAGE_ERROR_CODES.retry_limit_exceeded:
+      title = 'storage.errors.retry_limit_exceeded.title';
+      message = 'storage.errors.retry_limit_exceeded.message';
+      break;
+    case STORAGE_ERROR_CODES.file_too_large:
+      title = 'storage.errors.file_too_large.title';
+      message = 'storage.errors.file_too_large.message';
+      break;
+    case STORAGE_ERROR_CODES.canceled:
+      // User cancelled the upload.
+      break;
+    default:
+      title = 'global.errors.something_went_wrong.title';
+      message = 'global.errors.something_went_wrong.message';
+      break;
+  }
+
   if (title && message) {
     promptAlert(getTranslated(title), getTranslated(message));
   }

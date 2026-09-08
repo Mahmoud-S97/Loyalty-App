@@ -50,7 +50,13 @@ const PROFILE_EDITABLE_FIELDS: (keyof EditUserProfileData)[] = [
 const ProfileScreen = (): JSX.Element => {
   const { is_dark } = useAppTheme();
   const { user } = useAuth();
-  const { userProfile, isProfileLoading, updateUserProfile } = useUser();
+  const {
+    userProfile,
+    isProfileLoading,
+    updateUserProfile,
+    uploadUserProfileImage,
+    deleteUserProfileImage
+  } = useUser();
 
   const [userData, setUserData] = useState<EditUserProfileData | null>(null);
   const [showDatePicker, setShowDatePicker] = useState<boolean>(false);
@@ -101,11 +107,25 @@ const ProfileScreen = (): JSX.Element => {
 
     const cleanedFullName = userData.fullName.trim().replace(/\s+/g, ' ');
 
+    // Existing photo URL or newly selected local image URI.
+    let existingImageURL = userData.photoURL;
+
+    // Photo changed -> upload the local image and get the Firebase URL.
+    if (existingImageURL && existingImageURL !== userProfile?.photoURL) {
+      const newImageURL = await uploadUserProfileImage(
+        user.uid,
+        existingImageURL
+      );
+      if (newImageURL) {
+        existingImageURL = newImageURL;
+      }
+    }
+
     await updateUserProfile(user.uid, {
       fullName: cleanedFullName,
       dateOfBirth: userData.dateOfBirth,
       gender: userData.gender,
-      photoURL: userData.photoURL
+      photoURL: existingImageURL
     });
   };
 
@@ -222,13 +242,36 @@ const ProfileScreen = (): JSX.Element => {
     }
   };
 
-  const handleRemovePhoto = async () => {
-    imageBottomSheetRef.current?.dismiss();
-    setProfileFieldHandler('photoURL', null);
+  const removeProfilePhotoConfirmation = () => {
+    promptAlert(
+      getTranslated('app.messages.profile_photo.ask_remove_photo'),
+      getTranslated('app.messages.profile_photo.remove_photo_confirmation'),
+      [
+        {
+          style: 'destructive',
+          text: getTranslated('common.remove'),
+          onPress: handleRemovePhoto
+        },
+        {
+          style: 'default',
+          text: getTranslated('common.cancel')
+        }
+      ]
+    );
+  };
 
-    // Remove photo from storage
-    // Update Firestore photoURL
-    // Update local userData
+  const handleRemovePhoto = async (): Promise<void> => {
+    imageBottomSheetRef.current?.dismiss();
+    if (!user?.uid) return;
+
+    const isImageRemoved = await deleteUserProfileImage(user.uid);
+
+    if (isImageRemoved) {
+      await updateUserProfile(user.uid, {
+        photoURL: null
+      });
+      setProfileFieldHandler('photoURL', null);
+    }
   };
 
   return (
@@ -432,7 +475,7 @@ const ProfileScreen = (): JSX.Element => {
               <TouchableOpacity
                 activeOpacity={0.7}
                 className='w-full h-14 flex-row items-center px-4 rounded-xl'
-                onPress={handleRemovePhoto}
+                onPress={removeProfilePhotoConfirmation}
               >
                 <AppText
                   withTranslation={false}
