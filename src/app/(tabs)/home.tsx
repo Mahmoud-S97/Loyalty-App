@@ -1,12 +1,5 @@
 import React, { JSX, useRef, useState } from 'react';
-import {
-  Alert,
-  I18nManager,
-  Text,
-  TouchableOpacity,
-  View,
-  Linking
-} from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { router } from 'expo-router';
 import * as Updates from 'expo-updates';
 import NfcManager from 'react-native-nfc-manager';
@@ -24,21 +17,24 @@ import { useThemeStyles } from '@/Hooks/theme/useThemeStyles';
 import i18n from '@/lib/localization/i18n';
 import { notificationData } from '@/dummy-data';
 import { useNFC } from '@/Hooks/loyalty/useNFC';
+import { useAppConfig } from '@/Hooks/app/useAppConfig';
 import { getTranslated } from '@/lib/localization';
 import { promptAlert } from '@/lib/alerts/promptAlert';
 import { NFCErrorCode } from '@/lib/nfc/nfc.errors';
 import { logger } from '@/lib/logger';
 import StampCollectedModal from '@/components/loyalty/modals/StampCollectedModal';
 import VoucherCollectedModal from '@/components/loyalty/modals/VoucherCollectedModal';
+import Spinner from '@/components/ui/globals/Spinner';
 
 const HomeScreen = (): JSX.Element => {
   const { SCREEN_WIDTH } = useScreenDimensions();
   const { currentThemeColor } = useAppTheme();
   const { shadow } = useThemeStyles();
+  const { scanForShop, isScanning, error } = useNFC();
+  const { appPreferences, isLoading } = useAppConfig();
 
   const isNotificationsButtonPressed = useRef<boolean>(false);
 
-  const { scanForShop, isScanning, error } = useNFC();
   const [isStampCollected, setIsStampCollected] = useState<boolean>(false);
   const [isVoucherCollected, setIsVoucherCollected] = useState<boolean>(false);
   const [stampsLeft, setStampsLeft] = useState<number>(4);
@@ -132,26 +128,32 @@ const HomeScreen = (): JSX.Element => {
         <AppText className='text-center text-lg my-2' weight='medium'>
           app.scan_NFC_or_QR
         </AppText>
-        <View
-          testID='HomeScreen:ScanningButtonsWrapper'
-          className='flex-column gap-4 w-[70%] self-center mt-10'
-        >
-          <MainButton
-            className='w-full bg-primary dark:bg-brand-800'
-            title='app.tap_NFC_tag'
-            icon='nfc'
-            iconColor={APP_COLORS.neutral[400]}
-            disabled={isScanning}
-            isLoading={isScanning}
-            onPress={handleNFCScan}
-          />
-          <MainButton
-            className='w-full bg-primary dark:bg-brand-800'
-            title='app.scan_QR'
-            icon='qr-code'
-            iconColor={APP_COLORS.neutral[400]}
-          />
-        </View>
+        {(appPreferences?.enableNFC || appPreferences?.enableQRCode) && (
+          <View
+            testID='HomeScreen:ScanningButtonsWrapper'
+            className='flex-column gap-4 w-[70%] self-center mt-10'
+          >
+            {appPreferences?.enableNFC && (
+              <MainButton
+                className='w-full bg-primary dark:bg-brand-800'
+                title='app.tap_NFC_tag'
+                icon='nfc'
+                iconColor={APP_COLORS.neutral[400]}
+                disabled={isScanning}
+                isLoading={isScanning}
+                onPress={handleNFCScan}
+              />
+            )}
+            {appPreferences?.enableQRCode && (
+              <MainButton
+                className='w-full bg-primary dark:bg-brand-800'
+                title='app.scan_QR'
+                icon='qr-code'
+                iconColor={APP_COLORS.neutral[400]}
+              />
+            )}
+          </View>
+        )}
         <StampCollectedModal
           visible={isStampCollected}
           stampsLeft={stampsLeft}
@@ -162,6 +164,7 @@ const HomeScreen = (): JSX.Element => {
           onClose={() => setIsVoucherCollected(false)}
         />
       </ContainerView>
+      {isLoading && <Spinner />}
     </ScreenView>
   );
 };
