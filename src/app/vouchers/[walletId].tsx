@@ -27,10 +27,10 @@ const VoucherDetailScreen = (): JSX.Element => {
     (wallet) => wallet.id === walletId
   );
   const vouchersList = selectedWalletItem?.loyaltyCards?.filter(
-    (voucher) => voucher.stamps >= selectedWalletItem.threshold
+    (voucher) => voucher.stamps >= selectedWalletItem.threshold || voucher.status === 'completed'
   );
   const loyaltyCardsList = selectedWalletItem?.loyaltyCards.filter(
-    (card) => card.stamps < selectedWalletItem.threshold
+    (card) => card.stamps < selectedWalletItem.threshold || card.status === 'active'
   );
 
   const threshold = selectedWalletItem?.threshold ?? 0;
@@ -89,8 +89,9 @@ const VoucherDetailScreen = (): JSX.Element => {
               <AppText
                 numberOfLines={2}
                 className='text-sm text-left text-neutral-700 dark:text-neutral-500'
+                withTranslation={false}
               >
-                {selectedWalletItem?.shopAddress}
+                {`${selectedWalletItem?.shopAddress.address1}, ${selectedWalletItem?.shopAddress.address2}, ${selectedWalletItem?.shopAddress.postCode}`}
               </AppText>
             </View>
           </View>

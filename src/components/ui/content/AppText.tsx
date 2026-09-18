@@ -1,4 +1,4 @@
-import React, { JSX, ReactNode } from 'react';
+import React, { JSX, PropsWithChildren, ReactNode } from 'react';
 import { Text } from 'react-native';
 import { cn } from '@/lib/nativeWindCSS/cn';
 import { getTranslated } from '@/lib/localization';
@@ -22,7 +22,7 @@ const AppText = ({
   withTranslation = true,
   translationParams,
   weight = 'regular'
-}: AppTextProps): JSX.Element => {
+}: PropsWithChildren<AppTextProps>): JSX.Element => {
   const renderChildren =
     withTranslation && typeof children === 'string'
       ? getTranslated(children, translationParams)

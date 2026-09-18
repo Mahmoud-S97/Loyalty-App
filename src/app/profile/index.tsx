@@ -71,6 +71,8 @@ const ProfileScreen = (): JSX.Element => {
   useEffect(() => {
     if (!userProfile) return;
 
+    console.log('User-PRofile: ', userProfile);
+
     setUserData({
       fullName: userProfile.fullName,
       email: userProfile.email,

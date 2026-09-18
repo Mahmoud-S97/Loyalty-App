@@ -1,7 +1,8 @@
+import { UserShopWalletDto } from "@/types";
+
 export interface LoyaltyCard {
   id: string;
   stamps: number;
-  createdAt: string;
 }
 
 export interface WalletItem {
@@ -9,7 +10,7 @@ export interface WalletItem {
   shopId: string;
   shopName: string;
   shopDescription: string;
-  shopAddress: string;
+  shopAddress: UserShopWalletDto['shopAddress'];
   shopLogo: string;
   shopCoverImage: string;
   rewardTitle: string;

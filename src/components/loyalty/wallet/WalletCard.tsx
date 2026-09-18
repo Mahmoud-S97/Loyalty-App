@@ -139,7 +139,7 @@ const WalletCard = ({
                 withTranslation={false}
                 className='w-full text-left text-neutral-700 dark:text-neutral-700'
               >
-                {shopAddress}
+                  {`${shopAddress.address1}, ${shopAddress.address2}`}
               </AppText>
             </View>
             <View className='w-14 h-14 flex-column justify-center items-center self-start bg-brand-400 rounded-full'>

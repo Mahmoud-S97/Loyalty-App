@@ -64,7 +64,7 @@ const ShopProfileScreen = (): JSX.Element => {
               {shopData?.shopDescription}
             </AppText>
             <AppText className='text-sm text-left text-neutral-700 dark:text-neutral-500'>
-              {shopData?.shopAddress}
+              {`${shopData?.shopAddress.address1}, ${shopData?.shopAddress.address2}, ${shopData?.shopAddress.postCode}`}
             </AppText>
           </View>
         </View>

@@ -1,7 +1,17 @@
+import { AddressDto } from "../shops";
+
+export type LoyaltyCardStatus =
+  | 'active'
+  | 'completed'
+  | 'redeemed';
+
 export interface LoyaltyCardDto {
   id: string;
   stamps: number;
   createdAt: string;
+  completedAt: string | null;
+  redeemedAt: string | null;
+  status: LoyaltyCardStatus;
 }
 
 export interface UserShopWalletDto {
@@ -9,7 +19,7 @@ export interface UserShopWalletDto {
   shopId: string;
   shopName: string;
   shopDescription: string;
-  shopAddress: string;
+  shopAddress: AddressDto;
   shopLogo: string;
   shopCoverImage: string;
   rewardTitle: string;
