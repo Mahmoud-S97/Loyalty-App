@@ -1,4 +1,4 @@
-import React, { JSX } from 'react';
+import React, { JSX, useEffect } from 'react';
 import { View, Image, ImageBackground } from 'react-native';
 import ScrollingView from '@/components/layout/screens/ScrollingView';
 import GoBackButton from '@/components/ui/globals/buttons/GoBackButton';
@@ -9,21 +9,32 @@ import AppText from '@/components/ui/content/AppText';
 import ContainerView from '@/components/layout/screens/ContainerView';
 import LoyaltyCardList from '@/components/loyalty/loyalty-cards/LoyaltyCardList';
 import ShopProfileScreenSkeleton from '@/components/ui/skeletons/shop/ShopProfileScreenSkeleton';
+import { useShops } from '@/Hooks/shops/useShops';
+import { useWallet } from '@/Hooks/wallet/useWallet';
+import { useAuth } from '@/Hooks/auth/useAuth';
+import { logger } from '@/lib/logger';
+import { LoyaltyCardDto, UserWalletDto } from '@/types';
 
 const ShopProfileScreen = (): JSX.Element => {
-  const { shopId } = useLocalSearchParams();
+  const { shopId } = useLocalSearchParams<{ shopId?: string }>();
+  const normalizedShopId = Array.isArray(shopId) ? shopId[0] : shopId
+  const { user } = useAuth();
+  const { shopData, isLoading } = useShops(normalizedShopId);
+  console.log('ShopData:::: ', shopData);
+  const {
+    wallet,
+    isLoading: isWalletLoading,
+  } = useWallet(user?.uid);
 
-  // Later will be handled through APIs call!
-  const isLoading = false;
+  const selectedWalletItem = wallet.find((wallet) => wallet.shopId === normalizedShopId);
 
-  const shopData = USER_WALLET.find((wallet) => wallet.shopId === shopId);
-  const loyaltyCardsList = shopData?.loyaltyCards.filter(
-    (card) => card.stamps < shopData.threshold
-  );
   const threshold = shopData?.threshold ?? 0;
-  const shopLogo = shopData?.shopLogo;
 
-  if (isLoading) {
+  const loyaltyCardsList = selectedWalletItem?.loyaltyCards.filter(
+    (card) => card.stamps < threshold || card.status === 'active'
+  );
+
+  if (isLoading || isWalletLoading) {
     return <ShopProfileScreenSkeleton />;
   }
 
@@ -31,8 +42,8 @@ const ShopProfileScreen = (): JSX.Element => {
     <ScrollingView>
       <View className='w-full h-[220px] relative'>
         <ImageBackground
-          source={{ uri: shopData?.shopCoverImage }}
-          alt={shopData?.shopName}
+          source={{ uri: shopData?.coverImage }}
+          alt={shopData?.name}
           resizeMode='cover'
           className='flex-1'
         >
@@ -43,10 +54,10 @@ const ShopProfileScreen = (): JSX.Element => {
         </ImageBackground>
       </View>
       <ContainerView className='items-start pb-2'>
-        <View className='flex flex-row items-center gap-4'>
+        <View className='flex flex-row items-start gap-4'>
           <Image
-            source={{ uri: shopData?.shopLogo }}
-            alt={shopData?.shopName}
+            source={{ uri: shopData?.logo }}
+            alt={shopData?.name}
             className='size-20 rounded-xl'
             resizeMode='cover'
           />
@@ -55,27 +66,27 @@ const ShopProfileScreen = (): JSX.Element => {
               className='text-xl text-left text-neutral-900 dark:text-neutral-400'
               weight='bold'
             >
-              {shopData?.shopName}
+              {shopData?.name}
             </AppText>
             <AppText
               className='text-lg text-left text-neutral-900 dark:text-neutral-400'
               weight='medium'
             >
-              {shopData?.shopDescription}
+              {shopData?.specialties.join(', ')}
             </AppText>
             <AppText className='text-sm text-left text-neutral-700 dark:text-neutral-500'>
-              {`${shopData?.shopAddress.address1}, ${shopData?.shopAddress.address2}, ${shopData?.shopAddress.postCode}`}
+              {`${shopData?.address.address1}, ${shopData?.address.address2}, ${shopData?.address.postCode}`}
             </AppText>
           </View>
         </View>
         <AppText className='text-sm mt-4 text-left text-neutral-800 dark:text-neutral-400'>
-          {shopData?.shopDescription}
+          {shopData?.description}
         </AppText>
       </ContainerView>
       <LoyaltyCardList
         loyaltyCardsList={loyaltyCardsList}
         threshold={threshold}
-        shopLogo={shopLogo}
+        shopLogo={shopData?.logo}
       />
     </ScrollingView>
   );

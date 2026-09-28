@@ -30,7 +30,7 @@ import { useAppTheme } from '@/Hooks/theme/useAppTheme';
 import { promptAlert } from '@/lib/alerts/promptAlert';
 import { getTranslated } from '@/lib/localization';
 import { handleMediaPermissionErrorMessage } from '@/utils/userProfile';
-import { MEDIA_PERMISSION_ERROR_CODES } from '@/constants/account/userProfile';
+import { MEDIA_PERMISSION_ERROR_CODES } from '@/constants';
 
 type EditUserProfileData = {
   fullName: string;
@@ -70,8 +70,6 @@ const ProfileScreen = (): JSX.Element => {
 
   useEffect(() => {
     if (!userProfile) return;
-
-    console.log('User-PRofile: ', userProfile);
 
     setUserData({
       fullName: userProfile.fullName,

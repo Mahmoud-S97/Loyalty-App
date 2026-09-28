@@ -71,10 +71,10 @@ const WalletCard = ({
   }, []);
 
   const stamps =
-    loyaltyCards.find((card) => card.stamps < threshold)?.stamps ?? threshold;
+    loyaltyCards?.find((card) => card.status === 'active')?.stamps ?? threshold;
 
   const vouchersLength = loyaltyCards?.filter(
-    (voucher) => voucher.stamps >= threshold
+    (voucher) => voucher.status === 'completed'
   ).length;
 
   const rawPercent = (stamps / threshold) * 100;

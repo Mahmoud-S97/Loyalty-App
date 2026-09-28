@@ -12,24 +12,13 @@ type LoyaltyListProps = {
   shopLogo: string | undefined;
 };
 
-type LoyaltyCardProps = {
-  id: string;
-  stamps: number;
-  threshold: number;
-  loyaltyIcon: ImageSourcePropType | undefined;
-  shopLogo: string | undefined;
-  title?: string;
-  description?: string;
-  className?: string;
-};
-
 const LoyaltyCardList = ({
   loyaltyCardsList,
   threshold,
   shopLogo
 }: LoyaltyListProps): ReactNode => {
   const renderVoucherItem = ({ item }: { item: LoyaltyCardTypes }) => {
-    const loyaltyCardData: LoyaltyCardProps = {
+    const loyaltyCardData = {
       ...item,
       loyaltyIcon: LOCAL_IMAGES.LOGO_TRANS,
       shopLogo,
@@ -45,7 +34,18 @@ const LoyaltyCardList = ({
   const CARD_WIDTH = SCREEN_WIDTH * 0.82;
   const SPACING = 16;
 
-  if (loyaltyCardsList?.length === 0) return null;
+  const RenderEmptyCard = () => {
+    const initialData = {
+      id: '1',
+      loyaltyIcon: LOCAL_IMAGES.LOGO_TRANS,
+      stamps: 0,
+      shopLogo,
+      threshold,
+      title: 'app.reward_one_free_haircut',
+      description: 'app.redeem_now'
+    };
+    return <LoyaltyCard {...initialData} />;
+  };
 
   return (
     <View className='flex-1 mt-2 pb-20'>
@@ -73,6 +73,7 @@ const LoyaltyCardList = ({
         maxToRenderPerBatch={4}
         windowSize={5}
         removeClippedSubviews
+        ListEmptyComponent={() => <RenderEmptyCard />}
       />
     </View>
   );

@@ -13,25 +13,29 @@ import { useThemeStyles } from '@/Hooks/theme/useThemeStyles';
 import VouchersList from '@/components/loyalty/vouchers/VouchersList';
 import LoyaltyCardList from '@/components/loyalty/loyalty-cards/LoyaltyCardList';
 import VoucherDetailScreenSkeleton from '@/components/ui/skeletons/wallet/voucher-detail-screen/VoucherDetailScreenSkeleton';
+import { useWallet } from '@/Hooks/wallet/useWallet';
+import { useAuth } from '@/Hooks/auth/useAuth';
 
 const VoucherDetailScreen = (): JSX.Element => {
   const { cardShadow } = useThemeStyles();
   const { walletId } = useLocalSearchParams();
+  const { user } = useAuth();
+  const { wallet, isLoading } = useWallet(user?.uid);
 
   const isShopProfileButtonPressed = useRef<boolean>(false);
 
-  // Later will be handled through APIs call!
-  const isLoading = false;
-
-  const selectedWalletItem = USER_WALLET.find(
-    (wallet) => wallet.id === walletId
-  );
+  const selectedWalletItem = wallet.find((wallet) => wallet.id === walletId);
   const vouchersList = selectedWalletItem?.loyaltyCards?.filter(
-    (voucher) => voucher.stamps >= selectedWalletItem.threshold || voucher.status === 'completed'
+    (voucher) =>
+      voucher.stamps >= selectedWalletItem.threshold ||
+      voucher.status === 'completed'
   );
   const loyaltyCardsList = selectedWalletItem?.loyaltyCards.filter(
-    (card) => card.stamps < selectedWalletItem.threshold || card.status === 'active'
+    (card) =>
+      card.stamps < selectedWalletItem.threshold || card.status === 'active'
   );
+
+  console.log('loyaltyCardsList:::: ', loyaltyCardsList);
 
   const threshold = selectedWalletItem?.threshold ?? 0;
   const shopLogo = selectedWalletItem?.shopLogo;
@@ -65,7 +69,7 @@ const VoucherDetailScreen = (): JSX.Element => {
           />
         </ImageBackground>
       </View>
-      <ContainerView className='flex-0 relative pt-24'>
+      <ContainerView className='flex-0 relative pt-28'>
         <View
           style={[cardShadow, { borderWidth: 0.5 }]}
           className='w-full min-h-130 flex flex-col gap-4 px-4 py-6 border-neutral-500 dark:border-neutral-700 rounded-xl bg-neutral-100 dark:bg-secondary absolute -top-16 z-100'

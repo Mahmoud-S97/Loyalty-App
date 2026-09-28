@@ -2,10 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { UserProfile } from '@/types/user';
 import { userService } from '@/services/firebase/user.service';
 import { storageService } from '@/services/firebase/storage.service';
-import {
-  FIRESTORE_ERROR_CODES,
-  STORAGE_ERROR_CODES
-} from '@/constants/account/userProfile';
+import { FIRESTORE_ERROR_CODES, STORAGE_ERROR_CODES } from '@/constants';
 import {
   handleFirestoreErrorMessage,
   handleStorageErrorMessage
@@ -34,7 +31,7 @@ export const useUser = () => {
       const photoURL = await storageService.uploadProfileImage(uid, filePath);
       return photoURL;
     } catch (error: any) {
-      const errorCode = error.code || STORAGE_ERROR_CODES.something_went_wrong;
+      const errorCode = error?.code;
       handleStorageErrorMessage(errorCode);
       return null;
     } finally {
@@ -48,7 +45,7 @@ export const useUser = () => {
       await storageService.deleteProfileImage(uid);
       return true;
     } catch (error: any) {
-      const errorCode = error.code || STORAGE_ERROR_CODES.something_went_wrong;
+      const errorCode = error?.code;
       handleStorageErrorMessage(errorCode);
       return false;
     } finally {
@@ -69,8 +66,7 @@ export const useUser = () => {
       setUserProfile(profileData);
       return profileData;
     } catch (error: any) {
-      const errorCode =
-        error.code || FIRESTORE_ERROR_CODES.something_went_wrong;
+      const errorCode = error?.code;
       handleFirestoreErrorMessage(errorCode);
       return null;
     } finally {
@@ -88,8 +84,7 @@ export const useUser = () => {
       await userService.createUserProfile(uid, data);
       await getUserProfile(uid);
     } catch (error: any) {
-      const errorCode =
-        error.code || FIRESTORE_ERROR_CODES.something_went_wrong;
+      const errorCode = error?.code;
       handleFirestoreErrorMessage(errorCode);
     } finally {
       setIsLoading(false);
@@ -106,8 +101,7 @@ export const useUser = () => {
       await userService.updateUserProfile(uid, data);
       await getUserProfile(uid);
     } catch (error: any) {
-      const errorCode =
-        error.code || FIRESTORE_ERROR_CODES.something_went_wrong;
+      const errorCode = error?.code;
       handleFirestoreErrorMessage(errorCode);
     } finally {
       setIsLoading(false);
@@ -121,8 +115,7 @@ export const useUser = () => {
       await userService.deleteUserProfile(uid);
       setUserProfile(null);
     } catch (error: any) {
-      const errorCode =
-        error.code || FIRESTORE_ERROR_CODES.something_went_wrong;
+      const errorCode = error?.code;
       handleFirestoreErrorMessage(errorCode);
     } finally {
       setIsLoading(false);

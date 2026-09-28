@@ -1,5 +1,5 @@
 import { LOCAL_IMAGES } from '@/constants';
-import { UserShopWalletDto } from '@/types';
+import { UserWalletDto } from '@/types';
 
 const barbershoMockImage = require('@/assets/images/app/mock/snipz-barbershop.jpeg');
 
@@ -27,7 +27,7 @@ export const notificationData = [
   }
 ];
 
-export const USER_WALLET: UserShopWalletDto[] = [
+export const USER_WALLET: UserWalletDto[] = [
   {
     id: 'wallet_1',
 

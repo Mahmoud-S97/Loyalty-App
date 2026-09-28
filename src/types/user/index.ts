@@ -1,4 +1,4 @@
-import { RedemptionDto, UserShopWalletDto } from "../cards";
+import { RedemptionDto, UserWalletDto } from "../wallet";
 
 export type Gender = 'male' | 'female' | 'other' | 'rather_not_say';
 export interface UserProfile {
@@ -8,7 +8,7 @@ export interface UserProfile {
   gender: Gender | string;
   dateOfBirth: string;
   photoURL: string | null;
-  userWallet: UserShopWalletDto[] | null;
+  userWallet: UserWalletDto[] | null;
   voucherRedemtion: RedemptionDto[] | null;
   createdAt?: unknown;
   updatedAt?: unknown;

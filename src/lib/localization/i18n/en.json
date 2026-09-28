@@ -270,6 +270,30 @@
         "title": "Photo Access Denied",
         "message": "Photo access has been denied. Please enable photo access from your device settings to choose a profile photo."
       }
+    },
+    "userWallet": {
+      "errors": {
+        "unauthenticated": {
+          "title": "Sign in required",
+          "message": "Please sign in to access your wallet."
+        },
+        "unauthorized": {
+          "title": "Access denied",
+          "message": "You don't have permission to access this wallet."
+        },
+        "not_found": {
+          "title": "Wallet not found",
+          "message": "We couldn't find the requested wallet. Please try again."
+        },
+        "unavailable": {
+          "title": "Service unavailable",
+          "message": "The wallet service is temporarily unavailable. Please try again later."
+        },
+        "network_error": {
+          "title": "Connection problem",
+          "message": "We couldn't connect to your wallet. Please check your internet connection and try again."
+        }
+      }
     }
   },
   "prepositions": {

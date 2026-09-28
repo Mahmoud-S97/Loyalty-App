@@ -1,8 +1,8 @@
 import {
-  FIRESTORE_ERROR_CODES,
   MEDIA_PERMISSION_ERROR_CODES,
-  STORAGE_ERROR_CODES
-} from '@/constants/account/userProfile';
+  STORAGE_ERROR_CODES,
+  FIRESTORE_ERROR_CODES
+} from '@/constants';
 import { promptAlert } from '@/lib/alerts/promptAlert';
 import { getTranslated } from '@/lib/localization';
 

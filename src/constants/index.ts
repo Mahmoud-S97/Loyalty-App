@@ -3,3 +3,4 @@ export * from './images';
 export * from './account';
 export * from './storage';
 export * from './auth';
+export * from './firestore'

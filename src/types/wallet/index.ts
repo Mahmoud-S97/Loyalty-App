@@ -14,7 +14,7 @@ export interface LoyaltyCardDto {
   status: LoyaltyCardStatus;
 }
 
-export interface UserShopWalletDto {
+export interface UserWalletDto {
   id: string;
   shopId: string;
   shopName: string;
