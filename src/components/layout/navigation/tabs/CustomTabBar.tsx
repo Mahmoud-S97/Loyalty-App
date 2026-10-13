@@ -2,12 +2,10 @@ import React, { JSX, useRef } from 'react';
 import {
   View,
   TouchableOpacity,
-  Image,
   StyleSheet,
   Animated,
   Easing
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { CurvedTabBarBackground } from './CurvedTabBarBackground';
 import { APP_COLORS } from '@/constants/theme';
@@ -17,11 +15,17 @@ import type { BottomTabBarProps } from 'expo-router/build/react-navigation/botto
 import { cn } from '@/lib/nativeWindCSS/cn';
 import { useAppTheme } from '@/Hooks/theme/useAppTheme';
 import { useThemeStyles } from '@/Hooks/theme/useThemeStyles';
+import AppIcon from '@/components/ui/globals/icons/AppIcon';
+
+const TAB_ICONS: any = {
+  wallet: 'wallet',
+  shops: 'search',
+  account: 'person'
+};
 
 const CustomTabBar = ({
   state,
-  navigation,
-  descriptors
+  navigation
 }: BottomTabBarProps): JSX.Element => {
   const { is_dark } = useAppTheme();
   const { shadow } = useThemeStyles();
@@ -33,6 +37,8 @@ const CustomTabBar = ({
     inputRange: [0, 1],
     outputRange: ['0deg', '360deg']
   });
+
+  const isHomeFocused = state.routes[state.index]?.name === 'home';
 
   const animateBrandOnce = () => {
     rotateAnimation.setValue(0);
@@ -60,6 +66,51 @@ const CustomTabBar = ({
     ]).start();
   };
 
+  const renderTab = (route: any, index: number) => {
+    const isFocused = state.index === index;
+    const icon = TAB_ICONS[route.name];
+
+    if (!icon) return null;
+
+    return (
+      <TouchableOpacity
+        testID={`CustomTabBar:Tab-${route.name}`}
+        activeOpacity={0.8}
+        key={route.key}
+        className='flex-1 items-center justify-center'
+        onPress={() => {
+          Haptics.selectionAsync();
+          navigation.navigate(route.name);
+        }}
+      >
+        <AppIcon
+          type='Ionicons'
+          name={isFocused ? icon : `${icon}-outline`}
+          size={28}
+          color={
+            isFocused
+              ? is_dark
+                ? APP_COLORS.brand[500]
+                : APP_COLORS.primary
+              : APP_COLORS.neutral[700]
+          }
+        />
+
+        <AppText
+          className={cn(
+            'text-xs text-center leading-[1.2] text-neutral-700 dark:text-neutral-700',
+            {
+              'text-primary dark:text-brand-500': isFocused
+            }
+          )}
+          weight='semiBold'
+        >
+          {`app.${route.name}`}
+        </AppText>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <View
       testID='CustomTabBar:View'
@@ -68,57 +119,48 @@ const CustomTabBar = ({
       <View style={StyleSheet.absoluteFill}>
         <CurvedTabBarBackground />
       </View>
+
+      {/* Bottom navigation content */}
       <View
         testID='CustomTabBar:ContainerView'
-        className='w-full h-[68px] flex-row justify-between items-center pb-3'
+        className='w-full h-[76px] flex-row items-center pb-3'
       >
-        {state.routes.map((route: any, index: number) => {
-          if (route.name === 'home')
-            return <View key={route.key} className='flex-0 w-0' />;
+        {/* LEFT SIDE */}
+        <View className='flex-row flex-1 h-full pl-6'>
+          {state.routes.map((route, index) => {
+            if (route.name === 'wallet' || route.name === 'shops') {
+              return renderTab(route, index);
+            }
 
-          const isFocused = state.index === index;
-          const icon = route.name === 'wallet' ? 'wallet' : 'person';
+            return null;
+          })}
+        </View>
 
-          return (
-            <TouchableOpacity
-              testID={`CustomTabBar:Tab-${route.name}`}
-              activeOpacity={0.8}
-              key={route.key}
-              className='flex-1 items-center justify-center'
-              onPress={() => {
-                Haptics.selectionAsync();
-                navigation.navigate(route.name);
-              }}
-            >
-              <Ionicons
-                name={isFocused ? icon : `${icon}-outline`}
-                size={28}
-                color={
-                  isFocused
-                    ? is_dark
-                      ? APP_COLORS.brand[500]
-                      : APP_COLORS.primary
-                    : APP_COLORS.neutral[700]
-                }
-              />
-              <AppText
-                className={cn(
-                  'text-xs text-neutral-700 dark:text-neutral-700',
-                  { 'text-primary dark:text-brand-500': isFocused }
-                )}
-                weight='semiBold'
-              >{`app.${route.name}`}</AppText>
-            </TouchableOpacity>
-          );
-        })}
+        {/* CENTER SPACE */}
+        <View className='w-[68px] h-full' />
+
+        {/* RIGHT SIDE */}
+        <View className='flex-1 h-full'>
+          {state.routes.map((route, index) => {
+            if (route.name === 'account') {
+              return renderTab(route, index);
+            }
+
+            return null;
+          })}
+        </View>
       </View>
+
+      {/* CENTER HOME BUTTON */}
       <TouchableOpacity
         testID='CustomTabBar:CircleButton'
         activeOpacity={0.9}
         style={shadow}
         className={cn(
           'w-[64px] h-[64px] absolute -top-[32px] self-center items-center justify-center rounded-full bg-neutral-300 dark:bg-secondary',
-          { 'bg-primary dark:bg-primary': state.index === 0 }
+          {
+            'bg-primary dark:bg-primary': isHomeFocused
+          }
         )}
         onPress={() => {
           animateBrandOnce();

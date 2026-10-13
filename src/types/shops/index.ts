@@ -1,5 +1,4 @@
 export interface OpeningHoursDto {
-  isOpen: boolean;
   openAt: string | null;
   closeAt: string | null;
 }

@@ -1,34 +1,38 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ShopDto } from '@/types';
 import { shopService } from '@/services/firebase/shop.service';
 import { logger } from '@/lib/logger';
 
-export const useShops = (shopId: string | undefined) => {
+export const useShops = (shopId?: string | undefined) => {
   const [shops, setShops] = useState<ShopDto[]>([]);
-  const [shopData, setShopData] = useState<ShopDto | null>(null)
+  const [shopData, setShopData] = useState<ShopDto | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [searchedShop, setSearchedShop] = useState<string>('');
 
-  useEffect(() => {
-    getAllShops();
-  }, []);
+  const isFirstSearch = useRef<boolean>(true);
 
-  useEffect(() => {
-    getShopById();
-  }, []);
+  const getShops = useCallback(
+    async (searchTerm?: string): Promise<ShopDto[]> => {
+      try {
+        setIsLoading(true);
+        let availableShops = [];
 
-  const getAllShops = async (): Promise<ShopDto[]> => {
-    try {
-      setIsLoading(true);
-      const availableShops = await shopService.getShops();
-      setShops(availableShops);
-      return availableShops;
-    } catch (error: any) {
-      logger.log('Error while fetching the shops: ', error);
-      return [];
-    } finally {
-      setIsLoading(false);
-    }
-  };
+        if (!searchTerm?.trim()) {
+          availableShops = await shopService.getShops();
+        } else {
+          availableShops = await shopService.getFilteredShops(searchTerm);
+        }
+        setShops(availableShops);
+        return availableShops;
+      } catch (error: any) {
+        logger.log('Error while fetching the shops: ', error);
+        return [];
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    []
+  );
 
   const getShopById = useCallback(async (): Promise<ShopDto | null> => {
     if (!shopId?.trim()) {
@@ -79,11 +83,34 @@ export const useShops = (shopId: string | undefined) => {
     }
   };
 
+  useEffect(() => {
+    getShops();
+  }, [getShops]);
+
+  useEffect(() => {
+    if (isFirstSearch.current) {
+      isFirstSearch.current = false;
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      getShops(searchedShop);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [searchedShop, getShops]);
+
+  useEffect(() => {
+    getShopById();
+  }, [shopId]);
+
   return {
-    getAllShops,
+    getShops,
     getShopById,
     createShopProfile,
     updateShopProfile,
+    setSearchedShop,
+    searchedShop,
     shops,
     shopData,
     isLoading

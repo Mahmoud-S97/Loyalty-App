@@ -1,5 +1,6 @@
 import { I18nManager, Platform } from 'react-native';
 import i18n from '@/lib/localization/i18n';
+import { ShopDto } from '@/types';
 
 export type AppFontWeight = 'regular' | 'medium' | 'semiBold' | 'bold';
 
@@ -37,4 +38,40 @@ export const getFormattedDate = (selectedDate: Date | string): string => {
   const formattedDate = `${year}-${month}-${day}`;
 
   return formattedDate;
+};
+
+export const getShopIsOpen = (
+  openingHours: ShopDto['openingHours']
+): boolean => {
+  const now = new Date();
+
+  const dayNames = [
+    'sunday',
+    'monday',
+    'tuesday',
+    'wednesday',
+    'thursday',
+    'friday',
+    'saturday'
+  ] as const;
+
+  const todayName = dayNames[now.getDay()];
+  const todayHours = openingHours[todayName];
+
+  if (!todayHours.openAt || !todayHours.closeAt) {
+    return false;
+  }
+
+  const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+  const [openHour, openMinute] = todayHours.openAt.split(':').map(Number);
+
+  const [closeHour, closeMinute] = todayHours.closeAt.split(':').map(Number);
+
+  const openMinutes = openHour * 60 + openMinute;
+  const closeMinutes = closeHour * 60 + closeMinute;
+
+  const isOpen = currentMinutes >= openMinutes && currentMinutes < closeMinutes;
+
+  return isOpen;
 };

@@ -10,6 +10,7 @@ export default function TabsLayout() {
     <Tabs screenOptions={{ headerShown: false }} initialRouteName='home' tabBar={(props) => <CustomTabBar {...props} />}>
       <Tabs.Screen name='home' />
       <Tabs.Screen name='wallet' />
+      <Tabs.Screen name='shops' />
       <Tabs.Screen name='account' />
     </Tabs>
   );

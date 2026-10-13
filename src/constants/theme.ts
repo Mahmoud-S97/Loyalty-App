@@ -37,7 +37,7 @@ export const APP_COLORS = {
   }
 }
 
-export const shadowStyle = (isDark: boolean): ViewStyle => Platform.select({
+export const shadowStyle = (isDark: boolean): any => Platform.select({
   ios: {
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 8 },

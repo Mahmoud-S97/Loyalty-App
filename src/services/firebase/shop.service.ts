@@ -6,7 +6,9 @@ import {
   FieldValue,
   updateDoc,
   getDocs,
-  getDoc
+  getDoc,
+  where,
+  query
 } from '@react-native-firebase/firestore';
 import { logger } from '@/lib/logger';
 import { ShopDto } from '@/types';
@@ -23,6 +25,20 @@ export const shopService = {
       ...doc.data()
     })) as ShopDto[];
     logger.log('Available-Shops: ', availableShops);
+    return availableShops;
+  },
+  getFilteredShops: async (searchTerm: string): Promise<ShopDto[]> => {
+    const searchQuery = query(
+      shopsCollection,
+      where('name', '>=', searchTerm.toLowerCase()),
+      where('name', '<=', searchTerm.toLowerCase() + '\uf8ff`')
+    );
+    const shopSnapshot = await getDocs(searchQuery);
+    const availableShops = shopSnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data()
+    })) as ShopDto[];
+    logger.log('Filtered-Shops: ', availableShops);
     return availableShops;
   },
   getShopById: async (shopId: string): Promise<ShopDto | null> => {

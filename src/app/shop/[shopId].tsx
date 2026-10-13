@@ -14,13 +14,15 @@ import { useWallet } from '@/Hooks/wallet/useWallet';
 import { useAuth } from '@/Hooks/auth/useAuth';
 import { logger } from '@/lib/logger';
 import { LoyaltyCardDto, UserWalletDto } from '@/types';
+import { getShopIsOpen } from '@/utils';
+import { cn } from '@/lib/nativeWindCSS/cn';
 
 const ShopProfileScreen = (): JSX.Element => {
   const { shopId } = useLocalSearchParams<{ shopId?: string }>();
   const normalizedShopId = Array.isArray(shopId) ? shopId[0] : shopId
   const { user } = useAuth();
   const { shopData, isLoading } = useShops(normalizedShopId);
-  console.log('ShopData:::: ', shopData);
+
   const {
     wallet,
     isLoading: isWalletLoading,
@@ -37,6 +39,8 @@ const ShopProfileScreen = (): JSX.Element => {
   if (isLoading || isWalletLoading) {
     return <ShopProfileScreenSkeleton />;
   }
+
+  const isOpen = shopData && getShopIsOpen(shopData.openingHours);
 
   return (
     <ScrollingView>
@@ -62,12 +66,27 @@ const ShopProfileScreen = (): JSX.Element => {
             resizeMode='cover'
           />
           <View className='flex-1 flex-col'>
-            <AppText
-              className='text-xl text-left text-neutral-900 dark:text-neutral-400'
+            <View className='flex flex-col'>
+              <AppText
+              className='text-xl text-left capitalize text-neutral-900 dark:text-neutral-400'
               weight='bold'
             >
               {shopData?.name}
             </AppText>
+            {isOpen && (
+              <AppText
+              weight='semiBold'
+              className={cn(
+                'text-sm text-left',
+                isOpen
+                  ? 'text-green-600 dark:text-green-600'
+                  : 'text-orange-700 dark:text-orange-700'
+              )}
+            >
+              {isOpen ? 'app.open' : 'app.closed'}
+            </AppText>
+            )}
+            </View>
             <AppText
               className='text-lg text-left text-neutral-900 dark:text-neutral-400'
               weight='medium'
