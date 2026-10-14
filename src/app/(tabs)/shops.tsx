@@ -42,13 +42,13 @@ const ShopsScreens = (): JSX.Element => {
         />
         {searchedShop?.trim() && (
           <TouchableOpacity
+          className='flex absolute end-2 rounded-full p-2 items-center justify-center'
             activeOpacity={0.7}
             onPress={() => setSearchedShop('')}
           >
             <AppIcon
               type='Ionicons'
               name='close'
-              className='size-6 absolute me-16'
               color={
                 is_dark ? APP_COLORS.neutral[400] : APP_COLORS.neutral[700]
               }
