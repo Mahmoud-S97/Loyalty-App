@@ -27,7 +27,7 @@
       "favicon": "./src/assets/images/startup/icon.png"
     },
     "plugins": [
-      "./plugins/withNFC",
+      "./plugins/withNFC.ts",
       "expo-router",
       [
         "expo-font",
@@ -81,6 +81,12 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "0e269801-742a-4bb7-a6ac-e9ee4889b9aa"
+      }
     }
   }
 }

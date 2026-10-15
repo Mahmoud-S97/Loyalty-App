@@ -1,9 +1,10 @@
 import {
-  ConfigPlugin,
   withAndroidManifest,
   withEntitlementsPlist,
   withInfoPlist,
-} from 'expo/config-plugins';
+} from 'expo/config-plugins.js';
+
+import type { ConfigPlugin } from 'expo/config-plugins.js';
 
 const withNFC: ConfigPlugin = (config) => {
   // Android
