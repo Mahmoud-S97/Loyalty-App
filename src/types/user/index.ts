@@ -1,10 +1,13 @@
 import { RedemptionDto, UserWalletDto } from "../wallet";
 
 export type Gender = 'male' | 'female' | 'other' | 'rather_not_say';
+
+export type UserRole = 'user' | 'admin';
 export interface UserProfile {
   uid: string;
   fullName: string;
   email: string;
+  role: UserRole;
   gender: Gender | string;
   dateOfBirth: string;
   photoURL: string | null;

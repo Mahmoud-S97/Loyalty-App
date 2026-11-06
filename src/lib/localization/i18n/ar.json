@@ -206,7 +206,16 @@
       "rather_not_say": "بل لا أقول"
     },
     "nfc": {
+      "write": {
+        "button": "كتابة وسم NFC",
+        "success_title": "تمت كتابة وسم NFC!",
+        "success_message": "تمت كتابة وسم المحل بنجاح."
+      },
       "errors": {
+        "NFC_WRITE_FAILED": {
+          "title": "فشلت كتابة وسم NFC",
+          "message": "تعذرت كتابة معرّف المحل على وسم NFC هذه. يرجى المحاولة مرة أخرى."
+        },
         "NFC_NOT_SUPPORTED": {
           "title": "تقنية NFC غير مدعومة",
           "message": "تقنية NFC غير مدعومة على هذا الجهاز."

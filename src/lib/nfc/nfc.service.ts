@@ -104,6 +104,8 @@ class NFCService {
       if (!text.startsWith(BESTIE_NFC_PREFIX)) {
         throw new NFCError(NFCErrorCode.INVALID_TAG);
       }
+      
+      logger.log('Full-Shop-ID: ', text);
 
       const shopId = text.replace(BESTIE_NFC_PREFIX, '').trim();
 

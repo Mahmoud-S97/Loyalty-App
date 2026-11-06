@@ -206,7 +206,16 @@
       "rather_not_say": "Rather not say"
     },
     "nfc": {
+      "write": {
+        "button": "Write NFC Tag",
+        "success_title": "NFC Tag Written!",
+        "success_message": "The shop NFC tag has been written successfully."
+      },
       "errors": {
+        "NFC_WRITE_FAILED": {
+          "title": "Failed to Write NFC Tag",
+          "message": "We couldn't write the shop ID to this NFC tag. Please try again."
+        },
         "NFC_NOT_SUPPORTED": {
           "title": "NFC Not Supported",
           "message": "NFC is not supported on this device."

@@ -110,13 +110,26 @@ const ShopCard = ({
             resizeMode='cover'
             className='flex-1 relative'
           >
-            <Image
-              className='size-16 rounded-xl absolute bottom-4 start-4 border border-neutral-800'
-              resizeMode='cover'
-              source={{ uri: logo }}
-              alt={name}
-              style={shadow}
-            />
+            {logo ? (
+              <View className='flex rounded-xl absolute bottom-4 start-4 border border-neutral-800 items-center justify-center overflow-hidden'>
+                <Image
+                  className='size-16 '
+                  resizeMode='cover'
+                  source={{ uri: logo }}
+                  alt={name}
+                  style={shadow}
+                />
+              </View>
+            ) : (
+              <View className='flex size-16 absolute bottom-4 start-4 rounded-xl items-center justify-center bg-accent/80'>
+                <AppText
+                  className='text-3xl text-neutral-900 dark:text-neutral-800'
+                  weight='semiBold'
+                >
+                  {name?.charAt(0)}
+                </AppText>
+              </View>
+            )}
           </ImageBackground>
         </View>
 
@@ -155,7 +168,7 @@ const ShopCard = ({
             <AppText
               weight='semiBold'
               className={cn(
-                'text-sm text-left mt-1',
+                'text-xs text-left mt-1',
                 isOpen
                   ? 'text-green-600 dark:text-green-600'
                   : 'text-orange-700 dark:text-orange-700'

@@ -1,5 +1,6 @@
 import React, { JSX, useEffect } from 'react';
 import { View, Image, ImageBackground } from 'react-native';
+import NfcManager from 'react-native-nfc-manager';
 import ScrollingView from '@/components/layout/screens/ScrollingView';
 import GoBackButton from '@/components/ui/globals/buttons/GoBackButton';
 import { useLocalSearchParams } from 'expo-router';
@@ -12,23 +13,30 @@ import ShopProfileScreenSkeleton from '@/components/ui/skeletons/shop/ShopProfil
 import { useShops } from '@/Hooks/shops/useShops';
 import { useWallet } from '@/Hooks/wallet/useWallet';
 import { useAuth } from '@/Hooks/auth/useAuth';
+import { useUser } from '@/Hooks/user/useUser';
 import { logger } from '@/lib/logger';
 import { LoyaltyCardDto, UserWalletDto } from '@/types';
 import { getShopIsOpen } from '@/utils';
 import { cn } from '@/lib/nativeWindCSS/cn';
+import { useNFC } from '@/Hooks/loyalty/useNFC';
+import { getTranslated } from '@/lib/localization';
+import { NFCErrorCode } from '@/lib/nfc/nfc.errors';
+import { promptAlert } from '@/lib/alerts/promptAlert';
+import WriteNfcTagButton from '@/components/ui/globals/buttons/WriteNfcTagButton';
 
 const ShopProfileScreen = (): JSX.Element => {
   const { shopId } = useLocalSearchParams<{ shopId?: string }>();
-  const normalizedShopId = Array.isArray(shopId) ? shopId[0] : shopId
+  const normalizedShopId = Array.isArray(shopId) ? shopId[0] : shopId;
   const { user } = useAuth();
+  const { userProfile } = useUser();
   const { shopData, isLoading } = useShops(normalizedShopId);
+  const { writeNewNfcTag, isScanning } = useNFC();
 
-  const {
-    wallet,
-    isLoading: isWalletLoading,
-  } = useWallet(user?.uid);
+  const { wallet, isLoading: isWalletLoading } = useWallet(user?.uid);
 
-  const selectedWalletItem = wallet.find((wallet) => wallet.shopId === normalizedShopId);
+  const selectedWalletItem = wallet.find(
+    (wallet) => wallet.shopId === normalizedShopId
+  );
 
   const threshold = shopData?.threshold ?? 0;
 
@@ -42,72 +50,117 @@ const ShopProfileScreen = (): JSX.Element => {
 
   const isOpen = shopData && getShopIsOpen(shopData.openingHours);
 
+  // Write NFC-Tag is Admin config only!
+  const handleWriteNfcTag = async (): Promise<void> => {
+    const writingResult = await writeNewNfcTag(normalizedShopId);
+
+    if (!writingResult.success && writingResult.error) {
+      const errorCode = writingResult.error.code;
+      const errorTitle = getTranslated(`app.nfc.errors.${errorCode}.title`);
+      const errorMessage = getTranslated(`app.nfc.errors.${errorCode}.message`);
+
+      let alertActions = [];
+
+      const isNfcDisabled = errorCode === NFCErrorCode.NOT_ENABLED;
+
+      if (isNfcDisabled) {
+        alertActions.push(
+          {
+            text: getTranslated('common.cancel'),
+            style: 'cancel'
+          },
+          {
+            text: getTranslated('common.open_settings'),
+            style: 'default',
+            onPress: async () => await NfcManager.goToNfcSetting()
+          }
+        );
+      }
+
+      promptAlert(errorTitle, errorMessage, alertActions);
+
+      return;
+    }
+
+    logger.log('Writing-NFC-Result: ', writingResult);
+
+    promptAlert(
+      getTranslated('app.nfc.write.success_title'),
+      getTranslated('app.nfc.write.success_message')
+    );
+  };
+
   return (
-    <ScrollingView>
-      <View className='w-full h-[220px] relative'>
-        <ImageBackground
-          source={{ uri: shopData?.coverImage }}
-          alt={shopData?.name}
-          resizeMode='cover'
-          className='flex-1'
-        >
-          <GoBackButton
-            className='bg-secondary/60'
-            iconColor={APP_COLORS.neutral[200]}
-          />
-        </ImageBackground>
-      </View>
-      <ContainerView className='items-start pb-2'>
-        <View className='flex flex-row items-start gap-4'>
-          <Image
-            source={{ uri: shopData?.logo }}
+    <>
+      <ScrollingView>
+        <View className='w-full h-[220px] relative'>
+          <ImageBackground
+            source={{ uri: shopData?.coverImage }}
             alt={shopData?.name}
-            className='size-20 rounded-xl'
             resizeMode='cover'
-          />
-          <View className='flex-1 flex-col'>
-            <View className='flex flex-col'>
-              <AppText
-              className='text-xl text-left capitalize text-neutral-900 dark:text-neutral-400'
-              weight='bold'
-            >
-              {shopData?.name}
-            </AppText>
-            {isOpen && (
-              <AppText
-              weight='semiBold'
-              className={cn(
-                'text-sm text-left',
-                isOpen
-                  ? 'text-green-600 dark:text-green-600'
-                  : 'text-orange-700 dark:text-orange-700'
-              )}
-            >
-              {isOpen ? 'app.open' : 'app.closed'}
-            </AppText>
-            )}
-            </View>
-            <AppText
-              className='text-lg text-left text-neutral-900 dark:text-neutral-400'
-              weight='medium'
-            >
-              {shopData?.specialties.join(', ')}
-            </AppText>
-            <AppText className='text-sm text-left text-neutral-700 dark:text-neutral-500'>
-              {`${shopData?.address.address1}, ${shopData?.address.address2}, ${shopData?.address.postCode}`}
-            </AppText>
-          </View>
+            className='flex-1'
+          >
+            <GoBackButton
+              className='bg-secondary/60'
+              iconColor={APP_COLORS.neutral[200]}
+            />
+          </ImageBackground>
         </View>
-        <AppText className='text-sm mt-4 text-left text-neutral-800 dark:text-neutral-400'>
-          {shopData?.description}
-        </AppText>
-      </ContainerView>
-      <LoyaltyCardList
-        loyaltyCardsList={loyaltyCardsList}
-        threshold={threshold}
-        shopLogo={shopData?.logo}
-      />
-    </ScrollingView>
+        <ContainerView className='items-start pb-2'>
+          <View className='flex flex-row items-start gap-4'>
+            <Image
+              source={{ uri: shopData?.logo }}
+              alt={shopData?.name}
+              className='size-20 rounded-xl'
+              resizeMode='cover'
+            />
+            <View className='flex-1 flex-col'>
+              <View className='flex flex-col'>
+                <AppText
+                  className='text-xl text-left capitalize text-neutral-900 dark:text-neutral-400'
+                  weight='bold'
+                >
+                  {shopData?.name}
+                </AppText>
+                {isOpen && (
+                  <AppText
+                    weight='semiBold'
+                    className={cn(
+                      'text-sm text-left',
+                      isOpen
+                        ? 'text-green-600 dark:text-green-600'
+                        : 'text-orange-700 dark:text-orange-700'
+                    )}
+                  >
+                    {isOpen ? 'app.open' : 'app.closed'}
+                  </AppText>
+                )}
+              </View>
+              <AppText
+                className='text-lg text-left text-neutral-900 dark:text-neutral-400'
+                weight='medium'
+              >
+                {shopData?.specialties.join(', ')}
+              </AppText>
+              <AppText className='text-sm text-left text-neutral-700 dark:text-neutral-500'>
+                {`${shopData?.address.address1}, ${shopData?.address.address2}, ${shopData?.address.postCode}`}
+              </AppText>
+            </View>
+          </View>
+          <AppText className='text-sm mt-4 text-left text-neutral-800 dark:text-neutral-400'>
+            {shopData?.description}
+          </AppText>
+        </ContainerView>
+        <LoyaltyCardList
+          loyaltyCardsList={loyaltyCardsList}
+          threshold={threshold}
+          shopLogo={shopData?.logo}
+        />
+      </ScrollingView>
+      {userProfile?.role === 'admin' && (
+        <WriteNfcTagButton isLoading={isScanning} onPress={handleWriteNfcTag} />
+      )}
+    </>
   );
 };
 
