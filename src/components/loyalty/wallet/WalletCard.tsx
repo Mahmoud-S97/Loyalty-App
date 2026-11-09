@@ -71,7 +71,7 @@ const WalletCard = ({
   }, []);
 
   const stamps =
-    loyaltyCards?.find((card) => card.status === 'active')?.stamps ?? threshold;
+    loyaltyCards?.find((card) => card.status === 'active')?.stamps ?? 0;
 
   const vouchersLength = loyaltyCards?.filter(
     (voucher) => voucher.status === 'completed'
@@ -139,7 +139,7 @@ const WalletCard = ({
                 withTranslation={false}
                 className='w-full text-left text-neutral-700 dark:text-neutral-700'
               >
-                  {`${shopAddress.address1}, ${shopAddress.address2}`}
+                {`${shopAddress.address1}, ${shopAddress.address2}`}
               </AppText>
             </View>
             <View className='w-14 h-14 flex-column justify-center items-center self-start bg-brand-400 rounded-full'>

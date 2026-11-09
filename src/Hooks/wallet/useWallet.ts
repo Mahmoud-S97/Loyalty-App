@@ -4,6 +4,7 @@ import { logger } from '@/lib/logger';
 import { userWalletService } from '@/services/firebase/userWallet.service';
 import { UserWalletDto } from '@/types';
 import { handleUserWalletErrorMessage } from '@/utils/userWallet';
+import { useAuth } from '../auth/useAuth';
 
 interface UseWalletResult {
   wallet: UserWalletDto[];
@@ -16,12 +17,14 @@ interface UseWalletResult {
   ) => Promise<string | null>;
 }
 
-export const useWallet = (userId?: string): UseWalletResult => {
+export const useWallet = (): UseWalletResult => {
+  const { user } = useAuth();
+
   const [wallet, setWallet] = useState<UserWalletDto[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const refreshWallet = useCallback(async (): Promise<void> => {
-    if (!userId?.trim()) {
+    if (!user?.uid?.trim()) {
       setWallet([]);
       return;
     }
@@ -29,7 +32,7 @@ export const useWallet = (userId?: string): UseWalletResult => {
     try {
       setIsLoading(true);
 
-      const userWallet = await userWalletService.getUserWallet(userId);
+      const userWallet = await userWalletService.getUserWallet(user?.uid);
 
       setWallet(userWallet);
     } catch (error: any) {
@@ -40,39 +43,38 @@ export const useWallet = (userId?: string): UseWalletResult => {
     } finally {
       setIsLoading(false);
     }
-  }, [userId]);
+  }, [user?.uid]);
 
-  const getWalletByShopId = useCallback(
-    async (shopId: string): Promise<UserWalletDto | null> => {
-      if (!userId?.trim() || !shopId?.trim()) {
-        return null;
-      }
+  const getWalletByShopId = async (
+    shopId: string
+  ): Promise<UserWalletDto | null> => {
+    if (!user?.uid?.trim() || !shopId?.trim()) {
+      return null;
+    }
 
-      try {
-        return await userWalletService.getUserWalletById(userId, shopId);
-      } catch (error: any) {
-        logger.error('Get-Wallet-By-Shop-ID-Failed:', error);
-        const errorCode = error?.code;
-        handleUserWalletErrorMessage(errorCode);
-        return null;
-      }
-    },
-    [userId]
-  );
+    try {
+      return await userWalletService.getUserWalletById(user?.uid, shopId);
+    } catch (error: any) {
+      logger.error('Get-Wallet-By-Shop-ID-Failed:', error);
+      const errorCode = error?.code;
+      handleUserWalletErrorMessage(errorCode);
+      return null;
+    }
+  };
 
   const createOrUpdateUserWallet = useCallback(
     async (
       shopId: string,
       data: Omit<UserWalletDto, 'id'>
     ): Promise<string | null> => {
-      if (!userId?.trim() || !shopId?.trim()) {
+      if (!user?.uid?.trim() || !shopId?.trim()) {
         return null;
       }
 
       try {
         setIsLoading(true);
         const walletId = await userWalletService.createOrUpdateUserWallet(
-          userId,
+          user?.uid,
           shopId,
           data
         );
@@ -89,7 +91,7 @@ export const useWallet = (userId?: string): UseWalletResult => {
         setIsLoading(false);
       }
     },
-    [userId, refreshWallet]
+    [user?.uid, refreshWallet]
   );
 
   useEffect(() => {

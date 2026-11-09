@@ -3,7 +3,7 @@ import { ShopDto } from '@/types';
 import { shopService } from '@/services/firebase/shop.service';
 import { logger } from '@/lib/logger';
 
-export const useShops = (shopId?: string | undefined) => {
+export const useShops = () => {
   const [shops, setShops] = useState<ShopDto[]>([]);
   const [shopData, setShopData] = useState<ShopDto | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -34,23 +34,26 @@ export const useShops = (shopId?: string | undefined) => {
     []
   );
 
-  const getShopById = useCallback(async (): Promise<ShopDto | null> => {
-    if (!shopId?.trim()) {
-      setShopData(null);
-      return null;
-    }
-    try {
-      setIsLoading(true);
-      const data = await shopService.getShopById(shopId);
-      setShopData(data);
-      return data;
-    } catch (error: any) {
-      logger.log('Error while fetching the shop by its ID: ', error);
-      return null;
-    } finally {
-      setIsLoading(false);
-    }
-  }, [shopId]);
+  const getShopById = useCallback(
+    async (shopId: string): Promise<ShopDto | null> => {
+      if (!shopId?.trim()) {
+        setShopData(null);
+        return null;
+      }
+      try {
+        setIsLoading(true);
+        const data = await shopService.getShopById(shopId);
+        setShopData(data);
+        return data;
+      } catch (error: any) {
+        logger.log('Error while fetching the shop by its ID: ', error);
+        return null;
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    []
+  );
 
   const createShopProfile = async (
     data: Omit<ShopDto, 'id'>
@@ -99,10 +102,6 @@ export const useShops = (shopId?: string | undefined) => {
 
     return () => clearTimeout(timer);
   }, [searchedShop, getShops]);
-
-  useEffect(() => {
-    getShopById();
-  }, [shopId]);
 
   return {
     getShops,

@@ -12,7 +12,7 @@ import { LoyaltyCardDto, UserWalletDto } from '@/types';
 
 const db = getFirestore();
 
-type CreateOrUpdateUserWalletDto = Partial<
+export type CreateOrUpdateUserWalletDto = Partial<
   Omit<UserWalletDto, 'id' | 'loyaltyCards'>
 > & {
   loyaltyCards: Partial<LoyaltyCardDto>[];
@@ -39,12 +39,10 @@ export const userWalletService = {
   ): Promise<UserWalletDto | null> => {
     if (!userId?.trim() || !shopId?.trim()) return null;
 
-    const walletDocRef = doc(
-      collection(db, 'users', userId, 'userWallet', shopId)
-    );
+    const walletDocRef = doc(db, 'users', userId, 'userWallet', shopId);
     const walletSnapshot = await getDoc(walletDocRef);
 
-    if (!walletSnapshot.exists) {
+    if (!walletSnapshot.exists()) {
       return null;
     }
 
@@ -73,7 +71,7 @@ export const userWalletService = {
 
     const existingWallet = await getDoc(walletDocRef);
 
-    if (!existingWallet.exists) {
+    if (!existingWallet.exists()) {
       // Create new wallet-object
       await setDoc(walletDocRef, {
         ...walletData,

@@ -15,9 +15,15 @@ type WalletItemProps = {
 
 type WalletListProps = {
   userWallet: WalletItem[];
+  onRefresh?: () => Promise<void>;
+  isRefreshing: boolean;
 };
 
-const WalletList = ({ userWallet }: WalletListProps) => {
+const WalletList = ({
+  userWallet,
+  onRefresh,
+  isRefreshing
+}: WalletListProps) => {
   const renderWalletItem = ({ item, index }: WalletItemProps) => {
     return <WalletCard index={index} item={item} />;
   };
@@ -28,6 +34,8 @@ const WalletList = ({ userWallet }: WalletListProps) => {
       data={userWallet}
       keyExtractor={(item) => item.id.toString()}
       renderItem={renderWalletItem}
+      onRefresh={onRefresh}
+      refreshing={isRefreshing}
       contentContainerClassName={cn(
         'px-4 pt-6 pb-24',
         userWallet.length === 0 ? 'grow' : undefined

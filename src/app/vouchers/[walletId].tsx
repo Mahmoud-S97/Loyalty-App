@@ -5,7 +5,6 @@ import ScrollingView from '@/components/layout/screens/ScrollingView';
 import GoBackButton from '@/components/ui/globals/buttons/GoBackButton';
 import MainButton from '@/components/ui/globals/buttons/MainButton';
 import { useLocalSearchParams, router, RelativePathString } from 'expo-router';
-import { USER_WALLET } from '@/dummy-data';
 import { APP_COLORS } from '@/constants/theme';
 import AppText from '@/components/ui/content/AppText';
 import ContainerView from '@/components/layout/screens/ContainerView';
@@ -14,13 +13,11 @@ import VouchersList from '@/components/loyalty/vouchers/VouchersList';
 import LoyaltyCardList from '@/components/loyalty/loyalty-cards/LoyaltyCardList';
 import VoucherDetailScreenSkeleton from '@/components/ui/skeletons/wallet/voucher-detail-screen/VoucherDetailScreenSkeleton';
 import { useWallet } from '@/Hooks/wallet/useWallet';
-import { useAuth } from '@/Hooks/auth/useAuth';
 
 const VoucherDetailScreen = (): JSX.Element => {
   const { cardShadow } = useThemeStyles();
   const { walletId } = useLocalSearchParams();
-  const { user } = useAuth();
-  const { wallet, isLoading } = useWallet(user?.uid);
+  const { wallet, isLoading } = useWallet();
 
   const isShopProfileButtonPressed = useRef<boolean>(false);
 

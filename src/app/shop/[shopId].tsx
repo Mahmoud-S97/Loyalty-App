@@ -12,7 +12,6 @@ import LoyaltyCardList from '@/components/loyalty/loyalty-cards/LoyaltyCardList'
 import ShopProfileScreenSkeleton from '@/components/ui/skeletons/shop/ShopProfileScreenSkeleton';
 import { useShops } from '@/Hooks/shops/useShops';
 import { useWallet } from '@/Hooks/wallet/useWallet';
-import { useAuth } from '@/Hooks/auth/useAuth';
 import { useUser } from '@/Hooks/user/useUser';
 import { logger } from '@/lib/logger';
 import { LoyaltyCardDto, UserWalletDto } from '@/types';
@@ -26,13 +25,16 @@ import WriteNfcTagButton from '@/components/ui/globals/buttons/WriteNfcTagButton
 
 const ShopProfileScreen = (): JSX.Element => {
   const { shopId } = useLocalSearchParams<{ shopId?: string }>();
-  const normalizedShopId = Array.isArray(shopId) ? shopId[0] : shopId;
-  const { user } = useAuth();
+  const normalizedShopId: string = Array.isArray(shopId) ? shopId[0] : shopId;
   const { userProfile } = useUser();
-  const { shopData, isLoading } = useShops(normalizedShopId);
+  const { shopData, getShopById, isLoading } = useShops();
   const { writeNewNfcTag, isScanning } = useNFC();
 
-  const { wallet, isLoading: isWalletLoading } = useWallet(user?.uid);
+  const { wallet, isLoading: isWalletLoading } = useWallet();
+
+  useEffect(() => {
+    getShopById(normalizedShopId);
+  }, [normalizedShopId]);
 
   const selectedWalletItem = wallet.find(
     (wallet) => wallet.shopId === normalizedShopId
@@ -122,19 +124,17 @@ const ShopProfileScreen = (): JSX.Element => {
                 >
                   {shopData?.name}
                 </AppText>
-                {isOpen && (
-                  <AppText
-                    weight='semiBold'
-                    className={cn(
-                      'text-sm text-left',
-                      isOpen
-                        ? 'text-green-600 dark:text-green-600'
-                        : 'text-orange-700 dark:text-orange-700'
-                    )}
-                  >
-                    {isOpen ? 'app.open' : 'app.closed'}
-                  </AppText>
-                )}
+                <AppText
+                  weight='semiBold'
+                  className={cn(
+                    'text-xs text-left',
+                    isOpen
+                      ? 'text-green-600 dark:text-green-600'
+                      : 'text-orange-700 dark:text-orange-700'
+                  )}
+                >
+                  {isOpen ? 'app.open' : 'app.closed'}
+                </AppText>
               </View>
               <AppText
                 className='text-lg text-left text-neutral-900 dark:text-neutral-400'

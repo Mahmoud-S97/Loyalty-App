@@ -14,7 +14,6 @@ import scanningAnimation from '@/assets/lottie/NFC-QR-Reader.json';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useAppTheme } from '@/Hooks/theme/useAppTheme';
 import { useThemeStyles } from '@/Hooks/theme/useThemeStyles';
-import i18n from '@/lib/localization/i18n';
 import { notificationData } from '@/dummy-data';
 import { useNFC } from '@/Hooks/loyalty/useNFC';
 import { useAppConfig } from '@/Hooks/app/useAppConfig';
@@ -25,6 +24,10 @@ import { logger } from '@/lib/logger';
 import StampCollectedModal from '@/components/loyalty/modals/StampCollectedModal';
 import VoucherCollectedModal from '@/components/loyalty/modals/VoucherCollectedModal';
 import Spinner from '@/components/ui/globals/Spinner';
+import { useWallet } from '@/Hooks/wallet/useWallet';
+import { useShops } from '@/Hooks/shops/useShops';
+import { LoyaltyCardDto, UserWalletDto } from '@/types';
+import { CreateOrUpdateUserWalletDto } from '@/services/firebase/userWallet.service';
 
 const HomeScreen = (): JSX.Element => {
   const { SCREEN_WIDTH } = useScreenDimensions();
@@ -33,11 +36,18 @@ const HomeScreen = (): JSX.Element => {
   const { scanForShop, isScanning, error } = useNFC();
   const { appPreferences, isLoading } = useAppConfig();
 
+  const { getShopById } = useShops();
+  const {
+    getWalletByShopId,
+    createOrUpdateUserWallet,
+    isLoading: isCollectingStamp
+  } = useWallet();
+
   const isNotificationsButtonPressed = useRef<boolean>(false);
 
   const [isStampCollected, setIsStampCollected] = useState<boolean>(false);
   const [isVoucherCollected, setIsVoucherCollected] = useState<boolean>(false);
-  const [stampsLeft, setStampsLeft] = useState<number>(4);
+  const [stampsLeft, setStampsLeft] = useState<number>(0);
 
   const lottieCustomStyles = {
     width: SCREEN_WIDTH / 1.4,
@@ -57,6 +67,7 @@ const HomeScreen = (): JSX.Element => {
 
   const handleNFCScan = async () => {
     const scanningResult = await scanForShop();
+    logger.log('scanningResult: ', scanningResult);
 
     if (!scanningResult.success && scanningResult.error) {
       const errorCode = scanningResult.error.code;
@@ -86,9 +97,90 @@ const HomeScreen = (): JSX.Element => {
       return;
     }
 
-    // Success flow...
+    // === NFC Tap Success flow === //
 
-    logger.log('scanningResult: ', scanningResult);
+    const shopId = scanningResult?.shopId;
+
+    if (!shopId) return;
+
+    const shopData = await getShopById(shopId);
+    if (!shopData) return;
+
+    const walletData = await getWalletByShopId(shopId);
+
+    let isVoucherCompleted = false;
+
+    let loyaltyCards = walletData?.loyaltyCards || [];
+
+    const allCardsCompleted = loyaltyCards.every(
+      (card) => card.status === 'completed'
+    );
+
+    let newLoyaltyCard = {
+      id: new Date().toISOString(),
+      stamps: 1,
+      status: 'active',
+      redeemedAt: null,
+      completedAt: null,
+      createdAt: new Date().toISOString()
+    } as LoyaltyCardDto;
+
+    if (loyaltyCards.length === 0 || allCardsCompleted) {
+      loyaltyCards.push(newLoyaltyCard);
+    } else {
+      loyaltyCards = loyaltyCards.map((item, _) => {
+        if (item.status === 'active') {
+          if (item.stamps >= shopData.threshold - 1) {
+            isVoucherCompleted = true;
+            return {
+              ...item,
+              stamps: shopData.threshold,
+              status: 'completed',
+              completedAt: new Date().toISOString()
+            };
+          } else {
+            return { ...item, stamps: (item.stamps += 1) };
+          }
+        } else {
+          return item;
+        }
+      }) as LoyaltyCardDto[];
+    }
+
+    const data: UserWalletDto = {
+      id: shopData.id,
+      shopId: shopData.id,
+      shopName: shopData.name,
+      shopDescription: shopData.description,
+      shopAddress: shopData.address,
+      shopLogo: shopData.logo,
+      shopCoverImage: shopData.coverImage,
+      rewardTitle: shopData.rewardTitle,
+      threshold: shopData.threshold,
+      loyaltyCards
+    };
+
+    const result = await createOrUpdateUserWallet(shopId, data);
+
+    if (result) {
+      if (isVoucherCompleted) {
+        setIsVoucherCollected(true);
+        return;
+      }
+      const currentStamps =
+        loyaltyCards.find((card) => card.status === 'active')?.stamps ?? 0;
+      const whatStampsLeft = shopData.threshold - currentStamps;
+      setIsStampCollected(true);
+      setStampsLeft(whatStampsLeft);
+    }
+  };
+
+  const handlerStampCollectionModalClose = () => {
+    setIsStampCollected(false);
+  };
+
+  const handleVoucherCollectionModalClose = () => {
+    setIsVoucherCollected(false);
   };
 
   return (
@@ -139,8 +231,8 @@ const HomeScreen = (): JSX.Element => {
                 title='app.tap_NFC_tag'
                 icon='nfc'
                 iconColor={APP_COLORS.neutral[400]}
-                disabled={isScanning}
-                isLoading={isScanning}
+                disabled={isScanning || isCollectingStamp}
+                isLoading={isScanning || isCollectingStamp}
                 onPress={handleNFCScan}
               />
             )}
@@ -157,11 +249,11 @@ const HomeScreen = (): JSX.Element => {
         <StampCollectedModal
           visible={isStampCollected}
           stampsLeft={stampsLeft}
-          onClose={() => setIsStampCollected(false)}
+          onClose={handlerStampCollectionModalClose}
         />
         <VoucherCollectedModal
           visible={isVoucherCollected}
-          onClose={() => setIsVoucherCollected(false)}
+          onClose={handleVoucherCollectionModalClose}
         />
       </ContainerView>
       {isLoading && <Spinner />}
